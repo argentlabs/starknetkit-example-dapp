@@ -12,6 +12,7 @@ import { SessionKeysSign } from "@/components/Actions/SessionKeysSign"
 import { SessionKeysTypedDataOutside } from "@/components/Actions/SessionKeysTypedDataOutside"
 import { SignMessageRpcMethod } from "@/components/Actions/SignMessageRpcMethod"
 import { TransferRpcMethod } from "@/components/Actions/TransferRpcMethod"
+import { WalletRpcMsgContainer } from "@/components/Actions/WalletRpcMsgContainer"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
 import { ARGENT_WEBWALLET_URL } from "@/constants"
@@ -112,7 +113,9 @@ export default function StarknetkitLatest() {
             <AddTokenNext />
             <AddNetworkNext />
           </Flex>
-          <Section>rpc</Section>
+          <Section>
+            <WalletRpcMsgContainer wallet={wallet} />
+          </Section>
         </>
       )}
     </Flex>

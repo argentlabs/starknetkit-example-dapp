@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react"
 import { Section } from "./Section"
 import { FC } from "react"
 import { constants } from "starknet"
-import { Status } from "@/helpers/status"
 import { useAtomValue } from "jotai"
 import {
   lastTxErrorAtom,

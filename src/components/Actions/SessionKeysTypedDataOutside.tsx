@@ -4,7 +4,7 @@ import {
   provider,
 } from "@/constants"
 import { dappKey } from "@/helpers/openSessionHelper"
-import { Status } from "@/helpers/status"
+import { Status } from "@/types/status"
 import { parseInputAmountToUint256 } from "@/helpers/token"
 import {
   ArgentSessionService,

@@ -1,4 +1,4 @@
-import { Status } from "@/helpers/status"
+import { Status } from "@/types/status"
 import { atom } from "jotai"
 
 export const lastTxHashAtom = atom<string | undefined>(undefined)

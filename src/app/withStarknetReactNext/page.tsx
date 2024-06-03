@@ -7,7 +7,7 @@ import { SessionKeysExecuteOutside } from "@/components/SessionKeysExecuteOutsid
 import { SessionKeysSign } from "@/components/SessionKeysSign"
 import { SessionKeysTypedDataOutside } from "@/components/SessionKeysTypedDataOutside"
 import { provider } from "@/constants"
-import { Status } from "@/helpers/status"
+import { Status } from "@/types/status"
 import { OffChainSession } from "@argent/x-sessions"
 import { useEffect, useState } from "react"
 import { GatewayError, Signature, constants } from "starknet"
