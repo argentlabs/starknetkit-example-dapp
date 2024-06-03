@@ -1,41 +1,56 @@
 "use client"
 
 import { AccountSection } from "@/components/AccountSection"
+import { SessionKeysExecute } from "@/components/Actions/SessionKeysExecute"
+import { SessionKeysExecuteOutside } from "@/components/Actions/SessionKeysExecuteOutside"
+import { SessionKeysSign } from "@/components/Actions/SessionKeysSign"
+import { SessionKeysTypedDataOutside } from "@/components/Actions/SessionKeysTypedDataOutside"
 import { SignMessageRpcMethod } from "@/components/Actions/SignMessageRpcMethod"
 import { TransferRpcMethod } from "@/components/Actions/TransferRpcMethod"
 import { Section } from "@/components/Section"
-import { useWaitForTx } from "@/hooks/useWaitForTx"
+import { ARGENT_WEBWALLET_URL } from "@/constants"
 import {
+  connectorAtom,
   connectorDataAtom,
   walletStarknetkitNextAtom,
 } from "@/state/connectedWalletStarknetkitNext"
 import { Box, Button, Flex } from "@chakra-ui/react"
-import { useAtomValue } from "jotai"
+import { useAtom, useSetAtom } from "jotai"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { disconnect } from "starknetkit-latest"
+import { constants } from "starknet"
+import { connect, disconnect } from "starknetkit-next"
 
 export default function StarknetkitLatest() {
-  const wallet = useAtomValue(walletStarknetkitNextAtom)
-  const connectorData = useAtomValue(connectorDataAtom)
-
+  const [wallet, setWallet] = useAtom(walletStarknetkitNextAtom)
+  const [connectorData, setConnectorData] = useAtom(connectorDataAtom)
+  const setConnector = useSetAtom(connectorAtom)
   const navigate = useRouter()
 
-  const {
-    lastTxError,
-    lastTxHash,
-    lastTxStatus,
-    setLastTxHash,
-    setLastTxStatus,
-  } = useWaitForTx()
+  useEffect(() => {
+    const autoConnect = async () => {
+      const res = await connect({
+        modalMode: "neverAsk",
+        webWalletUrl: ARGENT_WEBWALLET_URL,
+        argentMobileOptions: {
+          dappName: "Starknetkit example dapp",
+          url: window.location.hostname,
+          chainId: constants.NetworkName.SN_SEPOLIA,
+          icons: [],
+        },
+      })
+
+      const { wallet, connector } = res
+      setWallet(wallet)
+      setConnectorData(connectorData)
+      setConnector(connector)
+    }
+    autoConnect()
+  }, [])
 
   useEffect(() => {
     if (!wallet) {
       navigate.replace("/")
-    }
-    return () => {
-      //disconnect();
-      //resetWalletAtom()
     }
   }, [])
 
@@ -58,14 +73,23 @@ export default function StarknetkitLatest() {
             </Box>
           </Flex>
           <AccountSection
-            address={connectorData.account}
-            chainId={connectorData.chainId}
+            address={connectorData?.account}
+            chainId={connectorData?.chainId}
           />
           <Section>
             <TransferRpcMethod />
           </Section>
           <Section>
             <SignMessageRpcMethod />
+          </Section>
+
+          <Section>
+            <SessionKeysSign />
+            <SessionKeysExecute />
+            <Flex alignItems="center" gap="100">
+              <SessionKeysExecuteOutside />
+              <SessionKeysTypedDataOutside />
+            </Flex>
           </Section>
         </>
       )}

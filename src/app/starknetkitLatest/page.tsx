@@ -7,24 +7,41 @@ import { Section } from "@/components/Section"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
 import { Box, Button, Flex } from "@chakra-ui/react"
-import { useAtomValue } from "jotai"
+import { useAtom } from "jotai"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { disconnect } from "starknetkit-latest"
+import { connect, disconnect } from "starknetkit-latest"
+import { RESET } from "jotai/utils"
+import { ARGENT_WEBWALLET_URL } from "@/constants"
+import { constants } from "starknet"
 
 export default function StarknetkitLatest() {
-  const wallet = useAtomValue(walletStarknetkitLatestAtom)
+  const [wallet, setWallet] = useAtom(walletStarknetkitLatestAtom)
   const navigate = useRouter()
 
   useWaitForTx()
 
   useEffect(() => {
+    const autoConnect = async () => {
+      debugger
+      const { wallet } = await connect({
+        modalMode: "neverAsk",
+        webWalletUrl: ARGENT_WEBWALLET_URL,
+        argentMobileOptions: {
+          dappName: "Starknetkit example dapp",
+          url: window.location.hostname,
+          chainId: constants.NetworkName.SN_SEPOLIA,
+          icons: [],
+        },
+      })
+      setWallet(wallet)
+    }
+    autoConnect()
+  }, [])
+
+  useEffect(() => {
     if (!wallet) {
       navigate.replace("/")
-    }
-    return () => {
-      //disconnect();
-      //resetWalletAtom()
     }
   }, [])
 
@@ -32,6 +49,7 @@ export default function StarknetkitLatest() {
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">
       {wallet && (
         <>
+          {/* TODO: move */}
           <Flex justifyContent="flex-end">
             <Box h="min-content">
               <Button
@@ -39,7 +57,7 @@ export default function StarknetkitLatest() {
                 rounded="lg"
                 onClick={() => {
                   disconnect()
-                  //resetWalletAtom()
+                  setWallet(RESET)
                 }}
               >
                 Disconnect

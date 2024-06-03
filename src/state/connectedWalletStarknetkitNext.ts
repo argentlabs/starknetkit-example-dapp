@@ -1,8 +1,8 @@
-import { atom } from "jotai"
-import { StarknetWindowObject } from "starknetkit-next"
+import { atomWithReset } from "jotai/utils"
+import { ConnectorData, StarknetWindowObject } from "starknetkit-next"
 import { Connector } from "starknetkit-next"
 
-export const walletStarknetkitNextAtom = atom<
+export const walletStarknetkitNextAtom = atomWithReset<
   StarknetWindowObject | null | undefined
 >(undefined)
 
@@ -11,6 +11,6 @@ export const walletStarknetkitNextAtom = atom<
   account?: string
   chainId?: Connector
 } | null */
-export const connectorDataAtom = atom<any>(null)
+export const connectorDataAtom = atomWithReset<ConnectorData | null>(null)
 
-export const connectorAtom = atom<Connector | null>(null)
+export const connectorAtom = atomWithReset<Connector | null>(null)

@@ -3,6 +3,8 @@ import { DappKey } from "@argent/x-sessions"
 import { ec } from "starknet"
 import { parseUnits } from "./token"
 
+/* Hardcoded values for session example */
+
 const ETHFees = [
   {
     tokenAddress: ETHTokenAddress,
