@@ -16,6 +16,7 @@ import {
 } from "@/state/connectedWalletStarknetkitNext"
 import { Box, Button, Flex } from "@chakra-ui/react"
 import { useAtom, useSetAtom } from "jotai"
+import { RESET } from "jotai/utils"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
 import { constants } from "starknet"
@@ -29,7 +30,11 @@ export default function StarknetkitLatest() {
 
   useEffect(() => {
     const autoConnect = async () => {
-      const res = await connect({
+      const {
+        wallet: connectedWallet,
+        connector,
+        connectorData,
+      } = await connect({
         modalMode: "neverAsk",
         webWalletUrl: ARGENT_WEBWALLET_URL,
         argentMobileOptions: {
@@ -40,17 +45,16 @@ export default function StarknetkitLatest() {
         },
       })
 
-      const { wallet, connector } = res
-      setWallet(wallet)
+      setWallet(connectedWallet)
       setConnectorData(connectorData)
       setConnector(connector)
-    }
-    autoConnect()
-  }, [])
 
-  useEffect(() => {
+      if (!connectedWallet) {
+        navigate.replace("/")
+      }
+    }
     if (!wallet) {
-      navigate.replace("/")
+      autoConnect()
     }
   }, [])
 
@@ -65,7 +69,10 @@ export default function StarknetkitLatest() {
                 rounded="lg"
                 onClick={() => {
                   disconnect()
-                  //resetWalletAtom()
+                  setWallet(RESET)
+                  setConnectorData(RESET)
+                  setConnector(RESET)
+                  navigate.replace("/")
                 }}
               >
                 Disconnect

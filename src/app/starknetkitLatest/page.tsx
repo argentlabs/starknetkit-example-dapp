@@ -23,8 +23,7 @@ export default function StarknetkitLatest() {
 
   useEffect(() => {
     const autoConnect = async () => {
-      debugger
-      const { wallet } = await connect({
+      const { wallet: connectedWallet } = await connect({
         modalMode: "neverAsk",
         webWalletUrl: ARGENT_WEBWALLET_URL,
         argentMobileOptions: {
@@ -34,15 +33,13 @@ export default function StarknetkitLatest() {
           icons: [],
         },
       })
-      setWallet(wallet)
+      setWallet(connectedWallet)
+
+      if (!connectedWallet) {
+        navigate.replace("/")
+      }
     }
     autoConnect()
-  }, [])
-
-  useEffect(() => {
-    if (!wallet) {
-      navigate.replace("/")
-    }
   }, [])
 
   return (

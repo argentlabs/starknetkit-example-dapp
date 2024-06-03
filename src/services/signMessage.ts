@@ -45,7 +45,7 @@ export const signMessageRcpMethod = async (
   })
 
   return wallet.request({
-    type: "starknet_signTypedData",
+    type: "wallet_signTypedData",
     params: {
       domain: {
         name: "Example DApp",

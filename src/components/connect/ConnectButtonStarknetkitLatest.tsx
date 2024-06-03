@@ -1,5 +1,5 @@
 import { ARGENT_WEBWALLET_URL } from "@/constants"
-import { Button } from "@chakra-ui/react"
+import { Button, Flex } from "@chakra-ui/react"
 import { FC } from "react"
 import { constants } from "starknet"
 import { connect } from "starknetkit-latest"
@@ -29,8 +29,17 @@ const ConnectButtonStarknetkitLatest: FC = () => {
   }
 
   return (
-    <Button p="2" rounded="lg" colorScheme="secondary" onClick={connectFn}>
-      Connect with Starknetkit@latest
+    <Button
+      p="4"
+      rounded="lg"
+      colorScheme="secondary"
+      onClick={connectFn}
+      h="16"
+    >
+      <Flex flexDirection="column">
+        <span>Connect with Starknetkit@latest</span>
+        <span>{process.env.starknetkitLatestVersion}</span>
+      </Flex>
     </Button>
   )
 }

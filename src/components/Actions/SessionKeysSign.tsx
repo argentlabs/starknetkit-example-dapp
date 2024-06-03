@@ -16,7 +16,7 @@ import {
   createSessionRequest,
   openSession,
 } from "@argent/x-sessions"
-import { Box, Button, Flex, Heading, Input } from "@chakra-ui/react"
+import { Button, Flex, Heading } from "@chakra-ui/react"
 import { useAtomValue, useSetAtom } from "jotai"
 import { useState } from "react"
 
@@ -51,6 +51,7 @@ const SessionKeysSign = () => {
         metaData(isStarkFeeToken),
         dappKey.publicKey,
       )
+
       setSessionRequest(sessionRequest)
       setAccountSessionSignature(accountSessionSignature)
 

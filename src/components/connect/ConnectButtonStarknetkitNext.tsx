@@ -4,7 +4,7 @@ import {
   connectorDataAtom,
   walletStarknetkitNextAtom,
 } from "@/state/connectedWalletStarknetkitNext"
-import { Button } from "@chakra-ui/react"
+import { Button, Flex } from "@chakra-ui/react"
 import { useSetAtom } from "jotai"
 import { useRouter } from "next/navigation"
 import { constants } from "starknet"
@@ -37,8 +37,11 @@ const ConnectButtonStarknetkitNext = () => {
   }
 
   return (
-    <Button p="2" rounded="lg" colorScheme="primary" onClick={connectFn}>
-      Connect with Starknetkit@next
+    <Button p="4" rounded="lg" colorScheme="primary" onClick={connectFn} h="16">
+      <Flex flexDirection="column">
+        <span>Connect with Starknetkit@next</span>
+        <span>{process.env.starknetkitNextVersion}</span>
+      </Flex>
     </Button>
   )
 }

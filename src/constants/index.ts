@@ -14,5 +14,3 @@ export const ARGENT_SESSION_SERVICE_BASE_URL =
 
 export const ARGENT_WEBWALLET_URL =
   process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL || "https://web.argent.xyz"
-
-console.log({ ARGENT_WEBWALLET_URL })
