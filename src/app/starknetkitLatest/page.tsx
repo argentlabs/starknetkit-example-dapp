@@ -1,32 +1,22 @@
 "use client"
 
 import { AccountSection } from "@/components/AccountSection"
+import { SignMessage } from "@/components/Actions/SignMessage"
 import { Transfer } from "@/components/Actions/Transfer"
 import { Section } from "@/components/Section"
-import { provider } from "@/constants"
-import { Status } from "@/helpers/status"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
-import { formatTruncatedAddress } from "@/utils/formatAddress"
 import { Box, Button, Flex } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
-import { Account, GatewayError, constants } from "starknet"
+import { useEffect } from "react"
 import { disconnect } from "starknetkit-latest"
 
 export default function StarknetkitLatest() {
   const wallet = useAtomValue(walletStarknetkitLatestAtom)
   const navigate = useRouter()
 
-  const {
-    lastTxError,
-    lastTxHash,
-    lastTxStatus,
-    setLastTxHash,
-    setLastTxError,
-    setLastTxStatus,
-  } = useWaitForTx()
+  useWaitForTx()
 
   useEffect(() => {
     if (!wallet) {
@@ -59,17 +49,12 @@ export default function StarknetkitLatest() {
           <AccountSection
             address={wallet?.account?.address}
             chainId={wallet.chainId}
-            lastTxHash={lastTxHash}
-            lastTxStatus={lastTxStatus}
-            lastTxError={lastTxError}
           />
           <Section>
-            <Transfer
-              account={wallet.account as Account}
-              setLastTransactionHash={setLastTxHash}
-              setTransactionStatus={setLastTxStatus}
-              transactionStatus={lastTxStatus}
-            />
+            <Transfer />
+          </Section>
+          <Section>
+            <SignMessage />
           </Section>
         </>
       )}
