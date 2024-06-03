@@ -1,6 +1,8 @@
 "use client"
 
 import { AccountSection } from "@/components/AccountSection"
+import { AddNetworkNext } from "@/components/Actions/AddNetwork"
+import { AddTokenNext } from "@/components/Actions/AddToken"
 import { Declare } from "@/components/Actions/Declare"
 import { Deploy } from "@/components/Actions/Deploy"
 import { MintRpcMethod } from "@/components/Actions/MintRpcMethod"
@@ -18,7 +20,7 @@ import {
   connectorDataAtom,
   walletStarknetkitNextAtom,
 } from "@/state/connectedWalletStarknetkitNext"
-import { Box, Button, Flex } from "@chakra-ui/react"
+import { Flex } from "@chakra-ui/react"
 import { useAtom, useSetAtom } from "jotai"
 import { RESET } from "jotai/utils"
 import { useRouter } from "next/navigation"
@@ -106,6 +108,11 @@ export default function StarknetkitLatest() {
                 </Flex>
               </Section>
             )}
+          <Flex>
+            <AddTokenNext />
+            <AddNetworkNext />
+          </Flex>
+          <Section>rpc</Section>
         </>
       )}
     </Flex>

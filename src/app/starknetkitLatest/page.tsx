@@ -18,6 +18,8 @@ import { Declare } from "@/components/Actions/Declare"
 import { Deploy } from "@/components/Actions/Deploy"
 import { Mint } from "@/components/Actions/Mint"
 import { DisconnectButton } from "@/components/DisconnectButton"
+import { AddNetworkLatest } from "@/components/Actions/AddNetwork"
+import { AddTokenLatest } from "@/components/Actions/AddToken"
 
 export default function StarknetkitLatest() {
   const [wallet, setWallet] = useAtom(walletStarknetkitLatestAtom)
@@ -79,6 +81,12 @@ export default function StarknetkitLatest() {
                 </Flex>
               </Section>
             )}
+          <Section>
+            <Flex>
+              <AddTokenLatest />
+              <AddNetworkLatest />
+            </Flex>
+          </Section>
         </>
       )}
     </Flex>
