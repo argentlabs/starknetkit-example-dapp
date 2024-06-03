@@ -14,6 +14,8 @@ import { connect, disconnect } from "starknetkit-latest"
 import { RESET } from "jotai/utils"
 import { ARGENT_WEBWALLET_URL } from "@/constants"
 import { constants } from "starknet"
+import { Declare } from "@/components/Actions/Declare"
+import { Deploy } from "@/components/Actions/Deploy"
 
 export default function StarknetkitLatest() {
   const [wallet, setWallet] = useAtom(walletStarknetkitLatestAtom)
@@ -71,6 +73,15 @@ export default function StarknetkitLatest() {
           <Section>
             <SignMessage />
           </Section>
+          {wallet.id !== "argentWebWallet" &&
+            wallet.id !== "argentMobileWallet" && (
+              <Section>
+                <Flex alignItems="center" gap="10">
+                  <Declare />
+                  <Deploy />
+                </Flex>
+              </Section>
+            )}
         </>
       )}
     </Flex>

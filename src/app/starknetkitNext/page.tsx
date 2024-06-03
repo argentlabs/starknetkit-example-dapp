@@ -1,6 +1,8 @@
 "use client"
 
 import { AccountSection } from "@/components/AccountSection"
+import { Declare } from "@/components/Actions/Declare"
+import { Deploy } from "@/components/Actions/Deploy"
 import { SessionKeysExecute } from "@/components/Actions/SessionKeysExecute"
 import { SessionKeysExecuteOutside } from "@/components/Actions/SessionKeysExecuteOutside"
 import { SessionKeysSign } from "@/components/Actions/SessionKeysSign"
@@ -98,6 +100,16 @@ export default function StarknetkitLatest() {
               <SessionKeysTypedDataOutside />
             </Flex>
           </Section>
+
+          {wallet.id !== "argentWebWallet" &&
+            wallet.id !== "argentMobileWallet" && (
+              <Section>
+                <Flex alignItems="center" gap="10">
+                  <Declare />
+                  <Deploy />
+                </Flex>
+              </Section>
+            )}
         </>
       )}
     </Flex>
