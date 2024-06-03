@@ -1,16 +1,15 @@
-import { transfer } from "@/services/transfer"
-import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
+import { transferJSONRpcMethod } from "@/services/transfer"
+import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
 import { Button, Flex, Heading, Input } from "@chakra-ui/react"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { useState } from "react"
-import { Account } from "starknet"
 
-const Transfer = () => {
+const TransferRpcMethod = () => {
   const [transferTo, setTransferTo] = useState("")
   const [transferAmount, setTransferAmount] = useState("1")
 
-  const wallet = useAtomValue(walletStarknetkitLatestAtom)
+  const wallet = useAtomValue(walletStarknetkitNextAtom)
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
   const setLastTransactionHash = useSetAtom(lastTxHashAtom)
 
@@ -21,12 +20,12 @@ const Transfer = () => {
 
   const handleTransferSubmit = async (e: React.FormEvent) => {
     try {
-      if (!wallet?.account) throw new Error("Account not connected")
+      if (!wallet) throw new Error("Account not connected")
 
       e.preventDefault()
       setTransactionStatus("approve")
-      const { transaction_hash } = await transfer(
-        wallet.account as Account,
+      const { transaction_hash } = await transferJSONRpcMethod(
+        wallet,
         transferTo,
         transferAmount,
       )
@@ -50,7 +49,7 @@ const Transfer = () => {
         gap="3"
         borderRadius="lg"
       >
-        <Heading as="h2">Transfer token</Heading>
+        <Heading as="h2">TransferRpcMethod token</Heading>
 
         <Input
           type="text"
@@ -83,4 +82,4 @@ const Transfer = () => {
   )
 }
 
-export { Transfer }
+export { TransferRpcMethod }

@@ -4,7 +4,7 @@ import {
   lastTxHashAtom,
   lastTxStatusAtom,
 } from "@/state/transactionState"
-import { useAtom, useSetAtom } from "jotai"
+import { useAtom } from "jotai"
 import { useEffect } from "react"
 import { GatewayError } from "starknet"
 
