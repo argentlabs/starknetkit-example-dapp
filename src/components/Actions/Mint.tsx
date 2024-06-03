@@ -32,7 +32,6 @@ const Mint = () => {
         as="form"
         onSubmit={handleMintSubmit}
         direction="column"
-        background="neutrals.700"
         flex={1}
         p="4"
         gap="3"

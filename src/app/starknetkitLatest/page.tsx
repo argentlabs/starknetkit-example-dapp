@@ -16,6 +16,8 @@ import { ARGENT_WEBWALLET_URL } from "@/constants"
 import { constants } from "starknet"
 import { Declare } from "@/components/Actions/Declare"
 import { Deploy } from "@/components/Actions/Deploy"
+import { Mint } from "@/components/Actions/Mint"
+import { DisconnectButton } from "@/components/DisconnectButton"
 
 export default function StarknetkitLatest() {
   const [wallet, setWallet] = useAtom(walletStarknetkitLatestAtom)
@@ -48,25 +50,20 @@ export default function StarknetkitLatest() {
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">
       {wallet && (
         <>
-          {/* TODO: move */}
-          <Flex justifyContent="flex-end">
-            <Box h="min-content">
-              <Button
-                p="2"
-                rounded="lg"
-                onClick={() => {
-                  disconnect()
-                  setWallet(RESET)
-                }}
-              >
-                Disconnect
-              </Button>
-            </Box>
-          </Flex>
+          <DisconnectButton
+            disconnectFn={disconnect}
+            resetFn={() => {
+              setWallet(RESET)
+              setWallet(RESET)
+            }}
+          />
           <AccountSection
             address={wallet?.account?.address}
             chainId={wallet.chainId}
           />
+          <Section>
+            <Mint />
+          </Section>
           <Section>
             <Transfer />
           </Section>

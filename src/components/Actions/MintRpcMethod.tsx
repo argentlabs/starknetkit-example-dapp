@@ -5,7 +5,7 @@ import { Flex, Heading, Input } from "@chakra-ui/react"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { useState } from "react"
 
-const Mint = () => {
+const MintRpcMethod = () => {
   const wallet = useAtomValue(walletStarknetkitNextAtom)
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
   const setLastTransactionHash = useSetAtom(lastTxHashAtom)
@@ -32,7 +32,6 @@ const Mint = () => {
         as="form"
         onSubmit={handleMintSubmit}
         direction="column"
-        background="neutrals.700"
         flex={1}
         p="4"
         gap="3"
@@ -55,4 +54,4 @@ const Mint = () => {
   )
 }
 
-export { Mint }
+export { MintRpcMethod }

@@ -3,12 +3,14 @@
 import { AccountSection } from "@/components/AccountSection"
 import { Declare } from "@/components/Actions/Declare"
 import { Deploy } from "@/components/Actions/Deploy"
+import { MintRpcMethod } from "@/components/Actions/MintRpcMethod"
 import { SessionKeysExecute } from "@/components/Actions/SessionKeysExecute"
 import { SessionKeysExecuteOutside } from "@/components/Actions/SessionKeysExecuteOutside"
 import { SessionKeysSign } from "@/components/Actions/SessionKeysSign"
 import { SessionKeysTypedDataOutside } from "@/components/Actions/SessionKeysTypedDataOutside"
 import { SignMessageRpcMethod } from "@/components/Actions/SignMessageRpcMethod"
 import { TransferRpcMethod } from "@/components/Actions/TransferRpcMethod"
+import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
 import { ARGENT_WEBWALLET_URL } from "@/constants"
 import {
@@ -64,34 +66,28 @@ export default function StarknetkitLatest() {
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">
       {wallet && (
         <>
-          <Flex justifyContent="flex-end">
-            <Box h="min-content">
-              <Button
-                p="2"
-                rounded="lg"
-                onClick={() => {
-                  disconnect()
-                  setWallet(RESET)
-                  setConnectorData(RESET)
-                  setConnector(RESET)
-                  navigate.replace("/")
-                }}
-              >
-                Disconnect
-              </Button>
-            </Box>
-          </Flex>
+          <DisconnectButton
+            disconnectFn={disconnect}
+            resetFn={() => {
+              setWallet(RESET)
+              setConnectorData(RESET)
+              setConnector(RESET)
+            }}
+          />
+
           <AccountSection
             address={connectorData?.account}
             chainId={connectorData?.chainId}
           />
+          <Section>
+            <MintRpcMethod />
+          </Section>
           <Section>
             <TransferRpcMethod />
           </Section>
           <Section>
             <SignMessageRpcMethod />
           </Section>
-
           <Section>
             <SessionKeysSign />
             <SessionKeysExecute />
