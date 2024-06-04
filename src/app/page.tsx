@@ -7,7 +7,7 @@ import {
   connectorDataAtom,
   walletStarknetkitNextAtom,
 } from "@/state/connectedWalletStarknetkitNext"
-import { Flex, Heading } from "@chakra-ui/react"
+import { Button, Flex, Heading } from "@chakra-ui/react"
 import { useSetAtom } from "jotai"
 import { RESET } from "jotai/utils"
 import { useEffect } from "react"
@@ -39,8 +39,42 @@ export default function Home() {
       <ConnectButtonStarknetkitLatest />
       <ConnectButtonStarknetkitNext />
       <Heading as="h1">Starknetkit + Starknet-react</Heading>
-      <div>Starknetkit@next + starknet-react</div>
-      <div>Starknetkit@latest + starknet-react</div>
+      <Button
+        as="a"
+        href="/withStarknetReactLatest"
+        p="4"
+        rounded="lg"
+        colorScheme="secondary"
+        h="20"
+      >
+        <Flex flexDirection="column" alignItems="center">
+          <span>
+            starknetkit@latest ({process.env.starknetkitLatestVersion})
+          </span>
+          <span>+</span>
+          <span>starknet-react ({process.env.starknetReactVersion})</span>
+        </Flex>
+      </Button>
+      <Flex flexDirection="column">
+        <Button
+          as="a"
+          href="/with"
+          p="4"
+          rounded="lg"
+          colorScheme="primary"
+          h="20"
+          isDisabled
+        >
+          <Flex flexDirection="column" alignItems="center">
+            <span>starknetkit@next ({process.env.starknetkitNextVersion})</span>
+            <span>+</span>
+            <span>starknet-react ({process.env.starknetReactVersion})</span>
+          </Flex>
+        </Button>
+        <Flex justifyContent="center">
+          <strong>TODO (wait for starknet-react v3)</strong>
+        </Flex>
+      </Flex>
     </Flex>
   )
 }

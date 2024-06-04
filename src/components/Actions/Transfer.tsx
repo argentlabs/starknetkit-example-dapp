@@ -1,16 +1,17 @@
+import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { transfer, transferJSONRpcMethod } from "@/services/transfer"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
 import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
-import { Button, Flex, Heading, Input } from "@chakra-ui/react"
+import { Box, Button, Flex, Heading, Input } from "@chakra-ui/react"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { FC, useState } from "react"
-import { Account } from "starknet"
+import { Account, AccountInterface } from "starknet"
 import { StarknetWindowObject } from "starknetkit-next"
 
 const TransferLatest = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom)
-  return <Transfer account={wallet?.account} />
+  return <Transfer account={wallet?.account as AccountInterface} />
 }
 const TransferNext = () => {
   const wallet = useAtomValue(walletStarknetkitNextAtom)
@@ -18,7 +19,7 @@ const TransferNext = () => {
 }
 
 interface TransferProps {
-  account?: Account
+  account?: Account | AccountInterface
   wallet?: StarknetWindowObject | null
 }
 
@@ -53,7 +54,6 @@ const Transfer: FC<TransferProps> = ({ account, wallet }) => {
       setTransactionStatus("idle")
     }
   }
-
   return (
     <Flex flex={1} width="full" gap={10}>
       <Flex
@@ -84,7 +84,7 @@ const Transfer: FC<TransferProps> = ({ account, wallet }) => {
           value={transferAmount}
           onChange={(e) => setTransferAmount(e.target.value)}
         />
-        <br />
+
         <Button
           colorScheme="primary"
           type="submit"

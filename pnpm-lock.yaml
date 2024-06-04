@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@argent/x-sessions':
-        specifier: ^6.7.2
-        version: 6.7.2(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)
+        specifier: ^6.7.3
+        version: 6.7.3(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)
       '@chakra-ui/react':
         specifier: ^2.8.2
         version: 2.8.2(@emotion/react@11.11.4(@types/react@18.3.3)(react@18.3.1))(@emotion/styled@11.11.5(@emotion/react@11.11.4(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(framer-motion@11.2.10(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -20,6 +20,12 @@ importers:
       '@emotion/styled':
         specifier: ^11.11.5
         version: 11.11.5(@emotion/react@11.11.4(@types/react@18.3.3)(react@18.3.1))(@types/react@18.3.3)(react@18.3.1)
+      '@starknet-react/chains':
+        specifier: ^0.1.7
+        version: 0.1.7
+      '@starknet-react/core':
+        specifier: ^2.8.2
+        version: 2.8.2(get-starknet-core@3.3.0(starknet@6.9.0))(react@18.3.1)(starknet@6.9.0)
       colord:
         specifier: ^2.9.3
         version: 2.9.3
@@ -50,24 +56,12 @@ importers:
       starknet:
         specifier: ^6.7.0
         version: 6.9.0
-      starknet-react-chains-latest:
-        specifier: npm:@starknet-react/chains@^0.1.7
-        version: '@starknet-react/chains@0.1.7'
-      starknet-react-chains-next:
-        specifier: npm:@starknet-react/chains@0.1.7
-        version: '@starknet-react/chains@0.1.7'
-      starknet-react-core-latest:
-        specifier: npm:@starknet-react/core@^2.8.2
-        version: '@starknet-react/core@2.8.2(get-starknet-core@3.3.0(starknet@6.9.0))(react@18.3.1)(starknet@6.9.0)'
-      starknet-react-core-next:
-        specifier: npm:@starknet-react/core@2.8.2
-        version: '@starknet-react/core@2.8.2(get-starknet-core@3.3.0(starknet@6.9.0))(react@18.3.1)(starknet@6.9.0)'
       starknetkit-latest:
         specifier: npm:starknetkit@^1.1.9
         version: starknetkit@1.1.9(starknet@6.9.0)
       starknetkit-next:
-        specifier: npm:starknetkit@^2.2.7
-        version: starknetkit@2.2.7(starknet@6.9.0)
+        specifier: npm:starknetkit@^2.2.9
+        version: starknetkit@2.2.9(starknet@6.9.0)
     devDependencies:
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -132,11 +126,11 @@ packages:
     peerDependencies:
       typescript: ^5.0.0
 
-  '@argent/x-sessions@6.7.2':
-    resolution: {integrity: sha512-nA24ThqAi/iVuUWVqe8rSrzfHMXkAeMJAyGmEnUQsxLdfJ0HwQ7s+DRUuBrJzpCE7SjBPDO68qqnz9jTxV5VbA==}
+  '@argent/x-sessions@6.7.3':
+    resolution: {integrity: sha512-7tB44LaBhOOzX+fanwxPeTJrmsjySwkEEiY9pDuWBpVaK8tnusleJ7qzoaZlY4hc+gvG4rnwt8HPKdLvq/QUZg==}
 
-  '@argent/x-shared@1.19.8':
-    resolution: {integrity: sha512-MLx5ihSDHX0AfelB8dQv4M+hj4jYDQ+MKhI4r7hgsGGGjtWBsYcswERypTvaj2JLxAtTYIVJbNp/tTVYxnVUFA==}
+  '@argent/x-shared@1.20.0':
+    resolution: {integrity: sha512-svNyXdAJCBevNS7/1Gc3gTXJ+5kyIKjHXvHOfCyCmX9XnkD/JD8SCcmVP6/AcDd+HmBn5ziM+GWz56cdEg7D2g==}
     peerDependencies:
       '@scure/base': ^1.1.1
       '@scure/bip39': ^1.2.1
@@ -1021,8 +1015,8 @@ packages:
   '@tanstack/query-core@5.40.0':
     resolution: {integrity: sha512-eD8K8jsOIq0Z5u/QbvOmfvKKE/XC39jA7yv4hgpl/1SRiU+J8QCIwgM/mEHuunQsL87dcvnHqSVLmf9pD4CiaA==}
 
-  '@tanstack/react-query@5.40.0':
-    resolution: {integrity: sha512-iv/W0Axc4aXhFzkrByToE1JQqayxTPNotCoSCnarR/A1vDIHaoKpg7FTIfP3Ev2mbKn1yrxq0ZKYUdLEJxs6Tg==}
+  '@tanstack/react-query@5.40.1':
+    resolution: {integrity: sha512-gOcmu+gpFd2taHrrgMM9RemLYYEDYfsCqszxCC0xtx+csDa4R8t7Hr7SfWXQP13S2sF+mOxySo/+FNXJFYBqcA==}
     peerDependencies:
       react: ^18.0.0
 
@@ -1880,9 +1874,6 @@ packages:
     resolution: {integrity: sha512-TG17zIBdjHIyO0CTjkB7lkuvo24OHLrkB/rZSEdspEAcwcysMpZOVgwrNPIzD89kU8gZ3m1UANarFNPVLULS5Q==}
     peerDependencies:
       starknet: ^5.18.0
-
-  get-starknet-core@4.0.0-next.2:
-    resolution: {integrity: sha512-1p7bJbmTxUMiybdLB/nPHsdIBviIUBBzuOljN7yWnrYsCaH4AVjQ32OGEgqDn+oV8hJIKIjmArexBT2OYzP9dA==}
 
   get-starknet-core@4.0.0-next.5:
     resolution: {integrity: sha512-zZ3i4E5UYF1f04fgkwfaVC0uj1pvdBlzsDqXEAfb4jc1WO4zM7rIm4XAUqdMwVSr4CBend5RM7U+zv166fBNYg==}
@@ -2861,9 +2852,6 @@ packages:
     resolution: {integrity: sha512-UcjcJOWknrNkF6PLX83qcHM6KHgVKNkV62Y8a5uYDVv9ydGQVwAHMKqHdJje1VTWpljG0WYpCDhrCdAOYH4TWg==}
     engines: {node: '>= 10.x'}
 
-  starknet-types@0.0.4:
-    resolution: {integrity: sha512-PklqFeSp9gMqbzW5IbO8l1s3xsNZYkNG/x/gsytgYCIl6H/cqiwCZolVTneyTibvrdHOQ8kP3PXwfdsypudYqw==}
-
   starknet-types@0.7.2:
     resolution: {integrity: sha512-r3JJ0rrK0g3FnVRGcFiLY+9YT5WZgxB4TKBfR44wYGevHtKEM6BM5B+Gn1eou1zV7xEAwz3GpmvLSQTUAzDhsw==}
 
@@ -2876,9 +2864,6 @@ packages:
   starknet@5.25.0:
     resolution: {integrity: sha512-ja5pV610voxTCw/MzXhZoZcwe+XZ5RVWkpa/Fhxsy0OP635DxKDbnPQSKCLWXmSi/BkfkpeefXXv4IUvYJo4kw==}
 
-  starknet@6.7.0:
-    resolution: {integrity: sha512-8NMedKBfkg/oZUgTYNw9lKeNoNYakL/Roah2HwKzrVyvDxBs0arrNrR8No8+tTq0wQg0HGu1w+JIObynjHAK3w==}
-
   starknet@6.9.0:
     resolution: {integrity: sha512-8860J7sGUr5UO/BDl3pjCZNUs/vgUM75wVoI93iOYLbTGF0f6MvFZsMOd73tsPKjEcG8V5BTSx6I7seDhQ9osw==}
 
@@ -2887,10 +2872,10 @@ packages:
     peerDependencies:
       starknet: ^6.7.0
 
-  starknetkit@2.2.7:
-    resolution: {integrity: sha512-tU+i4QEnGq0kfi8YbDL/AciNKL7kgU2CEuEeh4wJ22l5NcZPo/8k95maBdVdYhmc1iNzs4xOpdqqaN3xhWjz9w==}
+  starknetkit@2.2.9:
+    resolution: {integrity: sha512-B6CQP/pMqtyq3QRCFo37Ie/WZzewEBAt9QjnzKIoKO6/VsngNB1YnYcg/Og/UrgtiP340nkkvgMhqDekRqguPQ==}
     peerDependencies:
-      starknet: ^6.1.3
+      starknet: ^6.9.0
 
   std-env@3.7.0:
     resolution: {integrity: sha512-JPbdCEQLj1w5GilpiHAx3qJvFndqybBysA3qUOnznweH4QbNYUsW/ea8QzSrnh0vNsezMMw5bcVool8lM0gwzg==}
@@ -3312,11 +3297,11 @@ snapshots:
       dataloader: 2.2.2
       typescript: 5.4.5
 
-  '@argent/x-sessions@6.7.2(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)':
+  '@argent/x-sessions@6.7.3(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)':
     dependencies:
-      '@argent/x-shared': 1.19.8(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)
+      '@argent/x-shared': 1.20.0(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)
       minimalistic-assert: 1.0.1
-      starknet: 6.7.0
+      starknet: 6.9.0
       starknet4: starknet@4.22.0
       starknet5: starknet@5.25.0
     transitivePeerDependencies:
@@ -3332,7 +3317,7 @@ snapshots:
       - typescript
       - zod
 
-  '@argent/x-shared@1.19.8(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)':
+  '@argent/x-shared@1.20.0(@scure/base@1.1.6)(@scure/bip39@1.1.1)(lodash-es@4.17.21)(object-hash@3.0.0)(react-dom@18.3.1(react@18.3.1))(react-router-dom@6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(swr@1.3.0(react@18.3.1))(typescript@5.4.5)(zod@3.23.8)':
     dependencies:
       '@argent/x-multicall': 7.1.0(typescript@5.4.5)
       '@noble/hashes': 1.4.0
@@ -4453,7 +4438,7 @@ snapshots:
   '@starknet-react/core@2.8.2(get-starknet-core@3.3.0(starknet@6.9.0))(react@18.3.1)(starknet@6.9.0)':
     dependencies:
       '@starknet-react/chains': 0.1.7
-      '@tanstack/react-query': 5.40.0(react@18.3.1)
+      '@tanstack/react-query': 5.40.1(react@18.3.1)
       eventemitter3: 5.0.1
       get-starknet-core: 3.3.0(starknet@6.9.0)
       immutable: 4.3.6
@@ -4470,7 +4455,7 @@ snapshots:
 
   '@tanstack/query-core@5.40.0': {}
 
-  '@tanstack/react-query@5.40.0(react@18.3.1)':
+  '@tanstack/react-query@5.40.1(react@18.3.1)':
     dependencies:
       '@tanstack/query-core': 5.40.0
       react: 18.3.1
@@ -5669,8 +5654,6 @@ snapshots:
       '@module-federation/runtime': 0.1.16
       starknet: 6.9.0
 
-  get-starknet-core@4.0.0-next.2: {}
-
   get-starknet-core@4.0.0-next.5:
     dependencies:
       starknet-types: 0.7.2
@@ -6661,8 +6644,6 @@ snapshots:
 
   split2@4.2.0: {}
 
-  starknet-types@0.0.4: {}
-
   starknet-types@0.7.2: {}
 
   starknet@4.22.0:
@@ -6705,22 +6686,6 @@ snapshots:
       isomorphic-fetch: 3.0.0
       lossless-json: 2.0.11
       pako: 2.1.0
-      url-join: 4.0.1
-    transitivePeerDependencies:
-      - encoding
-
-  starknet@6.7.0:
-    dependencies:
-      '@noble/curves': 1.4.0
-      '@scure/base': 1.1.6
-      '@scure/starknet': 1.0.0
-      abi-wan-kanabi: 2.2.2
-      fetch-cookie: 3.0.1
-      isomorphic-fetch: 3.0.0
-      lossless-json: 4.0.1
-      pako: 2.1.0
-      starknet-types: 0.0.4
-      ts-mixer: 6.0.4
       url-join: 4.0.1
     transitivePeerDependencies:
       - encoding
@@ -6776,7 +6741,7 @@ snapshots:
       - uWebSockets.js
       - utf-8-validate
 
-  starknetkit@2.2.7(starknet@6.9.0):
+  starknetkit@2.2.9(starknet@6.9.0):
     dependencies:
       '@trpc/client': 10.45.2(@trpc/server@10.45.2)
       '@trpc/server': 10.45.2
@@ -6785,7 +6750,7 @@ snapshots:
       detect-browser: 5.3.0
       eventemitter3: 5.0.1
       events: 3.3.0
-      get-starknet-core: 4.0.0-next.2
+      get-starknet-core: 4.0.0-next.5
       get-starknet-coreV3: get-starknet-core@3.2.0(starknet@6.9.0)
       lodash-es: 4.17.21
       starknet: 6.9.0

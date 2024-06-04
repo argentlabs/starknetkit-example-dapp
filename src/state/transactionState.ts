@@ -1,6 +1,6 @@
 import { Status } from "@/types/status"
-import { atom } from "jotai"
+import { atomWithReset } from "jotai/utils"
 
-export const lastTxHashAtom = atom<string | undefined>(undefined)
-export const lastTxStatusAtom = atom<Status>("idle")
-export const lastTxErrorAtom = atom<string | undefined>(undefined)
+export const lastTxHashAtom = atomWithReset<string | undefined>(undefined)
+export const lastTxStatusAtom = atomWithReset<Status>("idle")
+export const lastTxErrorAtom = atomWithReset<string | undefined>(undefined)

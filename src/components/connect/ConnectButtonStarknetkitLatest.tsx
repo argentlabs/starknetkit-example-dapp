@@ -1,4 +1,4 @@
-import { ARGENT_WEBWALLET_URL } from "@/constants"
+import { ARGENT_WEBWALLET_URL, provider } from "@/constants"
 import { Button, Flex } from "@chakra-ui/react"
 import { FC } from "react"
 import { constants } from "starknet"
@@ -12,20 +12,26 @@ const ConnectButtonStarknetkitLatest: FC = () => {
   const navigate = useRouter()
 
   const connectFn = async () => {
-    const { wallet } = await connect({
-      modalMode: "alwaysAsk",
-      webWalletUrl: ARGENT_WEBWALLET_URL,
-      argentMobileOptions: {
-        dappName: "Starknetkit example dapp",
-        url: window.location.hostname,
-        chainId: constants.NetworkName.SN_SEPOLIA,
-        icons: [],
-      },
-    })
+    try {
+      const { wallet } = await connect({
+        provider,
+        modalMode: "alwaysAsk",
+        webWalletUrl: ARGENT_WEBWALLET_URL,
+        argentMobileOptions: {
+          dappName: "Starknetkit example dapp",
+          url: window.location.hostname,
+          chainId: constants.NetworkName.SN_SEPOLIA,
+          icons: [],
+        },
+      })
 
-    setWallet(wallet)
+      setWallet(wallet)
 
-    navigate.push("/starknetkitLatest")
+      navigate.push("/starknetkitLatest")
+    } catch (e) {
+      console.error(e)
+      alert((e as any).message)
+    }
   }
 
   return (
@@ -34,12 +40,9 @@ const ConnectButtonStarknetkitLatest: FC = () => {
       rounded="lg"
       colorScheme="secondary"
       onClick={connectFn}
-      h="16"
+      h="20"
     >
-      <Flex flexDirection="column">
-        <span>Connect with Starknetkit@latest</span>
-        <span>{process.env.starknetkitLatestVersion}</span>
-      </Flex>
+      starknetkit@latest ({process.env.starknetkitLatestVersion})
     </Button>
   )
 }

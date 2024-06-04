@@ -37,12 +37,19 @@ const ConnectButtonStarknetkitNext = () => {
   }
 
   return (
-    <Button p="4" rounded="lg" colorScheme="primary" onClick={connectFn} h="16">
-      <Flex flexDirection="column">
-        <span>Connect with Starknetkit@next</span>
-        <span>{process.env.starknetkitNextVersion}</span>
-      </Flex>
-    </Button>
+    <Flex flexDirection="column" alignItems="center">
+      <Button
+        p="4"
+        rounded="lg"
+        colorScheme="primary"
+        onClick={connectFn}
+        h="16"
+        w="full"
+      >
+        starknetkit@next ({process.env.starknetkitNextVersion})
+      </Button>
+      <strong>(with session keys)</strong> {/* TODO: will be removed */}
+    </Flex>
   )
 }
 

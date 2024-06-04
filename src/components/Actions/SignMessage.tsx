@@ -10,7 +10,7 @@ import { StarknetWindowObject } from "starknetkit-next"
 
 const SignMessageLatest = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom)
-  return <SignMessage account={wallet?.account} />
+  return <SignMessage account={wallet?.account as AccountInterface} />
 }
 
 const SignMessageNext = () => {

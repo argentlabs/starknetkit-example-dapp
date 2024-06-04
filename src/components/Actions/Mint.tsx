@@ -1,3 +1,4 @@
+import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { mintToken, mintTokenRcpMethod } from "@/services/mint"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
 import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
@@ -10,7 +11,7 @@ import { StarknetWindowObject } from "starknetkit-next"
 
 const MintLatest = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom)
-  return <Mint account={wallet?.account} />
+  return <Mint account={wallet?.account as AccountInterface} />
 }
 
 const MintNext = () => {

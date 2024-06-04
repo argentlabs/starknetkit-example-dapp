@@ -14,7 +14,7 @@ import { StarknetWindowObject } from "starknetkit-next"
 
 const DeployLatest = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom)
-  return <Deploy account={wallet?.account} />
+  return <Deploy account={wallet?.account as AccountInterface} />
 }
 const DeployNext = () => {
   const wallet = useAtomValue(walletStarknetkitNextAtom)

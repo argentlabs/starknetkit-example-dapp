@@ -10,7 +10,7 @@ import { SignMessageLatest } from "@/components/Actions/SignMessage"
 import { TransferLatest } from "@/components/Actions/Transfer"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
-import { ARGENT_WEBWALLET_URL } from "@/constants"
+import { ARGENT_WEBWALLET_URL, provider } from "@/constants"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
 import { Flex } from "@chakra-ui/react"
@@ -29,23 +29,32 @@ export default function StarknetkitLatest() {
 
   useEffect(() => {
     const autoConnect = async () => {
-      const { wallet: connectedWallet } = await connect({
-        modalMode: "neverAsk",
-        webWalletUrl: ARGENT_WEBWALLET_URL,
-        argentMobileOptions: {
-          dappName: "Starknetkit example dapp",
-          url: window.location.hostname,
-          chainId: constants.NetworkName.SN_SEPOLIA,
-          icons: [],
-        },
-      })
-      setWallet(connectedWallet)
+      try {
+        const { wallet: connectedWallet } = await connect({
+          provider,
+          modalMode: "neverAsk",
+          webWalletUrl: ARGENT_WEBWALLET_URL,
+          argentMobileOptions: {
+            dappName: "Starknetkit example dapp",
+            url: window.location.hostname,
+            chainId: constants.NetworkName.SN_SEPOLIA,
+            icons: [],
+          },
+        })
+        setWallet(connectedWallet)
 
-      if (!connectedWallet) {
-        navigate.replace("/")
+        if (!connectedWallet) {
+          navigate.replace("/")
+        }
+      } catch (e) {
+        console.error(e)
+        alert((e as any).message)
       }
     }
-    autoConnect()
+
+    if (!wallet) {
+      autoConnect()
+    }
   }, [])
 
   return (
@@ -55,7 +64,6 @@ export default function StarknetkitLatest() {
           <DisconnectButton
             disconnectFn={disconnect}
             resetFn={() => {
-              setWallet(RESET)
               setWallet(RESET)
             }}
           />
