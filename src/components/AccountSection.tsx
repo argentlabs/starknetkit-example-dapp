@@ -23,7 +23,8 @@ const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
       <Box>Account: {address}</Box>
       <Box>Chain: {chainId}</Box>
       <Box
-        className={`${lastTxHash ? "cursor-pointer hover:underline" : "default"}`}
+        cursor={lastTxHash ? "pointer" : "default"}
+        _hover={{ textDecoration: lastTxHash ? "underline" : "none" }}
         onClick={() => {
           if (!lastTxHash) return
           window.open(`https://sepolia.starkscan.co/tx/${lastTxHash}`, "_blank")

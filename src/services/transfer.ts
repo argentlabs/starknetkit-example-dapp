@@ -21,10 +21,14 @@ export const transfer = async (
 }
 
 export const transferJSONRpcMethod = async (
-  wallet: StarknetWindowObject,
+  wallet: StarknetWindowObject | undefined | null,
   transferTo: string,
   transferAmount: string,
 ): Promise<any> => {
+  if (!wallet) {
+    throw Error("wallet not connected")
+  }
+
   const transferCalldata = CallData.compile({
     to: transferTo,
     value: parseInputAmountToUint256(transferAmount),

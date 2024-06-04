@@ -1,16 +1,31 @@
-import { transfer } from "@/services/transfer"
+import { transfer, transferJSONRpcMethod } from "@/services/transfer"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
+import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
 import { Button, Flex, Heading, Input } from "@chakra-ui/react"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
-import { useState } from "react"
+import { FC, useState } from "react"
 import { Account } from "starknet"
+import { StarknetWindowObject } from "starknetkit-next"
 
-const Transfer = () => {
+const TransferLatest = () => {
+  const wallet = useAtomValue(walletStarknetkitLatestAtom)
+  return <Transfer account={wallet?.account} />
+}
+const TransferNext = () => {
+  const wallet = useAtomValue(walletStarknetkitNextAtom)
+  return <Transfer wallet={wallet} />
+}
+
+interface TransferProps {
+  account?: Account
+  wallet?: StarknetWindowObject | null
+}
+
+const Transfer: FC<TransferProps> = ({ account, wallet }) => {
   const [transferTo, setTransferTo] = useState("")
   const [transferAmount, setTransferAmount] = useState("1")
 
-  const wallet = useAtomValue(walletStarknetkitLatestAtom)
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
   const setLastTransactionHash = useSetAtom(lastTxHashAtom)
 
@@ -21,15 +36,15 @@ const Transfer = () => {
 
   const handleTransferSubmit = async (e: React.FormEvent) => {
     try {
-      if (!wallet?.account) throw new Error("Account not connected")
+      if (!account && !wallet) {
+        throw new Error("Account not connected")
+      }
 
       e.preventDefault()
       setTransactionStatus("approve")
-      const { transaction_hash } = await transfer(
-        wallet.account as Account,
-        transferTo,
-        transferAmount,
-      )
+      const { transaction_hash } = account
+        ? await transfer(account as Account, transferTo, transferAmount)
+        : await transferJSONRpcMethod(wallet, transferTo, transferAmount)
       setLastTransactionHash(transaction_hash)
       setTransactionStatus("pending")
       setTransferAmount("")
@@ -83,4 +98,4 @@ const Transfer = () => {
   )
 }
 
-export { Transfer }
+export { TransferLatest, TransferNext }

@@ -4,14 +4,14 @@ import { AccountSection } from "@/components/AccountSection"
 import { AddNetworkNext } from "@/components/Actions/AddNetwork"
 import { AddTokenNext } from "@/components/Actions/AddToken"
 import { Declare } from "@/components/Actions/Declare"
-import { Deploy } from "@/components/Actions/Deploy"
-import { MintRpcMethod } from "@/components/Actions/MintRpcMethod"
+import { DeployNext } from "@/components/Actions/Deploy"
+import { MintNext } from "@/components/Actions/Mint"
 import { SessionKeysExecute } from "@/components/Actions/SessionKeysExecute"
 import { SessionKeysExecuteOutside } from "@/components/Actions/SessionKeysExecuteOutside"
 import { SessionKeysSign } from "@/components/Actions/SessionKeysSign"
 import { SessionKeysTypedDataOutside } from "@/components/Actions/SessionKeysTypedDataOutside"
-import { SignMessageRpcMethod } from "@/components/Actions/SignMessageRpcMethod"
-import { TransferRpcMethod } from "@/components/Actions/TransferRpcMethod"
+import { SignMessageNext } from "@/components/Actions/SignMessage"
+import { TransferNext } from "@/components/Actions/Transfer"
 import { WalletRpcMsgContainer } from "@/components/Actions/WalletRpcMsgContainer"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
@@ -83,13 +83,13 @@ export default function StarknetkitLatest() {
             chainId={connectorData?.chainId}
           />
           <Section>
-            <MintRpcMethod />
+            <MintNext />
           </Section>
           <Section>
-            <TransferRpcMethod />
+            <TransferNext />
           </Section>
           <Section>
-            <SignMessageRpcMethod />
+            <SignMessageNext />
           </Section>
           <Section>
             <SessionKeysSign />
@@ -105,7 +105,7 @@ export default function StarknetkitLatest() {
               <Section>
                 <Flex alignItems="center" gap="10">
                   <Declare />
-                  <Deploy />
+                  <DeployNext />
                 </Flex>
               </Section>
             )}

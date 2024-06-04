@@ -1,13 +1,32 @@
-import { deploy } from "@/services/deploy"
+import { deploy, deployRcpMethod } from "@/services/deploy"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
+import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
 import { Button, Heading, Flex, Input } from "@chakra-ui/react"
 import { useAtomValue, useSetAtom } from "jotai"
-import { useState } from "react"
-import { UniversalDeployerContractPayload } from "starknet"
+import { FC, useState } from "react"
+import {
+  Account,
+  AccountInterface,
+  UniversalDeployerContractPayload,
+} from "starknet"
+import { StarknetWindowObject } from "starknetkit-next"
 
-const Deploy = () => {
+const DeployLatest = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom)
+  return <Deploy account={wallet?.account} />
+}
+const DeployNext = () => {
+  const wallet = useAtomValue(walletStarknetkitNextAtom)
+  return <Deploy wallet={wallet} />
+}
+
+interface DeployProps {
+  account?: Account | AccountInterface
+  wallet?: StarknetWindowObject | undefined | null
+}
+
+const Deploy: FC<DeployProps> = ({ account, wallet }) => {
   const setTransactionStatus = useSetAtom(lastTxStatusAtom)
   const setLastTransactionHash = useSetAtom(lastTxHashAtom)
   const [deployClassHash, setDeployClassHash] = useState("")
@@ -21,7 +40,10 @@ const Deploy = () => {
       const payload: UniversalDeployerContractPayload = {
         classHash: deployClassHash,
       }
-      const result = await deploy(wallet?.account, payload)
+
+      const result = account
+        ? await deploy(account, payload)
+        : await deployRcpMethod(wallet, payload)
       setLastTransactionHash(result.transaction_hash)
       setTransactionStatus("pending")
     } catch (e) {
@@ -60,4 +82,4 @@ const Deploy = () => {
   )
 }
 
-export { Deploy }
+export { DeployLatest, DeployNext }

@@ -32,12 +32,16 @@ export const signMessage = async (
 }
 
 export const signMessageRcpMethod = async (
-  wallet: StarknetWindowObject,
+  wallet: StarknetWindowObject | undefined | null,
   message: string,
   skipDeploy = false,
 ) => {
   if (!shortString.isShortString(message)) {
     throw Error("message must be a short string")
+  }
+
+  if (!wallet) {
+    throw Error("wallet not connected")
   }
 
   const chainId = await wallet?.request({

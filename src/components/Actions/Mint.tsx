@@ -1,12 +1,29 @@
-import { mintToken } from "@/services/mint"
+import { mintToken, mintTokenRcpMethod } from "@/services/mint"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
+import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
 import { Flex, Heading, Input } from "@chakra-ui/react"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
-import { useState } from "react"
+import { FC, useState } from "react"
+import { Account, AccountInterface } from "starknet"
+import { StarknetWindowObject } from "starknetkit-next"
 
-const Mint = () => {
+const MintLatest = () => {
   const wallet = useAtomValue(walletStarknetkitLatestAtom)
+  return <Mint account={wallet?.account} />
+}
+
+const MintNext = () => {
+  const wallet = useAtomValue(walletStarknetkitNextAtom)
+  return <Mint wallet={wallet} />
+}
+
+interface MintProps {
+  account?: Account | AccountInterface
+  wallet?: StarknetWindowObject | null
+}
+
+const Mint: FC<MintProps> = ({ account, wallet }) => {
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
   const setLastTransactionHash = useSetAtom(lastTxHashAtom)
 
@@ -17,7 +34,9 @@ const Mint = () => {
     e.preventDefault()
     try {
       setTransactionStatus("approve")
-      const { transaction_hash } = await mintToken(wallet?.account, mintAmount)
+      const { transaction_hash } = account
+        ? await mintToken(account, mintAmount)
+        : await mintTokenRcpMethod(wallet, mintAmount)
       setLastTransactionHash(transaction_hash)
       setTransactionStatus("pending")
     } catch (e) {
@@ -48,10 +67,14 @@ const Mint = () => {
           onChange={(e) => setMintAmount(e.target.value)}
         />
 
-        <Input type="submit" disabled={true} value="Not possible with ETH!" />
+        <Input
+          type="submit"
+          disabled={true || buttonsDisabled}
+          value="Not possible with ETH!"
+        />
       </Flex>
     </Flex>
   )
 }
 
-export { Mint }
+export { MintLatest, MintNext }

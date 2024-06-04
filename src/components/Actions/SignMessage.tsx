@@ -1,30 +1,48 @@
-import { signMessage } from "@/services/signMessage"
+import { signMessage, signMessageRcpMethod } from "@/services/signMessage"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
+import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxStatusAtom } from "@/state/transactionState"
 import { Button, Flex, Heading, Input, Textarea } from "@chakra-ui/react"
 import { useAtomValue, useSetAtom } from "jotai"
-import { useState } from "react"
-import { Account, stark } from "starknet"
+import { FC, useState } from "react"
+import { Account, AccountInterface, stark } from "starknet"
+import { StarknetWindowObject } from "starknetkit-next"
 
-const SignMessage = () => {
+const SignMessageLatest = () => {
+  const wallet = useAtomValue(walletStarknetkitLatestAtom)
+  return <SignMessage account={wallet?.account} />
+}
+
+const SignMessageNext = () => {
+  const wallet = useAtomValue(walletStarknetkitNextAtom)
+  return <SignMessage wallet={wallet} />
+}
+
+interface SignMessageProps {
+  account?: Account | AccountInterface
+  wallet?: StarknetWindowObject | null
+}
+
+const SignMessage: FC<SignMessageProps> = ({ account, wallet }) => {
   const [shortText, setShortText] = useState("")
   const [lastSig, setLastSig] = useState<string[]>([])
 
-  const wallet = useAtomValue(walletStarknetkitLatestAtom)
   const setTransactionStatus = useSetAtom(lastTxStatusAtom)
 
-  const handleSignSubmit = async () => {
+  const handleSignSubmit = async (skipDeploy?: boolean) => {
     try {
-      if (!wallet?.account) {
+      if (!account && !wallet) {
         throw new Error("Account not connected")
       }
 
       setTransactionStatus("approve")
-      const result = await signMessage(
-        wallet.account as Account,
-        await wallet.account.getChainId(),
-        shortText,
-      )
+      const result = account
+        ? await signMessage(
+            account as Account,
+            await account.getChainId(),
+            shortText,
+          )
+        : await signMessageRcpMethod(wallet, shortText, skipDeploy)
       setLastSig(stark.formatSignature(result))
       setTransactionStatus("success")
     } catch (e) {
@@ -85,4 +103,4 @@ const SignMessage = () => {
   )
 }
 
-export { SignMessage }
+export { SignMessageLatest, SignMessageNext }

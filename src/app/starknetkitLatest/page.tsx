@@ -1,25 +1,25 @@
 "use client"
 
 import { AccountSection } from "@/components/AccountSection"
-import { SignMessage } from "@/components/Actions/SignMessage"
-import { Transfer } from "@/components/Actions/Transfer"
-import { Section } from "@/components/Section"
-import { useWaitForTx } from "@/hooks/useWaitForTx"
-import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
-import { Box, Button, Flex } from "@chakra-ui/react"
-import { useAtom } from "jotai"
-import { useRouter } from "next/navigation"
-import { useEffect } from "react"
-import { connect, disconnect } from "starknetkit-latest"
-import { RESET } from "jotai/utils"
-import { ARGENT_WEBWALLET_URL } from "@/constants"
-import { constants } from "starknet"
-import { Declare } from "@/components/Actions/Declare"
-import { Deploy } from "@/components/Actions/Deploy"
-import { Mint } from "@/components/Actions/Mint"
-import { DisconnectButton } from "@/components/DisconnectButton"
 import { AddNetworkLatest } from "@/components/Actions/AddNetwork"
 import { AddTokenLatest } from "@/components/Actions/AddToken"
+import { Declare } from "@/components/Actions/Declare"
+import { DeployLatest } from "@/components/Actions/Deploy"
+import { MintLatest } from "@/components/Actions/Mint"
+import { SignMessageLatest } from "@/components/Actions/SignMessage"
+import { TransferLatest } from "@/components/Actions/Transfer"
+import { DisconnectButton } from "@/components/DisconnectButton"
+import { Section } from "@/components/Section"
+import { ARGENT_WEBWALLET_URL } from "@/constants"
+import { useWaitForTx } from "@/hooks/useWaitForTx"
+import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
+import { Flex } from "@chakra-ui/react"
+import { useAtom } from "jotai"
+import { RESET } from "jotai/utils"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
+import { constants } from "starknet"
+import { connect, disconnect } from "starknetkit-latest"
 
 export default function StarknetkitLatest() {
   const [wallet, setWallet] = useAtom(walletStarknetkitLatestAtom)
@@ -64,20 +64,20 @@ export default function StarknetkitLatest() {
             chainId={wallet.chainId}
           />
           <Section>
-            <Mint />
+            <MintLatest />
           </Section>
           <Section>
-            <Transfer />
+            <TransferLatest />
           </Section>
           <Section>
-            <SignMessage />
+            <SignMessageLatest />
           </Section>
           {wallet.id !== "argentWebWallet" &&
             wallet.id !== "argentMobileWallet" && (
               <Section>
                 <Flex alignItems="center" gap="10">
                   <Declare />
-                  <Deploy />
+                  <DeployLatest />
                 </Flex>
               </Section>
             )}
