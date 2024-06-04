@@ -1,6 +1,11 @@
 import { availableConnectors } from "@/helpers/connectorsLatest"
+import {
+  starknetReactVersionAtom,
+  starknetkitVersionAtom,
+} from "@/state/versionState"
 import { Button, Flex, Heading, Image } from "@chakra-ui/react"
 import { useConnect } from "@starknet-react/core"
+import { useSetAtom } from "jotai"
 import React, { useEffect, useState } from "react"
 import { useStarknetkitConnectModal } from "starknetkit-latest"
 import { isInArgentMobileAppBrowser } from "starknetkit-latest/argentMobile"
@@ -8,6 +13,8 @@ import { isInArgentMobileAppBrowser } from "starknetkit-latest/argentMobile"
 const ConnectStarknetReact = () => {
   const { connectAsync, connectors } = useConnect()
   const [isClient, setIsClient] = useState(false)
+  const setStarknetkitVersion = useSetAtom(starknetkitVersionAtom)
+  const setStarknetReactVersion = useSetAtom(starknetReactVersionAtom)
 
   const { starknetkitConnectModal } = useStarknetkitConnectModal({
     connectors: availableConnectors,
@@ -49,6 +56,12 @@ const ConnectStarknetReact = () => {
               key={connector.id}
               onClick={async () => {
                 await connectAsync({ connector })
+                setStarknetkitVersion(
+                  `starknetkit@latest (${process.env.starknetkitNextVersion})`,
+                )
+                setStarknetReactVersion(
+                  `starknet-react (${process.env.starknetReactVersion})`,
+                )
               }}
               alignItems="center"
               justifyContent="flex-start"
@@ -83,6 +96,12 @@ const ConnectStarknetReact = () => {
           const { connector } = await starknetkitConnectModal()
           if (!connector) return // or throw error
           await connectAsync({ connector: connector as any })
+          setStarknetkitVersion(
+            `starknetkit@latest (${process.env.starknetkitNextVersion})`,
+          )
+          setStarknetReactVersion(
+            `starknet-react (${process.env.starknetReactVersion})`,
+          )
         }}
         alignItems="center"
         justifyContent="flex-start"

@@ -4,6 +4,7 @@ import {
   connectorDataAtom,
   walletStarknetkitNextAtom,
 } from "@/state/connectedWalletStarknetkitNext"
+import { starknetkitVersionAtom } from "@/state/versionState"
 import { Button, Flex } from "@chakra-ui/react"
 import { useSetAtom } from "jotai"
 import { useRouter } from "next/navigation"
@@ -14,6 +15,7 @@ const ConnectButtonStarknetkitNext = () => {
   const setWallet = useSetAtom(walletStarknetkitNextAtom)
   const setConnectorData = useSetAtom(connectorDataAtom)
   const setConnector = useSetAtom(connectorAtom)
+  const setStarknetkitVersion = useSetAtom(starknetkitVersionAtom)
   const navigate = useRouter()
 
   const connectFn = async () => {
@@ -32,7 +34,9 @@ const ConnectButtonStarknetkitNext = () => {
     setWallet(wallet)
     setConnectorData(connectorData)
     setConnector(connector)
-
+    setStarknetkitVersion(
+      `starknetkit@next (${process.env.starknetkitNextVersion})`,
+    )
     navigate.push("/starknetkitNext")
   }
 
@@ -43,7 +47,7 @@ const ConnectButtonStarknetkitNext = () => {
         rounded="lg"
         colorScheme="primary"
         onClick={connectFn}
-        h="16"
+        h="20"
         w="full"
       >
         starknetkit@next ({process.env.starknetkitNextVersion})

@@ -1,3 +1,3 @@
 export default function StarknetReactNext() {
-  return <>todo</>
+  return <>TODO: wait for starknet-react v3</>
 }

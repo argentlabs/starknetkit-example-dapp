@@ -55,7 +55,7 @@ export default function StarknetkitLatest() {
     if (!wallet) {
       autoConnect()
     }
-  }, [])
+  }, [wallet])
 
   return (
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">

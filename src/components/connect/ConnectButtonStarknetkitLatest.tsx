@@ -1,14 +1,16 @@
 import { ARGENT_WEBWALLET_URL, provider } from "@/constants"
-import { Button, Flex } from "@chakra-ui/react"
+import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
+import { starknetkitVersionAtom } from "@/state/versionState"
+import { Button } from "@chakra-ui/react"
+import { useSetAtom } from "jotai"
+import { useRouter } from "next/navigation"
 import { FC } from "react"
 import { constants } from "starknet"
 import { connect } from "starknetkit-latest"
-import { useSetAtom } from "jotai"
-import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
-import { useRouter } from "next/navigation"
 
 const ConnectButtonStarknetkitLatest: FC = () => {
   const setWallet = useSetAtom(walletStarknetkitLatestAtom)
+  const setStarknetkitVersion = useSetAtom(starknetkitVersionAtom)
   const navigate = useRouter()
 
   const connectFn = async () => {
@@ -26,7 +28,9 @@ const ConnectButtonStarknetkitLatest: FC = () => {
       })
 
       setWallet(wallet)
-
+      setStarknetkitVersion(
+        `starknetkit@latest (${process.env.starknetkitLatestVersion})`,
+      )
       navigate.push("/starknetkitLatest")
     } catch (e) {
       console.error(e)

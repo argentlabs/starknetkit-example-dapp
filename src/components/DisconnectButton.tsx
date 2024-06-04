@@ -8,6 +8,10 @@ import {
   lastTxHashAtom,
   lastTxStatusAtom,
 } from "@/state/transactionState"
+import {
+  starknetReactVersionAtom,
+  starknetkitVersionAtom,
+} from "@/state/versionState"
 import { Box, Button, Flex } from "@chakra-ui/react"
 import { useSetAtom } from "jotai"
 import { RESET } from "jotai/utils"
@@ -30,6 +34,8 @@ const DisconnectButton: FC<DisconnectButtonProps> = ({
   const setAccountSessionSignature = useSetAtom(accountSessionSignatureAtom)
   const setSessionRequest = useSetAtom(sessionRequestAtom)
   const setSessionAccount = useSetAtom(sessionAccountAtom)
+  const setStarknetkitVersion = useSetAtom(starknetkitVersionAtom)
+  const setStarknetReactVersion = useSetAtom(starknetReactVersionAtom)
 
   return (
     <Flex justifyContent="flex-end">
@@ -46,7 +52,9 @@ const DisconnectButton: FC<DisconnectButtonProps> = ({
             setSessionAccount(RESET)
             setSessionRequest(RESET)
             setAccountSessionSignature(RESET)
-            navigate.replace("/")
+            setStarknetkitVersion(RESET)
+            setStarknetReactVersion(RESET)
+            navigate.push("/")
           }}
         >
           Disconnect
