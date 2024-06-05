@@ -74,6 +74,7 @@ const SessionKeysSign = () => {
       <Heading as="h2">Create session keys</Heading>
 
       {/* 
+      
       TODO: enable in future release
       
       <Flex alignItems="center" gap="1">
