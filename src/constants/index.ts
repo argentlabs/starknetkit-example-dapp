@@ -6,9 +6,24 @@ export const ETHTokenAddress =
 export const DAITokenAddress =
   "0x00da114221cb83fa859dbdb4c44beeaa0bb37c7537ad5ae66fe5e0efd20e6eb3"
 
+export const CHAIN_ID =
+  process.env.NEXT_PUBLIC_CHAIN_ID === constants.NetworkName.SN_MAIN
+    ? constants.NetworkName.SN_MAIN
+    : constants.NetworkName.SN_SEPOLIA
+
+const NODE_URL =
+  process.env.NEXT_PUBLIC_CHAIN_ID === constants.NetworkName.SN_MAIN
+    ? "https://starknet-mainnet.public.blastapi.io"
+    : "https://starknet-sepolia.public.blastapi.io/rpc/v0_7"
+
+const STARKNET_CHAIN_ID =
+  process.env.NEXT_PUBLIC_CHAIN_ID === constants.NetworkName.SN_MAIN
+    ? constants.StarknetChainId.SN_MAIN
+    : constants.StarknetChainId.SN_SEPOLIA
+
 export const provider = new RpcProvider({
-  nodeUrl: "https://starknet-sepolia.public.blastapi.io/rpc/v0_7",
-  chainId: constants.StarknetChainId.SN_SEPOLIA,
+  nodeUrl: NODE_URL,
+  chainId: STARKNET_CHAIN_ID,
 })
 
 export const ARGENT_SESSION_SERVICE_BASE_URL =
@@ -17,8 +32,3 @@ export const ARGENT_SESSION_SERVICE_BASE_URL =
 
 export const ARGENT_WEBWALLET_URL =
   process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL || "https://web.argent.xyz"
-
-export const CHAIN_ID =
-  process.env.NEXT_PUBLIC_CHAIN_ID === constants.NetworkName.SN_MAIN
-    ? constants.NetworkName.SN_MAIN
-    : constants.NetworkName.SN_SEPOLIA
