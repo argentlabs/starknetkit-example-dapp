@@ -1,4 +1,3 @@
-import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { mintToken, mintTokenRcpMethod } from "@/services/mint"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
 import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
