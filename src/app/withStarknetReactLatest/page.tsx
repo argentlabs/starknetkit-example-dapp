@@ -9,6 +9,7 @@ import { Section } from "@/components/Section"
 import { ConnectStarknetReact } from "@/components/connect/ConnectStarknetReact"
 import { CHAIN_ID } from "@/constants"
 import { availableConnectors } from "@/helpers/connectorsLatest"
+import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { Flex } from "@chakra-ui/react"
 import { mainnet, sepolia } from "@starknet-react/chains"
 import {
@@ -27,6 +28,8 @@ const StarknetReactDappContent = () => {
   const [chainId, setChainId] = useState<constants.StarknetChainId | undefined>(
     undefined,
   )
+
+  useWaitForTx()
 
   useEffect(() => {
     const getChainId = async () => {

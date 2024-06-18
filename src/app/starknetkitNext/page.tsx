@@ -16,6 +16,7 @@ import { WalletRpcMsgContainer } from "@/components/Actions/WalletRpcMsgContaine
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
 import { ARGENT_WEBWALLET_URL } from "@/constants"
+import { useWaitForTx } from "@/hooks/useWaitForTx"
 import {
   connectorAtom,
   connectorDataAtom,
@@ -34,6 +35,8 @@ export default function StarknetkitLatest() {
   const [connectorData, setConnectorData] = useAtom(connectorDataAtom)
   const setConnector = useSetAtom(connectorAtom)
   const navigate = useRouter()
+
+  useWaitForTx()
 
   useEffect(() => {
     const autoConnect = async () => {

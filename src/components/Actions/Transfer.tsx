@@ -1,4 +1,3 @@
-import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { transfer, transferJSONRpcMethod } from "@/services/transfer"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
 import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
@@ -43,9 +42,11 @@ const Transfer: FC<TransferProps> = ({ account, wallet }) => {
 
       e.preventDefault()
       setTransactionStatus("approve")
+
       const { transaction_hash } = account
         ? await transfer(account as Account, transferTo, transferAmount)
         : await transferJSONRpcMethod(wallet, transferTo, transferAmount)
+
       setLastTransactionHash(transaction_hash)
       setTransactionStatus("pending")
       setTransferAmount("")
