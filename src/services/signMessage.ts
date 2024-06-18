@@ -33,6 +33,7 @@ export const signMessage = async (
 
 export const signMessageRcpMethod = async (
   wallet: StarknetWindowObject | undefined | null,
+  chainId: constants.StarknetChainId | undefined,
   message: string,
   skipDeploy = false,
 ) => {
@@ -43,10 +44,6 @@ export const signMessageRcpMethod = async (
   if (!wallet) {
     throw Error("wallet not connected")
   }
-
-  const chainId = await wallet?.request({
-    type: "wallet_requestChainId",
-  })
 
   return wallet.request({
     type: "wallet_signTypedData",

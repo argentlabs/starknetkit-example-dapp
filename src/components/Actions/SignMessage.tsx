@@ -1,6 +1,9 @@
 import { signMessage, signMessageRcpMethod } from "@/services/signMessage"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
-import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
+import {
+  connectorDataAtom,
+  walletStarknetkitNextAtom,
+} from "@/state/connectedWalletStarknetkitNext"
 import { lastTxStatusAtom } from "@/state/transactionState"
 import { Button, Flex, Heading, Input, Textarea } from "@chakra-ui/react"
 import { useAtomValue, useSetAtom } from "jotai"
@@ -26,7 +29,7 @@ interface SignMessageProps {
 const SignMessage: FC<SignMessageProps> = ({ account, wallet }) => {
   const [shortText, setShortText] = useState("")
   const [lastSig, setLastSig] = useState<string[]>([])
-
+  const connectorData = useAtomValue(connectorDataAtom)
   const setTransactionStatus = useSetAtom(lastTxStatusAtom)
 
   const handleSignSubmit = async (skipDeploy?: boolean) => {
@@ -42,7 +45,12 @@ const SignMessage: FC<SignMessageProps> = ({ account, wallet }) => {
             await account.getChainId(),
             shortText,
           )
-        : await signMessageRcpMethod(wallet, shortText, skipDeploy)
+        : await signMessageRcpMethod(
+            wallet,
+            connectorData?.chainId,
+            shortText,
+            skipDeploy,
+          )
       setLastSig(stark.formatSignature(result))
       setTransactionStatus("success")
     } catch (e) {
