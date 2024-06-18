@@ -1,11 +1,17 @@
 import { provider } from "@/constants"
-import { useEffect, useState } from "react"
+import {
+  lastTxErrorAtom,
+  lastTxHashAtom,
+  lastTxStatusAtom,
+} from "@/state/transactionState"
+import { useAtom, useAtomValue, useSetAtom } from "jotai"
+import { useEffect } from "react"
 import { GatewayError } from "starknet"
 
 const useWaitForTx = () => {
-  const [lastTxHash, setLastTxHash] = useState("")
-  const [lastTxStatus, setLastTxStatus] = useState("idle")
-  const [lastTxError, setLastTxError] = useState("")
+  const lastTxHash = useAtomValue(lastTxHashAtom)
+  const [lastTxStatus, setLastTxStatus] = useAtom(lastTxStatusAtom)
+  const setLastTxError = useSetAtom(lastTxErrorAtom)
 
   useEffect(() => {
     const waitTx = async () => {
@@ -24,17 +30,11 @@ const useWaitForTx = () => {
         }
       }
     }
-    waitTx()
-  }, [lastTxStatus, lastTxHash])
 
-  return {
-    lastTxHash,
-    setLastTxHash,
-    lastTxError,
-    setLastTxError,
-    lastTxStatus,
-    setLastTxStatus,
-  }
+    if (lastTxHash && lastTxStatus === "pending") {
+      waitTx()
+    }
+  }, [lastTxStatus, lastTxHash])
 }
 
 export { useWaitForTx }

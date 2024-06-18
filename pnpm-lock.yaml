@@ -54,7 +54,7 @@ importers:
         specifier: ^18.3.1
         version: 18.3.1(react@18.3.1)
       starknet:
-        specifier: ^6.7.0
+        specifier: ^6.9.0
         version: 6.9.0
       starknetkit-latest:
         specifier: npm:starknetkit@^1.1.9
