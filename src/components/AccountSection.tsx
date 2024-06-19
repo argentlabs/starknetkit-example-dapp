@@ -12,6 +12,7 @@ import { useAtomValue } from "jotai"
 import { FC } from "react"
 import { constants } from "starknet"
 import { Section } from "./Section"
+import { CHAIN_ID } from "@/constants"
 
 interface AccountSectionProps {
   address?: string
@@ -40,7 +41,9 @@ const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
           onClick={() => {
             if (!lastTxHash) return
             window.open(
-              `https://sepolia.starkscan.co/tx/${lastTxHash}`,
+              CHAIN_ID === constants.NetworkName.SN_MAIN
+                ? `https://voyager.online/tx/${lastTxHash}`
+                : `https://sepolia.voyager.online/tx/${lastTxHash}`,
               "_blank",
             )
           }}
