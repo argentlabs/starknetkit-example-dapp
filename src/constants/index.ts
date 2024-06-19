@@ -6,6 +6,9 @@ export const ETHTokenAddress =
 export const DAITokenAddress =
   "0x00da114221cb83fa859dbdb4c44beeaa0bb37c7537ad5ae66fe5e0efd20e6eb3"
 
+export const ARGENT_DUMMY_CONTRACT_ADDRESS =
+  "0x001c515f991f706039696a54f6f33730e9b0e8cc5d04187b13c2c714401acfd4"
+
 export const CHAIN_ID =
   process.env.NEXT_PUBLIC_CHAIN_ID === constants.NetworkName.SN_MAIN
     ? constants.NetworkName.SN_MAIN

@@ -1,6 +1,10 @@
-import { ETHTokenAddress } from "@/constants"
+import {
+  ARGENT_DUMMY_CONTRACT_ADDRESS,
+  CHAIN_ID,
+  ETHTokenAddress,
+} from "@/constants"
 import { DappKey } from "@argent/x-sessions"
-import { ec } from "starknet"
+import { constants, ec } from "starknet"
 import { parseUnits } from "./token"
 
 /* Hardcoded values for session example */
@@ -25,12 +29,20 @@ const STRKFees = [
   },
 ]
 
-const allowedMethods = [
-  {
-    "Contract Address": ETHTokenAddress,
-    selector: "transfer",
-  },
-]
+const allowedMethods =
+  CHAIN_ID === constants.NetworkName.SN_MAIN
+    ? [
+        {
+          "Contract Address": ARGENT_DUMMY_CONTRACT_ADDRESS,
+          selector: "set_number",
+        },
+      ]
+    : [
+        {
+          "Contract Address": ETHTokenAddress,
+          selector: "transfer",
+        },
+      ]
 
 const expiry = Math.floor((Date.now() + 1000 * 60 * 60 * 24) / 1000) as any
 
