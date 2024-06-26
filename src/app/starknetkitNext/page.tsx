@@ -81,6 +81,16 @@ export default function StarknetkitLatest() {
             }}
           />
 
+          {wallet.id === "argentWebWallet" && (
+            <a
+              target="_blank"
+              href={`${process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL}`}
+              rel="noopener noreferrer"
+            >
+              Webwallet dashboard
+            </a>
+          )}
+
           <AccountSection
             address={connectorData?.account}
             chainId={connectorData?.chainId}
