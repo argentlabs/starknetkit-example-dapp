@@ -68,6 +68,12 @@ export default function StarknetkitLatest() {
     }
   }, [wallet])
 
+  const handleDashboard = () => {
+    window
+      .open(process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL, "_blank", "noopener")
+      ?.focus()
+  }
+
   return (
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">
       {wallet && (
@@ -82,13 +88,18 @@ export default function StarknetkitLatest() {
           />
 
           {wallet.id === "argentWebWallet" && (
-            <a
-              target="_blank"
-              href={`${process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL}`}
-              rel="noopener noreferrer"
-            >
-              Webwallet dashboard
-            </a>
+            <Flex gap="10">
+              <a
+                href={process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Webwallet dashboard href
+              </a>
+              <div onClick={handleDashboard}>
+                Webwallet dashboard window.open
+              </div>
+            </Flex>
           )}
 
           <AccountSection
