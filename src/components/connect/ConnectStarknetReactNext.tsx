@@ -41,7 +41,6 @@ const ConnectStarknetReactNext = () => {
 
   return (
     <Flex direction="column" gap="3" p="5">
-      {status}
       <Flex direction="column" gap="3">
         {connectors.filter(inAppBrowserFilter).map((connector) => {
           if (!connector.available()) {

@@ -17,17 +17,14 @@ import {
   StarknetConfig,
   publicProvider,
   useAccount,
-  useWalletRequest,
 } from "starknet-react-core-next"
-import { Connector, StarknetkitConnector, disconnect } from "starknetkit-next"
+import { disconnect } from "starknetkit-next"
 
 const StarknetReactDappContent = () => {
-  const { account, status, isConnected } = useAccount()
+  const { account, isConnected } = useAccount()
   const [chainId, setChainId] = useState<constants.StarknetChainId | undefined>(
     undefined,
   )
-
-  console.log({ account, isConnected })
 
   useWaitForTx()
 
