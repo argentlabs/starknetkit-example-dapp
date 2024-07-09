@@ -11,6 +11,7 @@ import { SessionKeysExecuteOutside } from "@/components/Actions/SessionKeysExecu
 import { SessionKeysSign } from "@/components/Actions/SessionKeysSign"
 import { SessionKeysTypedDataOutside } from "@/components/Actions/SessionKeysTypedDataOutside"
 import { SignMessageNext } from "@/components/Actions/SignMessage"
+import { SwitchNetworkNext } from "@/components/Actions/SwitchNetwork"
 import { TransferNext } from "@/components/Actions/Transfer"
 import { WalletRpcMsgContainer } from "@/components/Actions/WalletRpcMsgContainer"
 import { DisconnectButton } from "@/components/DisconnectButton"
@@ -137,6 +138,7 @@ export default function StarknetkitLatest() {
             <Flex>
               <AddTokenNext />
               <AddNetworkNext />
+              <SwitchNetworkNext />
             </Flex>
           </Section>
           <Section>
