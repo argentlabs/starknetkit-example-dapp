@@ -12,7 +12,14 @@ export function WalletRpcMsgContainer({
   return (
     <>
       <Heading as="h2">Wallet RPC</Heading>
-      <SimpleGrid columns={3} spacing="20px" paddingBottom="20px">
+      <SimpleGrid
+        columns={{
+          base: 1,
+          md: 3,
+        }}
+        spacing="20px"
+        paddingBottom="20px"
+      >
         <WalletRpcMessage
           message={RpcMessage.wallet_requestAccounts}
           param=""

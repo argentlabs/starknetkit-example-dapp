@@ -10,13 +10,14 @@ import {
 import { Box, Flex, Heading } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { FC } from "react"
-import { constants } from "starknet"
+import { constants, num } from "starknet"
 import { Section } from "./Section"
 import { CHAIN_ID } from "@/constants"
+import { ChainId } from "@starknet-io/types-js"
 
 interface AccountSectionProps {
   address?: string
-  chainId?: constants.StarknetChainId | string
+  chainId?: bigint | string
 }
 
 const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
@@ -26,6 +27,9 @@ const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
   const starknetkitVersion = useAtomValue(starknetkitVersionAtom)
   const starknetReactVersion = useAtomValue(starknetReactVersionAtom)
 
+  const hexChainId =
+    typeof chainId === "bigint" ? num.toHex(chainId ?? 0) : null
+
   return (
     <>
       <Flex alignItems="center" justifyContent="space-between">
@@ -34,7 +38,14 @@ const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
       </Flex>
       <Section>
         <Box>Account: {address}</Box>
-        <Box>Chain: {chainId}</Box>
+        <Box>
+          Chain:{" "}
+          {!hexChainId
+            ? chainId
+            : hexChainId === constants.StarknetChainId.SN_SEPOLIA
+              ? constants.NetworkName.SN_SEPOLIA
+              : constants.NetworkName.SN_MAIN}
+        </Box>
         <Box
           cursor={lastTxHash ? "pointer" : "default"}
           _hover={{ textDecoration: lastTxHash ? "underline" : "none" }}

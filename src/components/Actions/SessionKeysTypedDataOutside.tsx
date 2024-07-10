@@ -4,26 +4,24 @@ import {
   provider,
 } from "@/constants"
 import { dappKey } from "@/helpers/openSessionHelper"
-import { Status } from "@/types/status"
 import { parseInputAmountToUint256 } from "@/helpers/token"
-import {
-  ArgentSessionService,
-  OffChainSession,
-  OutsideExecutionTypedDataResponse,
-  SessionDappService,
-  buildSessionAccount,
-} from "@argent/x-sessions"
-import { FC, useState } from "react"
-import { Abi, Contract, Signature, stark } from "starknet"
-import Erc20Abi from "../../abi/ERC20.json"
-import { useAtomValue } from "jotai"
 import {
   accountSessionSignatureAtom,
   sessionRequestAtom,
 } from "@/state/argentSessionState"
 import { connectorDataAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxStatusAtom } from "@/state/transactionState"
+import {
+  ArgentSessionService,
+  OutsideExecutionTypedDataResponse,
+  SessionDappService,
+  buildSessionAccount,
+} from "@argent/x-sessions"
 import { Button, Flex, Heading, Input } from "@chakra-ui/react"
+import { useAtomValue } from "jotai"
+import { useState } from "react"
+import { Abi, Contract, stark } from "starknet"
+import Erc20Abi from "../../abi/ERC20.json"
 
 const SessionKeysTypedDataOutside = () => {
   const accountSessionSignature = useAtomValue(accountSessionSignatureAtom)
@@ -121,7 +119,10 @@ const SessionKeysTypedDataOutside = () => {
       p="4"
       gap="3"
       onSubmit={handleSubmitEFOTypedData}
-      w="fit-content"
+      w={{
+        base: "full",
+        md: "fit-content",
+      }}
     >
       <Heading as="h2">Get outside typed data</Heading>
       <Input
@@ -145,7 +146,7 @@ const SessionKeysTypedDataOutside = () => {
           type="submit"
           isDisabled={buttonsDisabled}
         >
-          Get typed data
+          Get data
         </Button>
         <Button
           colorScheme="secondary"

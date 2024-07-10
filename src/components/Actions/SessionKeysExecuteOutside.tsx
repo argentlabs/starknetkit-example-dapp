@@ -126,7 +126,10 @@ const SessionKeysExecuteOutside = ({}) => {
       p="4"
       gap="3"
       onSubmit={handleSubmitEFO}
-      w="fit-content"
+      w={{
+        base: "full",
+        md: "fit-content",
+      }}
     >
       <Heading as="h4">Get outside execution call</Heading>
       <Input
@@ -150,7 +153,7 @@ const SessionKeysExecuteOutside = ({}) => {
           type="submit"
           isDisabled={buttonsDisabled}
         >
-          Get execution data
+          Get data
         </Button>
 
         <Button

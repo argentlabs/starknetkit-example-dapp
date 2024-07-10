@@ -136,7 +136,10 @@ const SessionKeysExecute = () => {
       p="4"
       gap="3"
       onSubmit={submitSessionTransaction}
-      w="fit-content"
+      w={{
+        base: "full",
+        md: "fit-content",
+      }}
     >
       {CHAIN_ID === constants.NetworkName.SN_MAIN ? (
         <Heading as="h2">Invoke dummy function with session keys</Heading>

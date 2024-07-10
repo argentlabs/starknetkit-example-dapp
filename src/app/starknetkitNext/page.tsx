@@ -11,6 +11,7 @@ import { SessionKeysExecuteOutside } from "@/components/Actions/SessionKeysExecu
 import { SessionKeysSign } from "@/components/Actions/SessionKeysSign"
 import { SessionKeysTypedDataOutside } from "@/components/Actions/SessionKeysTypedDataOutside"
 import { SignMessageNext } from "@/components/Actions/SignMessage"
+import { SwitchNetworkNext } from "@/components/Actions/SwitchNetwork"
 import { TransferNext } from "@/components/Actions/Transfer"
 import { WalletRpcMsgContainer } from "@/components/Actions/WalletRpcMsgContainer"
 import { DisconnectButton } from "@/components/DisconnectButton"
@@ -68,6 +69,12 @@ export default function StarknetkitLatest() {
     }
   }, [wallet])
 
+  const handleDashboard = () => {
+    window
+      .open(process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL, "_blank", "noopener")
+      ?.focus()
+  }
+
   return (
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">
       {wallet && (
@@ -82,13 +89,18 @@ export default function StarknetkitLatest() {
           />
 
           {wallet.id === "argentWebWallet" && (
-            <a
-              target="_blank"
-              href={`${process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL}`}
-              rel="noopener noreferrer"
-            >
-              Webwallet dashboard
-            </a>
+            <Flex gap="10">
+              <a
+                href={process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Webwallet dashboard href
+              </a>
+              <div onClick={handleDashboard}>
+                Webwallet dashboard window.open
+              </div>
+            </Flex>
           )}
 
           <AccountSection
@@ -107,7 +119,14 @@ export default function StarknetkitLatest() {
           <Section>
             <SessionKeysSign />
             <SessionKeysExecute />
-            <Flex alignItems="center" gap="100">
+            <Flex
+              alignItems={{
+                base: "flex-start",
+                md: "center",
+              }}
+              gap={{ base: "5", md: "100" }}
+              flexDirection={{ base: "column", md: "row" }}
+            >
               <SessionKeysExecuteOutside />
               <SessionKeysTypedDataOutside />
             </Flex>
@@ -123,9 +142,15 @@ export default function StarknetkitLatest() {
               </Section>
             )}
           <Section>
-            <Flex>
+            <Flex
+              flexDirection={{
+                base: "column",
+                md: "row",
+              }}
+            >
               <AddTokenNext />
               <AddNetworkNext />
+              <SwitchNetworkNext />
             </Flex>
           </Section>
           <Section>

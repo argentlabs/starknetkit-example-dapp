@@ -58,22 +58,20 @@ export default function Home() {
       <Flex flexDirection="column">
         <Button
           as="a"
-          href="/with"
+          href="/withStarknetReactNext"
           p="4"
           rounded="lg"
           colorScheme="primary"
           h="20"
-          isDisabled
         >
           <Flex flexDirection="column" alignItems="center">
-            <span>starknetkit@next ({process.env.starknetkitNextVersion})</span>
+            <span>
+              starknetkit@next ({process.env.starknetkitLatestVersion})
+            </span>
             <span>+</span>
-            <span>starknet-react ({process.env.starknetReactVersion})</span>
+            <span>starknet-react ({process.env.starknetReactNextVersion})</span>
           </Flex>
         </Button>
-        <Flex justifyContent="center">
-          <strong>TODO (wait for starknet-react v3)</strong>
-        </Flex>
       </Flex>
     </Flex>
   )

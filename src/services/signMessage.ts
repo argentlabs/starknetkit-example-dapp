@@ -1,4 +1,10 @@
-import { Account, AccountInterface, constants, shortString } from "starknet"
+import {
+  Account,
+  AccountInterface,
+  constants,
+  num,
+  shortString,
+} from "starknet"
 import { StarknetWindowObject } from "starknetkit-next"
 
 export const signMessage = async (
@@ -33,7 +39,7 @@ export const signMessage = async (
 
 export const signMessageRcpMethod = async (
   wallet: StarknetWindowObject | undefined | null,
-  chainId: constants.StarknetChainId | undefined,
+  chainId: bigint | undefined,
   message: string,
   skipDeploy = false,
 ) => {
@@ -50,7 +56,7 @@ export const signMessageRcpMethod = async (
     params: {
       domain: {
         name: "Example DApp",
-        chainId,
+        chainId: num.toHex(chainId ?? 0),
         version: "0.0.1",
       },
       types: {

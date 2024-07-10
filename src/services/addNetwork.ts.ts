@@ -18,6 +18,35 @@ export const addNetworkNext = async (
     },
   })
 }
+export const switchNetworkNext = async (
+  wallet: StarknetWindowObjectNext | undefined | null,
+) => {
+  if (!wallet) {
+    throw Error("starknet wallet not connected")
+  }
+
+  await wallet.request({
+    type: "wallet_switchStarknetChain",
+    params: {
+      chainId: "SN_DAPP_TEST",
+    },
+  })
+}
+
+export const switchNetworkLatest = async (
+  wallet: StarknetWindowObjectLatest | undefined | null,
+) => {
+  if (!wallet) {
+    throw Error("starknet wallet not connected")
+  }
+
+  await wallet.request({
+    type: "wallet_switchStarknetChain",
+    params: {
+      chainId: "SN_DAPP_TEST",
+    },
+  })
+}
 
 export const addNetworkLatest = async (
   wallet: StarknetWindowObjectLatest | undefined | null,

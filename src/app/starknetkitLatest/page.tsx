@@ -7,13 +7,14 @@ import { Declare } from "@/components/Actions/Declare"
 import { DeployLatest } from "@/components/Actions/Deploy"
 import { MintLatest } from "@/components/Actions/Mint"
 import { SignMessageLatest } from "@/components/Actions/SignMessage"
+import { SwitchNetworkLatest } from "@/components/Actions/SwitchNetwork"
 import { TransferLatest } from "@/components/Actions/Transfer"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
 import { ARGENT_WEBWALLET_URL, provider } from "@/constants"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
-import { Flex } from "@chakra-ui/react"
+import { Flex, Switch } from "@chakra-ui/react"
 import { useAtom } from "jotai"
 import { RESET } from "jotai/utils"
 import { useRouter } from "next/navigation"
@@ -90,9 +91,15 @@ export default function StarknetkitLatest() {
               </Section>
             )}
           <Section>
-            <Flex>
+            <Flex
+              flexDirection={{
+                base: "column",
+                md: "row",
+              }}
+            >
               <AddTokenLatest />
               <AddNetworkLatest />
+              <SwitchNetworkLatest />
             </Flex>
           </Section>
         </>
