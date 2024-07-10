@@ -119,7 +119,14 @@ export default function StarknetkitLatest() {
           <Section>
             <SessionKeysSign />
             <SessionKeysExecute />
-            <Flex alignItems="center" gap="100">
+            <Flex
+              alignItems={{
+                base: "flex-start",
+                md: "center",
+              }}
+              gap={{ base: "5", md: "100" }}
+              flexDirection={{ base: "column", md: "row" }}
+            >
               <SessionKeysExecuteOutside />
               <SessionKeysTypedDataOutside />
             </Flex>
@@ -135,7 +142,12 @@ export default function StarknetkitLatest() {
               </Section>
             )}
           <Section>
-            <Flex>
+            <Flex
+              flexDirection={{
+                base: "column",
+                md: "row",
+              }}
+            >
               <AddTokenNext />
               <AddNetworkNext />
               <SwitchNetworkNext />

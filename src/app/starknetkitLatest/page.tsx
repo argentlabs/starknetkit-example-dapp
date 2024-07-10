@@ -91,7 +91,12 @@ export default function StarknetkitLatest() {
               </Section>
             )}
           <Section>
-            <Flex>
+            <Flex
+              flexDirection={{
+                base: "column",
+                md: "row",
+              }}
+            >
               <AddTokenLatest />
               <AddNetworkLatest />
               <SwitchNetworkLatest />
