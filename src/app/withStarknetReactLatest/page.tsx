@@ -23,8 +23,7 @@ import { constants } from "starknet"
 import { disconnect } from "starknetkit-next"
 
 const StarknetReactDappContent = () => {
-  const { account, status, isConnected } = useAccount()
-  const { connector } = useConnect()
+  const { account, isConnected } = useAccount()
   const [chainId, setChainId] = useState<constants.StarknetChainId | undefined>(
     undefined,
   )

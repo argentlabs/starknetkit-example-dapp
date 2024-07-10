@@ -1,13 +1,30 @@
-import { ETHTokenAddress } from "@/constants"
+import { ETHTokenAddress, provider } from "@/constants"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
-import { bigDecimal } from "@argent/x-shared"
 import { Flex, Heading, Input } from "@chakra-ui/react"
-import { useAccount, useContractWrite } from "@starknet-react/core"
 import { useAtom, useSetAtom } from "jotai"
-import { useMemo, useState } from "react"
+import { useState } from "react"
+import { Abi, useContract } from "starknet-react-core-next"
+
+const abi = [
+  {
+    type: "function",
+    name: "permissionedMint",
+    state_mutability: "external",
+    inputs: [
+      {
+        name: "recipient",
+        type: "core::starknet::contract_address::ContractAddress",
+      },
+      {
+        name: "amount",
+        type: "core::integer::u256",
+      },
+    ],
+    outputs: [],
+  },
+] as const satisfies Abi
 
 const MintWithStarknetReact = () => {
-  const { account } = useAccount()
   const [mintAmount, setMintAmount] = useState("10")
 
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
@@ -15,32 +32,17 @@ const MintWithStarknetReact = () => {
 
   const buttonsDisabled = ["approve", "pending"].includes(transactionStatus)
 
-  const mintCalls = useMemo(() => {
-    if (!account) {
-      return []
-    }
-    return [
-      {
-        contractAddress: ETHTokenAddress,
-        entrypoint: "transfer",
-        calldata: [
-          account?.address,
-          Number(bigDecimal.parseEther(mintAmount).value),
-          0,
-        ],
-      },
-    ]
-  }, [account, mintAmount])
-
-  const { writeAsync: mintWithStarknetReact } = useContractWrite({
-    calls: mintCalls,
+  const { contract } = useContract({
+    abi,
+    address: ETHTokenAddress,
+    provider,
   })
 
   const handleMintSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
       setTransactionStatus("approve")
-      const { transaction_hash } = await mintWithStarknetReact()
+      const { transaction_hash } = await contract
       setLastTransactionHash(transaction_hash)
       setTransactionStatus("pending")
     } catch (e) {

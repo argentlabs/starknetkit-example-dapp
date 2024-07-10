@@ -23,7 +23,7 @@ import { ETHTokenAddress } from "@/constants"
 import {
   AddInvokeTransactionParameters,
   AddStarknetChainParameters,
-} from "starknet-types"
+} from "@starknet-io/types-js"
 
 export function useRpcMessageHandler(
   wallet: StarknetWindowObject,
