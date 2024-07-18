@@ -9,17 +9,18 @@ import { MintLatest } from "@/components/Actions/Mint"
 import { SignMessageLatest } from "@/components/Actions/SignMessage"
 import { SwitchNetworkLatest } from "@/components/Actions/SwitchNetwork"
 import { TransferLatest } from "@/components/Actions/Transfer"
+import { UniversalSignExecutorLatest } from "@/components/Actions/UniversalSignExecutor"
+import { UniversalTransactionExecutorLatest } from "@/components/Actions/UniversalTransactionExecutor"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
-import { ARGENT_WEBWALLET_URL, provider } from "@/constants"
+import { ARGENT_WEBWALLET_URL, CHAIN_ID, provider } from "@/constants"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
-import { Flex, Switch } from "@chakra-ui/react"
+import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import { useAtom } from "jotai"
 import { RESET } from "jotai/utils"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { constants } from "starknet"
 import { connect, disconnect } from "starknetkit-latest"
 
 export default function StarknetkitLatest() {
@@ -38,7 +39,7 @@ export default function StarknetkitLatest() {
           argentMobileOptions: {
             dappName: "Starknetkit example dapp",
             url: window.location.hostname,
-            chainId: constants.NetworkName.SN_SEPOLIA,
+            chainId: CHAIN_ID,
             icons: [],
           },
         })
@@ -72,36 +73,55 @@ export default function StarknetkitLatest() {
             address={wallet?.account?.address}
             chainId={wallet.chainId}
           />
-          <Section>
-            <MintLatest />
-          </Section>
-          <Section>
-            <TransferLatest />
-          </Section>
-          <Section>
-            <SignMessageLatest />
-          </Section>
-          {wallet.id !== "argentWebWallet" &&
-            wallet.id !== "argentMobileWallet" && (
-              <Section>
-                <Flex alignItems="center" gap="10">
-                  <Declare />
-                  <DeployLatest />
+          <Tabs isLazy>
+            <TabList>
+              <Tab>Main functions</Tab>
+              <Tab>Universal transaction executor</Tab>
+              <Tab>Universal sign executor</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <Flex flexDirection="column" gap="4" w="full" h="full">
+                  <Section>
+                    <MintLatest />
+                  </Section>
+                  <Section>
+                    <TransferLatest />
+                  </Section>
+                  <Section>
+                    <SignMessageLatest />
+                  </Section>
+                  {wallet.id !== "argentWebWallet" &&
+                    wallet.id !== "argentMobileWallet" && (
+                      <Section>
+                        <Flex alignItems="center" gap="10">
+                          <Declare />
+                          <DeployLatest />
+                        </Flex>
+                      </Section>
+                    )}
+                  <Section>
+                    <Flex
+                      flexDirection={{
+                        base: "column",
+                        md: "row",
+                      }}
+                    >
+                      <AddTokenLatest />
+                      <AddNetworkLatest />
+                      <SwitchNetworkLatest />
+                    </Flex>
+                  </Section>
                 </Flex>
-              </Section>
-            )}
-          <Section>
-            <Flex
-              flexDirection={{
-                base: "column",
-                md: "row",
-              }}
-            >
-              <AddTokenLatest />
-              <AddNetworkLatest />
-              <SwitchNetworkLatest />
-            </Flex>
-          </Section>
+              </TabPanel>
+              <TabPanel>
+                <UniversalTransactionExecutorLatest />
+              </TabPanel>
+              <TabPanel>
+                <UniversalSignExecutorLatest />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </>
       )}
     </Flex>
