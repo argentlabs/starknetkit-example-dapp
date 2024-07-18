@@ -13,22 +13,23 @@ import { SessionKeysTypedDataOutside } from "@/components/Actions/SessionKeysTyp
 import { SignMessageNext } from "@/components/Actions/SignMessage"
 import { SwitchNetworkNext } from "@/components/Actions/SwitchNetwork"
 import { TransferNext } from "@/components/Actions/Transfer"
+import { UniversalSignExecutorNext } from "@/components/Actions/UniversalSignExecutor"
+import { UniversalTransactionExecutorNext } from "@/components/Actions/UniversalTransactionExecutor"
 import { WalletRpcMsgContainer } from "@/components/Actions/WalletRpcMsgContainer"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
-import { ARGENT_WEBWALLET_URL } from "@/constants"
+import { ARGENT_WEBWALLET_URL, CHAIN_ID } from "@/constants"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import {
   connectorAtom,
   connectorDataAtom,
   walletStarknetkitNextAtom,
 } from "@/state/connectedWalletStarknetkitNext"
-import { Flex } from "@chakra-ui/react"
+import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
 import { useAtom, useSetAtom } from "jotai"
 import { RESET } from "jotai/utils"
 import { useRouter } from "next/navigation"
 import { useEffect } from "react"
-import { constants } from "starknet"
 import { connect, disconnect } from "starknetkit-next"
 
 export default function StarknetkitLatest() {
@@ -51,7 +52,7 @@ export default function StarknetkitLatest() {
         argentMobileOptions: {
           dappName: "Starknetkit example dapp",
           url: window.location.hostname,
-          chainId: constants.NetworkName.SN_SEPOLIA,
+          chainId: CHAIN_ID,
           icons: [],
         },
       })
@@ -87,75 +88,78 @@ export default function StarknetkitLatest() {
               setConnector(RESET)
             }}
           />
-
-          {wallet.id === "argentWebWallet" && (
-            <Flex gap="10">
-              <a
-                href={process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Webwallet dashboard href
-              </a>
-              <div onClick={handleDashboard}>
-                Webwallet dashboard window.open
-              </div>
-            </Flex>
-          )}
-
           <AccountSection
             address={connectorData?.account}
             chainId={connectorData?.chainId}
           />
-          <Section>
-            <MintNext />
-          </Section>
-          <Section>
-            <TransferNext />
-          </Section>
-          <Section>
-            <SignMessageNext />
-          </Section>
-          <Section>
-            <SessionKeysSign />
-            <SessionKeysExecute />
-            <Flex
-              alignItems={{
-                base: "flex-start",
-                md: "center",
-              }}
-              gap={{ base: "5", md: "100" }}
-              flexDirection={{ base: "column", md: "row" }}
-            >
-              <SessionKeysExecuteOutside />
-              <SessionKeysTypedDataOutside />
-            </Flex>
-          </Section>
 
-          {wallet.id !== "argentWebWallet" &&
-            wallet.id !== "argentMobileWallet" && (
-              <Section>
-                <Flex alignItems="center" gap="10">
-                  <Declare />
-                  <DeployNext />
+          <Tabs isLazy>
+            <TabList>
+              <Tab>Main functions</Tab>
+              <Tab>Universal transaction executor</Tab>
+              <Tab>Universal sign executor</Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                <Flex flexDirection="column" gap="4" w="full" h="full">
+                  <Section>
+                    <MintNext />
+                  </Section>
+                  <Section>
+                    <TransferNext />
+                  </Section>
+                  <Section>
+                    <SignMessageNext />
+                  </Section>
+                  <Section>
+                    <SessionKeysSign />
+                    <SessionKeysExecute />
+                    <Flex
+                      alignItems={{
+                        base: "flex-start",
+                        md: "center",
+                      }}
+                      gap={{ base: "5", md: "100" }}
+                      flexDirection={{ base: "column", md: "row" }}
+                    >
+                      <SessionKeysExecuteOutside />
+                      <SessionKeysTypedDataOutside />
+                    </Flex>
+                  </Section>
+                  {wallet.id !== "argentWebWallet" &&
+                    wallet.id !== "argentMobileWallet" && (
+                      <Section>
+                        <Flex alignItems="center" gap="10">
+                          <Declare />
+                          <DeployNext />
+                        </Flex>
+                      </Section>
+                    )}
+                  <Section>
+                    <Flex
+                      flexDirection={{
+                        base: "column",
+                        md: "row",
+                      }}
+                    >
+                      <AddTokenNext />
+                      <AddNetworkNext />
+                      <SwitchNetworkNext />
+                    </Flex>
+                  </Section>
+                  <Section>
+                    <WalletRpcMsgContainer wallet={wallet} />
+                  </Section>
                 </Flex>
-              </Section>
-            )}
-          <Section>
-            <Flex
-              flexDirection={{
-                base: "column",
-                md: "row",
-              }}
-            >
-              <AddTokenNext />
-              <AddNetworkNext />
-              <SwitchNetworkNext />
-            </Flex>
-          </Section>
-          <Section>
-            <WalletRpcMsgContainer wallet={wallet} />
-          </Section>
+              </TabPanel>
+              <TabPanel>
+                <UniversalTransactionExecutorNext />
+              </TabPanel>
+              <TabPanel>
+                <UniversalSignExecutorNext />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </>
       )}
     </Flex>
