@@ -1,11 +1,10 @@
-import { ARGENT_WEBWALLET_URL, provider } from "@/constants"
+import { ARGENT_WEBWALLET_URL, CHAIN_ID, provider } from "@/constants"
 import { walletStarknetkitLatestAtom } from "@/state/connectedWalletStarknetkitLatest"
 import { starknetkitVersionAtom } from "@/state/versionState"
 import { Button } from "@chakra-ui/react"
 import { useSetAtom } from "jotai"
 import { useRouter } from "next/navigation"
 import { FC } from "react"
-import { constants } from "starknet"
 import { connect } from "starknetkit-latest"
 
 const ConnectButtonStarknetkitLatest: FC = () => {
@@ -22,7 +21,7 @@ const ConnectButtonStarknetkitLatest: FC = () => {
         argentMobileOptions: {
           dappName: "Starknetkit example dapp",
           url: window.location.hostname,
-          chainId: constants.NetworkName.SN_SEPOLIA,
+          chainId: CHAIN_ID,
           icons: [],
         },
       })
