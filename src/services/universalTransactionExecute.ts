@@ -45,12 +45,6 @@ export const universalTransactionExecuteJSONRpcMethod = async ({
     throw Error("wallet not connected")
   }
 
-  console.log({
-    contract_address,
-    entry_point,
-    calldata,
-  })
-
   return wallet.request({
     type: "wallet_addInvokeTransaction",
     params: {

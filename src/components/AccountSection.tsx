@@ -7,7 +7,7 @@ import {
   starknetReactVersionAtom,
   starknetkitVersionAtom,
 } from "@/state/versionState"
-import { Box, Flex, Heading } from "@chakra-ui/react"
+import { Box, Flex, Heading, useToast } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { FC } from "react"
 import { constants, num } from "starknet"
@@ -26,6 +26,7 @@ const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
   const lastTxError = useAtomValue(lastTxErrorAtom)
   const starknetkitVersion = useAtomValue(starknetkitVersionAtom)
   const starknetReactVersion = useAtomValue(starknetReactVersionAtom)
+  const toast = useToast()
 
   const hexChainId =
     typeof chainId === "bigint" ? num.toHex(chainId ?? 0) : null
@@ -37,7 +38,22 @@ const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
         {starknetReactVersion && <Heading>{starknetReactVersion}</Heading>}
       </Flex>
       <Section>
-        <Box>Account: {address}</Box>
+        <Box
+          cursor={address ? "pointer" : "default"}
+          onClick={() => {
+            if (address) {
+              navigator.clipboard.writeText(address || "")
+              toast({
+                title: "Address copied",
+                duration: 1000,
+                containerStyle: { minWidth: "50px" },
+                status: "success",
+              })
+            }
+          }}
+        >
+          Account: {address}
+        </Box>
         <Box>
           Chain:{" "}
           {!hexChainId
