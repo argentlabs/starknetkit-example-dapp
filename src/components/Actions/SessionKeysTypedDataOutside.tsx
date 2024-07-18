@@ -17,7 +17,7 @@ import {
   SessionDappService,
   buildSessionAccount,
 } from "@argent/x-sessions"
-import { Button, Flex, Heading, Input } from "@chakra-ui/react"
+import { Button, Flex, Heading, Input, useToast } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { useState } from "react"
 import { Abi, Contract, stark } from "starknet"
@@ -28,6 +28,7 @@ const SessionKeysTypedDataOutside = () => {
   const sessionRequest = useAtomValue(sessionRequestAtom)
   const connectorData = useAtomValue(connectorDataAtom)
   const transactionStatus = useAtomValue(lastTxStatusAtom)
+  const toast = useToast()
 
   const [amount, setAmount] = useState("")
   const [outsideExecution, setOutsideExecution] = useState<
@@ -110,6 +111,12 @@ const SessionKeysTypedDataOutside = () => {
 
   const copyData = () => {
     navigator.clipboard.writeText(JSON.stringify(outsideExecution))
+    toast({
+      title: "Outside execution typed data copied",
+      duration: 1000,
+      containerStyle: { minWidth: "50px" },
+      status: "success",
+    })
   }
 
   return (
