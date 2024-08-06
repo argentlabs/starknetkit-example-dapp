@@ -23,6 +23,7 @@ import { useWaitForTx } from "@/hooks/useWaitForTx"
 import {
   connectorAtom,
   connectorDataAtom,
+  useWalletAccountChange,
   walletStarknetkitNextAtom,
 } from "@/state/connectedWalletStarknetkitNext"
 import { Flex, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react"
@@ -37,7 +38,7 @@ export default function StarknetkitLatest() {
   const [connectorData, setConnectorData] = useAtom(connectorDataAtom)
   const setConnector = useSetAtom(connectorAtom)
   const navigate = useRouter()
-
+  useWalletAccountChange()
   useWaitForTx()
 
   useEffect(() => {
@@ -69,12 +70,6 @@ export default function StarknetkitLatest() {
       autoConnect()
     }
   }, [wallet])
-
-  const handleDashboard = () => {
-    window
-      .open(process.env.NEXT_PUBLIC_ARGENT_WEBWALLET_URL, "_blank", "noopener")
-      ?.focus()
-  }
 
   return (
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">
