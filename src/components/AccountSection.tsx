@@ -33,9 +33,11 @@ const AccountSection: FC<AccountSectionProps> = ({ address, chainId }) => {
 
   return (
     <>
-      <Flex alignItems="center" justifyContent="space-between">
-        <Heading>{starknetkitVersion}</Heading>
-        {starknetReactVersion && <Heading>{starknetReactVersion}</Heading>}
+      <Flex flexDirection="column" gap="2">
+        <Heading size="sm">{starknetkitVersion}</Heading>
+        {starknetReactVersion && (
+          <Heading size="sm">{starknetReactVersion}</Heading>
+        )}
       </Flex>
       <Section>
         <Box
