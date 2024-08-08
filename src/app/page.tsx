@@ -37,6 +37,7 @@ export default function Home() {
     >
       <Heading as="h1">Starknetkit</Heading>
       <ConnectButtonStarknetkitLatest />
+      {/* manually hidden */}
       <ConnectButtonStarknetkitNext />
       <Heading as="h1">Starknetkit + Starknet-react</Heading>
       <Button
@@ -55,6 +56,7 @@ export default function Home() {
           <span>starknet-react ({process.env.starknetReactVersion})</span>
         </Flex>
       </Button>
+      {/* manually hidden */}
       <Flex flexDirection="column">
         <Button
           as="a"
@@ -65,9 +67,7 @@ export default function Home() {
           h="20"
         >
           <Flex flexDirection="column" alignItems="center">
-            <span>
-              starknetkit@next ({process.env.starknetkitLatestVersion})
-            </span>
+            <span>starknetkit@next ({process.env.starknetkitNextVersion})</span>
             <span>+</span>
             <span>starknet-react ({process.env.starknetReactNextVersion})</span>
           </Flex>
