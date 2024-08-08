@@ -1,23 +1,25 @@
+import { availableConnectors } from "@/helpers/connectorsNext"
 import {
   starknetReactVersionAtom,
   starknetkitVersionAtom,
 } from "@/state/versionState"
 import { Button, Flex, Heading, Image } from "@chakra-ui/react"
-import { useConnect } from "starknet-react-core-next"
 import { useSetAtom } from "jotai"
 import React, { useEffect, useState } from "react"
-import { Connector, useStarknetkitConnectModal } from "starknetkit-next"
-import { isInArgentMobileAppBrowser } from "starknetkit-next/argentMobile"
-import { availableConnectors } from "@/helpers/connectorsNext"
+import { useConnect } from "starknet-react-core-next"
+import {
+  StarknetkitConnector,
+  useStarknetkitConnectModal,
+} from "starknetkit-next"
 
 const ConnectStarknetReactNext = () => {
-  const { connectAsync, connectors, status } = useConnect()
+  const { connectAsync, connectors } = useConnect()
   const [isClient, setIsClient] = useState(false)
   const setStarknetkitVersion = useSetAtom(starknetkitVersionAtom)
   const setStarknetReactVersion = useSetAtom(starknetReactVersionAtom)
 
   const { starknetkitConnectModal } = useStarknetkitConnectModal({
-    connectors: availableConnectors,
+    connectors: availableConnectors as StarknetkitConnector[],
   })
 
   // https://nextjs.org/docs/messages/react-hydration-error#solution-1-using-useeffect-to-run-on-the-client-only
@@ -32,24 +34,17 @@ const ConnectStarknetReactNext = () => {
     return <></>
   }
 
-  const inAppBrowserFilter = (c: any) => {
-    if (isInArgentMobileAppBrowser()) {
-      return c.id === "argentX"
-    }
-    return c
-  }
-
   return (
     <Flex direction="column" gap="3" p="5">
       <Flex direction="column" gap="3">
-        {connectors.filter(inAppBrowserFilter).map((connector) => {
+        {connectors.map((connector) => {
           if (!connector.available()) {
             return <React.Fragment key={connector.id} />
           }
           const icon =
             typeof connector.icon === "string"
               ? connector.icon
-              : connector.icon.dark ?? ""
+              : (connector.icon.dark ?? "")
           const isSvg = icon?.startsWith("<svg")
 
           return (

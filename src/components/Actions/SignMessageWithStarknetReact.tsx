@@ -54,7 +54,7 @@ const SignMessageWithStarknetReact: FC<SignMessageWithStarknetReactProps> = ({
   }
 
   return (
-    <Flex flex={1} width="full">
+    <Flex flexDirection={{ base: "column", sm: "row" }} flex={1} width="full">
       <Flex
         as="form"
         onSubmit={(e) => {
@@ -79,7 +79,11 @@ const SignMessageWithStarknetReact: FC<SignMessageWithStarknetReactProps> = ({
           onChange={(e) => setShortText(e.target.value)}
         />
 
-        <div style={{ display: "flex", alignItems: "center", gap: "1em" }}>
+        <Flex
+          flexDirection={{ base: "column", sm: "row" }}
+          alignItems="center"
+          gap="1em"
+        >
           <Button colorScheme="primary" type="submit" w="full">
             Sign
           </Button>
@@ -93,7 +97,7 @@ const SignMessageWithStarknetReact: FC<SignMessageWithStarknetReactProps> = ({
           >
             Sign without deploy
           </Button>
-        </div>
+        </Flex>
       </Flex>
       <Flex
         as="form"
