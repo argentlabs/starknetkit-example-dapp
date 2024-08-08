@@ -19,7 +19,6 @@ const SignMessageWithStarknetReactNext: FC<
   const { connector } = useConnect()
   const [shortText, setShortText] = useState("")
   const [lastSig, setLastSig] = useState<string[]>([])
-  console.log({ connector })
 
   const setTransactionStatus = useSetAtom(lastTxStatusAtom)
 

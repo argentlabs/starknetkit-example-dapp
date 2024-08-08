@@ -1,6 +1,8 @@
 import { ARGENT_WEBWALLET_URL, CHAIN_ID } from "@/constants"
-import { isInArgentMobileAppBrowser } from "starknetkit-next/argentMobile"
-import { ArgentMobileConnector } from "starknetkit-next/argentMobile"
+import {
+  isInArgentMobileAppBrowser,
+  ArgentMobileConnector,
+} from "starknetkit-next/argentMobile"
 import { InjectedConnector } from "starknetkit-next/injected"
 import { WebWalletConnector } from "starknetkit-next/webwallet"
 
