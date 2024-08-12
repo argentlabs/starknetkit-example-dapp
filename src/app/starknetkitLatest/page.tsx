@@ -59,6 +59,14 @@ export default function StarknetkitLatest() {
     }
   }, [wallet])
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      document.addEventListener("wallet_disconnected", async () => {
+        setWallet(RESET)
+      })
+    }
+  }, [])
+
   return (
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">
       {wallet && (

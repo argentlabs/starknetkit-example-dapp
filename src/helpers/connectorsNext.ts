@@ -13,7 +13,6 @@ export const availableConnectors = isInArgentMobileAppBrowser()
           dappName: "Example dapp",
           chainId: CHAIN_ID,
         },
-        inAppBrowserOptions: {},
       }),
     ]
   : [
@@ -24,7 +23,6 @@ export const availableConnectors = isInArgentMobileAppBrowser()
           dappName: "Example dapp",
           chainId: CHAIN_ID,
         },
-        inAppBrowserOptions: {},
       }),
       new WebWalletConnector({ url: ARGENT_WEBWALLET_URL }),
     ]
