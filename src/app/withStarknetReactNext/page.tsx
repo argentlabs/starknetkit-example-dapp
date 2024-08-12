@@ -10,6 +10,7 @@ import { CHAIN_ID } from "@/constants"
 import { availableConnectors } from "@/helpers/connectorsNext"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { Flex } from "@chakra-ui/react"
+import { Connector } from "starknet-react-core-next"
 import { useEffect, useState } from "react"
 import { constants } from "starknet"
 import { mainnet, sepolia } from "starknet-react-chains-next"
@@ -90,9 +91,7 @@ export default function StarknetReactNext() {
       <StarknetConfig
         chains={chains}
         provider={providers}
-        connectors={
-          availableConnectors as any
-        } /* remove when starknet-react update types */
+        connectors={availableConnectors as Connector[]}
       >
         <StarknetReactDappContent />
       </StarknetConfig>
