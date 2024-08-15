@@ -58,7 +58,7 @@ const ConnectStarknetReactNext = () => {
                   `starknetkit@latest (${process.env.starknetkitNextVersion})`,
                 )
                 setStarknetReactVersion(
-                  `starknet-react (${process.env.starknetReactVersion})`,
+                  `starknet-react (${process.env.starknetReactNextVersion})`,
                 )
               }}
               alignItems="center"

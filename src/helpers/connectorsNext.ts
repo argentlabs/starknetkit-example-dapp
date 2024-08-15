@@ -10,6 +10,7 @@ export const availableConnectors = isInArgentMobileAppBrowser()
   ? [
       ArgentMobileConnector.init({
         options: {
+          url: typeof window !== "undefined" ? window.location.href : "",
           dappName: "Example dapp",
           chainId: CHAIN_ID,
         },
@@ -20,6 +21,7 @@ export const availableConnectors = isInArgentMobileAppBrowser()
       new InjectedConnector({ options: { id: "braavos" } }),
       ArgentMobileConnector.init({
         options: {
+          url: typeof window !== "undefined" ? window.location.href : "",
           dappName: "Example dapp",
           chainId: CHAIN_ID,
         },
