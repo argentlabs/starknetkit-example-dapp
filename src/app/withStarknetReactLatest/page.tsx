@@ -16,7 +16,6 @@ import {
   StarknetConfig,
   publicProvider,
   useAccount,
-  useConnect,
 } from "@starknet-react/core"
 import { useEffect, useState } from "react"
 import { constants } from "starknet"
