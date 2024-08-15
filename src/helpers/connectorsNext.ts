@@ -1,6 +1,8 @@
 import { ARGENT_WEBWALLET_URL, CHAIN_ID } from "@/constants"
-import { isInArgentMobileAppBrowser } from "starknetkit-next/argentMobile"
-import { ArgentMobileConnector } from "starknetkit-next/argentMobile"
+import {
+  isInArgentMobileAppBrowser,
+  ArgentMobileConnector,
+} from "starknetkit-next/argentMobile"
 import { InjectedConnector } from "starknetkit-next/injected"
 import { WebWalletConnector } from "starknetkit-next/webwallet"
 
@@ -8,10 +10,10 @@ export const availableConnectors = isInArgentMobileAppBrowser()
   ? [
       ArgentMobileConnector.init({
         options: {
+          url: typeof window !== "undefined" ? window.location.href : "",
           dappName: "Example dapp",
           chainId: CHAIN_ID,
         },
-        inAppBrowserOptions: {},
       }),
     ]
   : [
@@ -19,10 +21,10 @@ export const availableConnectors = isInArgentMobileAppBrowser()
       new InjectedConnector({ options: { id: "braavos" } }),
       ArgentMobileConnector.init({
         options: {
+          url: typeof window !== "undefined" ? window.location.href : "",
           dappName: "Example dapp",
           chainId: CHAIN_ID,
         },
-        inAppBrowserOptions: {},
       }),
       new WebWalletConnector({ url: ARGENT_WEBWALLET_URL }),
     ]

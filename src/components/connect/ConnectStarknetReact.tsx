@@ -95,7 +95,7 @@ const ConnectStarknetReact = () => {
         onClick={async () => {
           const { connector } = await starknetkitConnectModal()
           if (!connector) return // or throw error
-          await connectAsync({ connector: connector as any })
+          await connectAsync({ connector })
           setStarknetkitVersion(
             `starknetkit@latest (${process.env.starknetkitNextVersion})`,
           )

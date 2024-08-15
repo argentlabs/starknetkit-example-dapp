@@ -90,9 +90,7 @@ export default function StarknetReactNext() {
       <StarknetConfig
         chains={chains}
         provider={providers}
-        connectors={
-          availableConnectors as any
-        } /* remove when starknet-react update types */
+        connectors={availableConnectors}
       >
         <StarknetReactDappContent />
       </StarknetConfig>
