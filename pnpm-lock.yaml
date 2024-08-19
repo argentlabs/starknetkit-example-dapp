@@ -72,8 +72,8 @@ importers:
         specifier: npm:starknetkit@^1.1.9
         version: starknetkit@1.1.9(starknet@6.11.0)
       starknetkit-next:
-        specifier: npm:starknetkit@^2.2.23
-        version: starknetkit@2.2.23(starknet@6.11.0)
+        specifier: npm:starknetkit@^2.2.24
+        version: starknetkit@2.2.24(starknet@6.11.0)
     devDependencies:
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -2980,8 +2980,8 @@ packages:
     peerDependencies:
       starknet: ^6.7.0
 
-  starknetkit@2.2.23:
-    resolution: {integrity: sha512-cAf8Hf2Q3HTIy0g+PeRihXO2EVKFeJsVYwWd7XSt1xF4xHJcG5mb86mdfoV7Z9POILuy38CPNvUAc48BmFPfHA==}
+  starknetkit@2.2.24:
+    resolution: {integrity: sha512-4L80RCdq6AUnwUVeMA7x2XdOdZsmRFL2rgnmRPM6Thn5wFKhO+5M7O4vUwfUPJmAvGqY1ix59Lb94xub0Oc7bQ==}
     peerDependencies:
       starknet: ^6.9.0
 
@@ -7040,7 +7040,7 @@ snapshots:
       - uWebSockets.js
       - utf-8-validate
 
-  starknetkit@2.2.23(starknet@6.11.0):
+  starknetkit@2.2.24(starknet@6.11.0):
     dependencies:
       '@starknet-io/get-starknet': 4.0.0
       '@starknet-io/get-starknet-core': 4.0.0
