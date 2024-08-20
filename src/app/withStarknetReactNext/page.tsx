@@ -3,6 +3,7 @@
 import { AccountSection } from "@/components/AccountSection"
 import { SignMessageWithStarknetReactNext } from "@/components/Actions/SignMessageWithStarknetReactNext"
 import { TransferWithStarknetReactNext } from "@/components/Actions/TransferWithStarknetReactNext"
+import { WalletRpcMsgContainerWithStarknetReactNext } from "@/components/Actions/WalletRpcMsgContainer"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
 import { ConnectStarknetReactNext } from "@/components/connect/ConnectStarknetReactNext"
@@ -72,6 +73,9 @@ const StarknetReactDappContent = () => {
                 <SessionKeysTypedDataOutside />
               </Flex>
             </Section> */}
+            <Section>
+              <WalletRpcMsgContainerWithStarknetReactNext />
+            </Section>
           </>
         </Flex>
       )}
