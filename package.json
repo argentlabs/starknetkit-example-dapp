@@ -31,7 +31,7 @@
     "starknet-react-chains-next": "npm:@starknet-react/chains@3.0.0-beta.2",
     "starknet-react-core-next": "npm:@starknet-react/core@3.0.0-beta.2",
     "starknetkit-latest": "npm:starknetkit@^1.1.9",
-    "starknetkit-next": "npm:starknetkit@^2.2.23"
+    "starknetkit-next": "npm:starknetkit@^2.2.25"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",

@@ -3,6 +3,33 @@ import { WalletRpcMessage } from "./WalletRpcMessage"
 import { constants } from "starknet"
 import { RpcMessage } from "@/types/RpcMessage"
 import { StarknetWindowObject } from "starknetkit-next"
+import { useWalletRequest } from "starknet-react-core-next"
+import { WalletRpcMessageReactNext } from "./WalletRpcMessageReactNext"
+
+export const WalletRpcMsgContainerWithStarknetReactNext = () => {
+  return (
+    <>
+      <Heading as="h2">Wallet RPC</Heading>
+      <SimpleGrid
+        columns={{
+          base: 1,
+          md: 3,
+        }}
+        spacing="20px"
+        paddingBottom="20px"
+      >
+        <WalletRpcMessageReactNext
+          type="wallet_requestAccounts"
+          params={{
+            silent_mode: true,
+          }}
+        />
+
+        <WalletRpcMessageReactNext type="wallet_getPermissions" />
+      </SimpleGrid>
+    </>
+  )
+}
 
 export function WalletRpcMsgContainer({
   wallet,
