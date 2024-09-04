@@ -69,7 +69,7 @@ export default function StarknetkitLatest() {
     if (!wallet) {
       autoConnect()
     }
-  }, [wallet])
+  }, [navigate, setConnector, setWallet, setConnectorData, wallet])
 
   useEffect(() => {
     if (typeof window !== "undefined") {
@@ -79,7 +79,7 @@ export default function StarknetkitLatest() {
         setConnector(RESET)
       })
     }
-  }, [])
+  }, [setConnector, setConnectorData, setWallet])
 
   return (
     <Flex as="main" flexDirection="column" p="10" gap="4" w="dvw" h="100dvh">

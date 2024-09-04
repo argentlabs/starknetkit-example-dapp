@@ -34,7 +34,7 @@ const useWaitForTx = () => {
     if (lastTxHash && lastTxStatus === "pending") {
       waitTx()
     }
-  }, [lastTxStatus, lastTxHash])
+  }, [lastTxStatus, lastTxHash, setLastTxError, setLastTxStatus])
 }
 
 export { useWaitForTx }
