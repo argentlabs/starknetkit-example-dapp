@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky"
+    "prepare": "husky",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@argent/x-sessions": "^6.7.4",
@@ -16,11 +17,11 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@starknet-io/types-js": "^0.7.7",
-    "@starknet-react/chains": "^0.1.7",
-    "@starknet-react/core": "^2.8.2",
+    "@starknet-react/chains": "3.0.0-beta.3",
+    "@starknet-react/core": "3.0.0-beta.3",
     "colord": "^2.9.3",
     "framer-motion": "^11.2.10",
-    "get-starknet-core": "^3.2.0",
+    "get-starknet-core": "^4.0.0",
     "jotai": "^2.8.2",
     "lodash-es": "^4.17.21",
     "next": "14.2.4",

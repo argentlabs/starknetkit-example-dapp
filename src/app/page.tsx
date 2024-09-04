@@ -23,7 +23,7 @@ export default function Home() {
     setWalletNext(RESET)
     setConnectorData(RESET)
     setConnector(RESET)
-  }, [])
+  }, [setConnector, setConnectorData, setWalletLatest, setWalletNext])
 
   return (
     <Flex
