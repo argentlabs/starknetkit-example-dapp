@@ -20,6 +20,7 @@ import {
   useAccount,
 } from "starknet-react-core-next"
 import { disconnect } from "starknetkit-next"
+import { MintWithStarknetReact } from "./_components/MintWithStarknetReact"
 
 const StarknetReactDappContent = () => {
   const { account, isConnected } = useAccount()
@@ -54,16 +55,16 @@ const StarknetReactDappContent = () => {
           <>
             <DisconnectButton disconnectFn={disconnect} />
             <AccountSection address={account?.address} chainId={chainId} />
-            {/* <Section>
+            <Section>
               <MintWithStarknetReact />
-            </Section> */}
+            </Section>
             <Section>
               <TransferWithStarknetReactNext />
             </Section>
             <Section>
               <SignMessageWithStarknetReactNext chainId={chainId} />
             </Section>
-            {/* 
+            {/*
             TODO: wait for the next version of starknetkit and starknet-react with rpc methods
             <Section>
               <SessionKeysSign />
