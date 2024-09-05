@@ -53,5 +53,5 @@ export const useWalletAccountChange = () => {
     wallet?.off("accountsChanged", accountChangeHandler)
     wallet?.off("networkChanged", networkChangeHandler)
     return
-  }, [accountChangeHandler, networkChangeHandler])
+  }, [wallet, accountChangeHandler, networkChangeHandler])
 }
