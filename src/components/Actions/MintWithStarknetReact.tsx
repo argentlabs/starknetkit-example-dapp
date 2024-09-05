@@ -2,15 +2,9 @@ import { ETHTokenAddress } from "@/constants"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
 import { bigDecimal } from "@argent/x-shared"
 import { Flex, Heading, Input } from "@chakra-ui/react"
-import {
-  Abi,
-  useAccount,
-  useContract,
-  useSendTransaction,
-} from "@starknet-react/core"
+import { useAccount, useContractWrite } from "@starknet-react/core"
 import { useAtom, useSetAtom } from "jotai"
 import { useMemo, useState } from "react"
-import Erc20Abi from "@/abi/ERC20.json"
 
 const MintWithStarknetReact = () => {
   const { account } = useAccount()
@@ -21,50 +15,32 @@ const MintWithStarknetReact = () => {
 
   const buttonsDisabled = ["approve", "pending"].includes(transactionStatus)
 
-  // const mintCalls = useMemo(() => {
-  //   if (!account) {
-  //     return []
-  //   }
-  //   return [
-  //     {
-  //       contractAddress: ETHTokenAddress,
-  //       entrypoint: "transfer",
-  //       calldata: [
-  //         account?.address,
-  //         Number(bigDecimal.parseEther(mintAmount).value),
-  //         0,
-  //       ],
-  //     },
-  //   ]
-  // }, [account, mintAmount])
+  const mintCalls = useMemo(() => {
+    if (!account) {
+      return []
+    }
+    return [
+      {
+        contractAddress: ETHTokenAddress,
+        entrypoint: "transfer",
+        calldata: [
+          account?.address,
+          Number(bigDecimal.parseEther(mintAmount).value),
+          0,
+        ],
+      },
+    ]
+  }, [account, mintAmount])
 
-  const { contract } = useContract({
-    address: ETHTokenAddress,
-    abi: Erc20Abi as Abi,
-  })
-
-  const {
-    sendAsync: mintWithStarknetReact,
-    error,
-    data,
-  } = useSendTransaction({
-    calls:
-      contract && account?.address
-        ? [
-            contract.populate("transfer", [
-              account?.address,
-              Number(bigDecimal.parseEther(mintAmount).value),
-            ]),
-          ]
-        : undefined,
+  const { writeAsync: mintWithStarknetReact } = useContractWrite({
+    calls: mintCalls,
   })
 
   const handleMintSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
       setTransactionStatus("approve")
-      await mintWithStarknetReact()
-      const transaction_hash = data?.transaction_hash ?? ""
+      const { transaction_hash } = await mintWithStarknetReact()
       setLastTransactionHash(transaction_hash)
       setTransactionStatus("pending")
     } catch (e) {
