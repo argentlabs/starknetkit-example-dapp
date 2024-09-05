@@ -9,9 +9,10 @@ import {
   useSendTransaction,
 } from "starknet-react-core-next"
 import { useAtom, useSetAtom } from "jotai"
-import { useMemo, useState } from "react"
+import { useState } from "react"
+import Erc20Abi from "@/abi/ERC20TransferAbi.json"
 
-const TransferWithStarknetReact = () => {
+export const TransferWithStarknetReact = () => {
   const { account } = useAccount()
   const [transferTo, setTransferTo] = useState("")
   const [transferAmount, setTransferAmount] = useState("1")
@@ -19,43 +20,8 @@ const TransferWithStarknetReact = () => {
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
   const setLastTransactionHash = useSetAtom(lastTxHashAtom)
 
-  const transferCalls = useMemo(() => {
-    return !account
-      ? []
-      : [
-          {
-            contractAddress: ETHTokenAddress,
-            entrypoint: "transfer",
-            calldata: [
-              account.address,
-              Number(bigDecimal.parseEther(transferAmount).value),
-              0,
-            ],
-          },
-        ]
-  }, [account, transferAmount])
-
-  const abi = [
-    {
-      type: "function",
-      name: "transfer",
-      state_mutability: "external",
-      inputs: [
-        {
-          name: "recipient",
-          type: "core::starknet::contract_address::ContractAddress",
-        },
-        {
-          name: "amount",
-          type: "core::integer::u256",
-        },
-      ],
-      outputs: [],
-    },
-  ] as const satisfies Abi
-
   const { contract } = useContract({
-    abi: abi as Abi,
+    abi: Erc20Abi as Abi,
     address: ETHTokenAddress,
   })
 
@@ -130,5 +96,3 @@ const TransferWithStarknetReact = () => {
     </Flex>
   )
 }
-
-export { TransferWithStarknetReact }

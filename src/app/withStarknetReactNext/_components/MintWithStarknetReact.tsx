@@ -2,11 +2,17 @@ import { ETHTokenAddress } from "@/constants"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
 import { bigDecimal } from "@argent/x-shared"
 import { Flex, Heading, Input } from "@chakra-ui/react"
-import { useAccount, useContractWrite } from "@starknet-react/core"
+import {
+  useAccount,
+  useContract,
+  Abi,
+  useSendTransaction,
+} from "starknet-react-core-next"
 import { useAtom, useSetAtom } from "jotai"
-import { useMemo, useState } from "react"
+import { useState } from "react"
+import Erc20Abi from "@/abi/ERC20TransferAbi.json"
 
-const MintWithStarknetReact = () => {
+export const MintWithStarknetReact = () => {
   const { account } = useAccount()
   const [mintAmount, setMintAmount] = useState("10")
 
@@ -15,25 +21,21 @@ const MintWithStarknetReact = () => {
 
   const buttonsDisabled = ["approve", "pending"].includes(transactionStatus)
 
-  const mintCalls = useMemo(() => {
-    if (!account) {
-      return []
-    }
-    return [
-      {
-        contractAddress: ETHTokenAddress,
-        entrypoint: "transfer",
-        calldata: [
-          account?.address,
-          Number(bigDecimal.parseEther(mintAmount).value),
-          0,
-        ],
-      },
-    ]
-  }, [account, mintAmount])
+  const { contract } = useContract({
+    abi: Erc20Abi as Abi,
+    address: ETHTokenAddress,
+  })
 
-  const { writeAsync: mintWithStarknetReact } = useContractWrite({
-    calls: mintCalls,
+  const { error, sendAsync: mintWithStarknetReact } = useSendTransaction({
+    calls:
+      contract && account?.address
+        ? [
+            contract.populate("transfer", [
+              account.address,
+              Number(bigDecimal.parseEther(mintAmount).value),
+            ]),
+          ]
+        : undefined,
   })
 
   const handleMintSubmit = async (e: React.FormEvent) => {
@@ -45,6 +47,7 @@ const MintWithStarknetReact = () => {
       setTransactionStatus("pending")
     } catch (e) {
       console.error(e)
+      console.error(error)
       setTransactionStatus("idle")
     }
   }
@@ -70,6 +73,7 @@ const MintWithStarknetReact = () => {
           value={mintAmount}
           onChange={(e) => setMintAmount(e.target.value)}
         />
+        {/* TODO: When will we allow below? Need to ask Ale */}
 
         <Input
           type="submit"
@@ -80,5 +84,3 @@ const MintWithStarknetReact = () => {
     </Flex>
   )
 }
-
-export { MintWithStarknetReact }
