@@ -73,13 +73,9 @@ export const MintWithStarknetReact = () => {
           value={mintAmount}
           onChange={(e) => setMintAmount(e.target.value)}
         />
-        {/* TODO: When will we allow below? Need to ask Ale */}
+        {/* TODO: Verify it's ok that the submit has been enabled */}
 
-        <Input
-          type="submit"
-          disabled={true || buttonsDisabled}
-          value="Not possible with ETH!"
-        />
+        <Input type="submit" disabled={buttonsDisabled} value="Submit" />
       </Flex>
     </Flex>
   )
