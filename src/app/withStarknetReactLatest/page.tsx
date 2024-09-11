@@ -1,9 +1,8 @@
 "use client"
 
 import { AccountSection } from "@/components/AccountSection"
-import { MintWithStarknetReact } from "@/components/Actions/MintWithStarknetReact"
 import { SignMessageWithStarknetReact } from "@/components/Actions/SignMessageWithStarknetReact"
-import { TransferWithStarknetReact } from "@/components/Actions/TransferWithStarknetReact"
+import { TransferWithStarknetReact } from "@/app/withStarknetReactLatest/_components/TransferWithStarknetReact"
 import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
 import { ConnectStarknetReact } from "@/components/connect/ConnectStarknetReact"
@@ -20,6 +19,7 @@ import {
 import { useEffect, useState } from "react"
 import { constants } from "starknet"
 import { disconnect } from "starknetkit-next"
+import { MintWithStarknetReact } from "@/app/withStarknetReactLatest/_components/MintWithStarknetReact"
 
 const StarknetReactDappContent = () => {
   const { account, isConnected } = useAccount()
@@ -63,7 +63,7 @@ const StarknetReactDappContent = () => {
             <Section>
               <SignMessageWithStarknetReact chainId={chainId} />
             </Section>
-            {/* 
+            {/*
             TODO: wait for the next version of starknetkit and starknet-react with rpc methods
             <Section>
               <SessionKeysSign />
