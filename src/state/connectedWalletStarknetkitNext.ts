@@ -3,7 +3,7 @@ import {
   ChainId,
   NetworkChangeEventHandler,
 } from "@starknet-io/types-js"
-import { useAtom, useAtomValue, useSetAtom } from "jotai"
+import { useAtomValue, useSetAtom } from "jotai"
 import { atomWithReset } from "jotai/utils"
 import { useEffect } from "react"
 import { ConnectorData, StarknetWindowObject } from "starknetkit-next"
@@ -53,5 +53,5 @@ export const useWalletAccountChange = () => {
     wallet?.off("accountsChanged", accountChangeHandler)
     wallet?.off("networkChanged", networkChangeHandler)
     return
-  }, [])
+  }, [wallet, accountChangeHandler, networkChangeHandler])
 }
