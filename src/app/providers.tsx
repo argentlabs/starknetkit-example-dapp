@@ -14,6 +14,10 @@ export function Providers({ children }: { children: ReactNode }) {
     setMounted(true)
   }, [])
 
+  if (!mounted) {
+    return <div style={{ visibility: "hidden" }}>{null}</div>
+  }
+
   const body = (
     <>
       <ColorModeScript initialColorMode={"light"} />
@@ -22,10 +26,6 @@ export function Providers({ children }: { children: ReactNode }) {
       </JotaiProvider>
     </>
   )
-
-  if (!mounted) {
-    return <div style={{ visibility: "hidden" }}>{body}</div>
-  }
 
   return body
 }

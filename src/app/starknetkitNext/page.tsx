@@ -69,7 +69,7 @@ export default function StarknetkitLatest() {
     if (!wallet) {
       autoConnect()
     }
-  }, [wallet])
+  }, [navigate, setConnector, setConnectorData, setWallet, wallet])
 
   useEffect(() => {
     if (typeof window !== "undefined") {
