@@ -31,7 +31,7 @@
     "starknet": "^6.11.0",
     "starknet-react-chains-next": "npm:@starknet-react/chains@3.0.0-beta.3",
     "starknet-react-core-next": "npm:@starknet-react/core@3.0.0-beta.3",
-    "starknetkit-latest": "npm:starknetkit@^1.1.9",
+    "starknetkit-latest": "npm:starknetkit@^2.0.0",
     "starknetkit-next": "npm:starknetkit@2.3.0"
   },
   "devDependencies": {

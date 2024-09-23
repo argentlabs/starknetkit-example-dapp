@@ -69,8 +69,8 @@ importers:
         specifier: npm:@starknet-react/core@3.0.0-beta.3
         version: '@starknet-react/core@3.0.0-beta.3(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)(typescript@5.6.2)'
       starknetkit-latest:
-        specifier: npm:starknetkit@^1.1.9
-        version: starknetkit@1.1.9(starknet@6.11.0)
+        specifier: npm:starknetkit@^2.0.0
+        version: starknetkit@2.3.0(starknet@6.11.0)
       starknetkit-next:
         specifier: npm:starknetkit@2.3.0
         version: starknetkit@2.3.0(starknet@6.11.0)
@@ -1975,11 +1975,6 @@ packages:
   get-port-please@3.1.2:
     resolution: {integrity: sha512-Gxc29eLs1fbn6LQ4jSU4vXjlwyZhF5HsGuMAa7gqBP4Rw4yxxltyDUuF5MBclFzDTXO+ACchGQoeela4DSfzdQ==}
 
-  get-starknet-core@3.3.3:
-    resolution: {integrity: sha512-IscL4lAigJpc/9Idkg07sdyUOXkB+/goTDQm8EhMGn/nIAW4rn04d+D47ils75drNQIfZZKDIIZrWrbIKvjoWA==}
-    peerDependencies:
-      starknet: ^5.18.0
-
   get-starknet-core@4.0.0:
     resolution: {integrity: sha512-6pLmidQZkC3wZsrHY99grQHoGpuuXqkbSP65F8ov1/JsEI8DDLkhsAuLCKFzNOK56cJp+f1bWWfTJ57e9r5eqQ==}
 
@@ -2990,11 +2985,6 @@ packages:
 
   starknet@6.9.0:
     resolution: {integrity: sha512-8860J7sGUr5UO/BDl3pjCZNUs/vgUM75wVoI93iOYLbTGF0f6MvFZsMOd73tsPKjEcG8V5BTSx6I7seDhQ9osw==}
-
-  starknetkit@1.1.9:
-    resolution: {integrity: sha512-KarnNS9sJoImTdpTKizyNzDlQSAOutbzuZ6CzHQpJHWzaf8ION9aIf+d87sY7hSlbmD7cqGRUG28Hpke24arCg==}
-    peerDependencies:
-      starknet: ^6.7.0
 
   starknetkit@2.3.0:
     resolution: {integrity: sha512-xW78arRWHgXvAJuzM1kgiVWeAfG5t9QsxWLgET+pliuqXkBCJTbK/11UdByQ3ga69q+4JWEopDdChBI3YyP4Bw==}
@@ -4567,7 +4557,7 @@ snapshots:
 
   '@scure/bip32@1.4.0':
     dependencies:
-      '@noble/curves': 1.4.0
+      '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
       '@scure/base': 1.1.8
 
@@ -5938,11 +5928,6 @@ snapshots:
 
   get-port-please@3.1.2: {}
 
-  get-starknet-core@3.3.3(starknet@6.11.0):
-    dependencies:
-      '@module-federation/runtime': 0.1.21
-      starknet: 6.11.0
-
   get-starknet-core@4.0.0:
     dependencies:
       '@starknet-io/types-js': 0.7.7
@@ -7022,38 +7007,6 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  starknetkit@1.1.9(starknet@6.11.0):
-    dependencies:
-      '@trpc/client': 10.45.2(@trpc/server@10.45.2)
-      '@trpc/server': 10.45.2
-      '@walletconnect/sign-client': 2.16.1
-      bowser: 2.11.0
-      detect-browser: 5.3.0
-      eventemitter3: 5.0.1
-      events: 3.3.0
-      get-starknet-core: 3.3.3(starknet@6.11.0)
-      lodash-es: 4.17.21
-      starknet: 6.11.0
-      svelte-forms: 2.3.1
-      trpc-browser: 1.4.2(@trpc/client@10.45.2(@trpc/server@10.45.2))(@trpc/server@10.45.2)
-    transitivePeerDependencies:
-      - '@azure/app-configuration'
-      - '@azure/cosmos'
-      - '@azure/data-tables'
-      - '@azure/identity'
-      - '@azure/keyvault-secrets'
-      - '@azure/storage-blob'
-      - '@capacitor/preferences'
-      - '@netlify/blobs'
-      - '@planetscale/database'
-      - '@react-native-async-storage/async-storage'
-      - '@upstash/redis'
-      - '@vercel/kv'
-      - bufferutil
-      - ioredis
-      - uWebSockets.js
-      - utf-8-validate
-
   starknetkit@2.3.0(starknet@6.11.0):
     dependencies:
       '@starknet-io/get-starknet': 4.0.0
@@ -7419,7 +7372,7 @@ snapshots:
 
   webauthn-p256@0.0.5:
     dependencies:
-      '@noble/curves': 1.4.0
+      '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
 
   webidl-conversions@3.0.1: {}
