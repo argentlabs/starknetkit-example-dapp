@@ -30,8 +30,8 @@ importers:
         specifier: ^0.1.7
         version: 0.1.7
       '@starknet-react/core':
-        specifier: ^2.8.2
-        version: 2.9.0(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)
+        specifier: ^3.0.0
+        version: 3.0.0(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)(typescript@5.6.2)
       colord:
         specifier: ^2.9.3
         version: 2.9.3
@@ -1080,15 +1080,18 @@ packages:
   '@starknet-react/chains@0.1.7':
     resolution: {integrity: sha512-UNh97I1SvuJKaAhKOmpEk8JcWuZWMlPG/ba2HcvFYL9x/47BKndJ+Da9V+iJFtkHUjreVnajT1snsaz1XMG+UQ==}
 
+  '@starknet-react/chains@3.0.0':
+    resolution: {integrity: sha512-+XulhJZMSDAEX9JXHI5qJetHlf1Xr0nc7K2+efUMotGxXM31ovKWc/0JFlJh9Jwjgik/UO859Dh4yLkb92PAhw==}
+
   '@starknet-react/chains@3.0.0-beta.3':
     resolution: {integrity: sha512-Xq59vvSctzQmYLATRBdqouiW3bdI+dyYUviBIF0G2k70niPatJsSNa8N8NsJCk5yHo1xLnfoYvo9ufVp+BQrUQ==}
 
-  '@starknet-react/core@2.9.0':
-    resolution: {integrity: sha512-UdRo454/g2lb0YsNAUJohJ2w21LlahcEXQlkWrddoKFubRY6Q0b39hec0eZOCqfU0Z1Sh7kF1XYvI5t9xL4yTQ==}
+  '@starknet-react/core@3.0.0':
+    resolution: {integrity: sha512-r3oZ5oGC2V3fNoCK1yua6yab4aJpmcuCnxN/RGGdTnJwy5GNO8q819qmsqBB7x61+zMCrwc+QN/FxvKGDbwJjw==}
     peerDependencies:
-      get-starknet-core: ^3.2.0
+      get-starknet-core: ^4.0.0
       react: ^18.0
-      starknet: ^5.25.0
+      starknet: ^6.11.0
 
   '@starknet-react/core@3.0.0-beta.3':
     resolution: {integrity: sha512-J8VS4Ou4VRATDTpWwFjp2P7WzSkpSFc3qa7TA6mcHMaD50T/53VegoqnNO5EfhB0OSUIgEKaN7JnRyg26UGybg==}
@@ -2100,9 +2103,6 @@ packages:
   ignore@5.3.2:
     resolution: {integrity: sha512-hsBTNUqQTDwkWtcdYI2i06Y/nUBEsNEDJKjWdigLvegy8kDuJAS8uRlpkkcQpyEXL0Z/pjDy5HBmMjRCJ2gq+g==}
     engines: {node: '>= 4'}
-
-  immutable@4.3.7:
-    resolution: {integrity: sha512-1hqclzwYwjRDFLjcFxOM5AYkkG0rpFPpr1RLPMEuGczoS7YA8gLhy8SWXYRAA/XwfEHpfo3cw5JGioS32fnMRw==}
 
   import-fresh@3.3.0:
     resolution: {integrity: sha512-veYYhQa+D1QBKznvhUHxb8faxlrwUnxseDAbAp457E0wLNio2bOSKnjYDhMj+YiAq61xrMGhQk9iXVk5FzgQMw==}
@@ -4567,7 +4567,7 @@ snapshots:
 
   '@scure/bip32@1.4.0':
     dependencies:
-      '@noble/curves': 1.4.0
+      '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
       '@scure/base': 1.1.8
 
@@ -4680,18 +4680,25 @@ snapshots:
 
   '@starknet-react/chains@0.1.7': {}
 
+  '@starknet-react/chains@3.0.0': {}
+
   '@starknet-react/chains@3.0.0-beta.3': {}
 
-  '@starknet-react/core@2.9.0(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)':
+  '@starknet-react/core@3.0.0(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)(typescript@5.6.2)':
     dependencies:
-      '@starknet-react/chains': 0.1.7
+      '@starknet-io/types-js': 0.7.7
+      '@starknet-react/chains': 3.0.0
       '@tanstack/react-query': 5.55.4(react@18.3.1)
       eventemitter3: 5.0.1
       get-starknet-core: 4.0.0
-      immutable: 4.3.7
       react: 18.3.1
       starknet: 6.11.0
+      viem: 2.21.6(typescript@5.6.2)(zod@3.23.8)
       zod: 3.23.8
+    transitivePeerDependencies:
+      - bufferutil
+      - typescript
+      - utf-8-validate
 
   '@starknet-react/core@3.0.0-beta.3(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)(typescript@5.6.2)':
     dependencies:
@@ -6076,8 +6083,6 @@ snapshots:
 
   ignore@5.3.2: {}
 
-  immutable@4.3.7: {}
-
   import-fresh@3.3.0:
     dependencies:
       parent-module: 1.0.1
@@ -7419,7 +7424,7 @@ snapshots:
 
   webauthn-p256@0.0.5:
     dependencies:
-      '@noble/curves': 1.4.0
+      '@noble/curves': 1.4.2
       '@noble/hashes': 1.4.0
 
   webidl-conversions@3.0.1: {}

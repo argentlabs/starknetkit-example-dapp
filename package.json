@@ -18,7 +18,7 @@
     "@emotion/styled": "^11.11.5",
     "@starknet-io/types-js": "^0.7.7",
     "@starknet-react/chains": "^0.1.7",
-    "@starknet-react/core": "^2.8.2",
+    "@starknet-react/core": "^3.0.0",
     "colord": "^2.9.3",
     "framer-motion": "^11.2.10",
     "get-starknet-core": "^4.0.0",
