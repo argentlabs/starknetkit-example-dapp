@@ -11,7 +11,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@argent/x-sessions": "file:../x-sessions",
+    "@argent/x-sessions": "^6.7.8",
     "@argent/x-shared": "^1.32.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
