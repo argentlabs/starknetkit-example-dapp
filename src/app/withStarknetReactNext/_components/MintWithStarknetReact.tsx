@@ -1,30 +1,19 @@
-import { ETHTokenAddress, provider } from "@/constants"
+import { ETHTokenAddress } from "@/constants"
 import { lastTxHashAtom, lastTxStatusAtom } from "@/state/transactionState"
+import { bigDecimal } from "@argent/x-shared"
 import { Flex, Heading, Input } from "@chakra-ui/react"
+import {
+  useAccount,
+  useContract,
+  Abi,
+  useSendTransaction,
+} from "starknet-react-core-next"
 import { useAtom, useSetAtom } from "jotai"
 import { useState } from "react"
-import { Abi, useContract } from "starknet-react-core-next"
+import Erc20Abi from "@/abi/ERC20TransferAbi.json"
 
-const abi = [
-  {
-    type: "function",
-    name: "permissionedMint",
-    state_mutability: "external",
-    inputs: [
-      {
-        name: "recipient",
-        type: "core::starknet::contract_address::ContractAddress",
-      },
-      {
-        name: "amount",
-        type: "core::integer::u256",
-      },
-    ],
-    outputs: [],
-  },
-] as const satisfies Abi
-
-const MintWithStarknetReact = () => {
+export const MintWithStarknetReact = () => {
+  const { account } = useAccount()
   const [mintAmount, setMintAmount] = useState("10")
 
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
@@ -33,20 +22,32 @@ const MintWithStarknetReact = () => {
   const buttonsDisabled = ["approve", "pending"].includes(transactionStatus)
 
   const { contract } = useContract({
-    abi,
+    abi: Erc20Abi as Abi,
     address: ETHTokenAddress,
-    provider,
+  })
+
+  const { error, sendAsync: mintWithStarknetReact } = useSendTransaction({
+    calls:
+      contract && account?.address
+        ? [
+            contract.populate("transfer", [
+              account.address,
+              Number(bigDecimal.parseEther(mintAmount).value),
+            ]),
+          ]
+        : undefined,
   })
 
   const handleMintSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
       setTransactionStatus("approve")
-      const { transaction_hash } = await contract
+      const { transaction_hash } = await mintWithStarknetReact()
       setLastTransactionHash(transaction_hash)
       setTransactionStatus("pending")
     } catch (e) {
       console.error(e)
+      console.error(error)
       setTransactionStatus("idle")
     }
   }
@@ -72,15 +73,10 @@ const MintWithStarknetReact = () => {
           value={mintAmount}
           onChange={(e) => setMintAmount(e.target.value)}
         />
+        {/* TODO: Verify it's ok that the submit has been enabled */}
 
-        <Input
-          type="submit"
-          disabled={true || buttonsDisabled}
-          value="Not possible with ETH!"
-        />
+        <Input type="submit" disabled={buttonsDisabled} value="Submit" />
       </Flex>
     </Flex>
   )
 }
-
-export { MintWithStarknetReact }
