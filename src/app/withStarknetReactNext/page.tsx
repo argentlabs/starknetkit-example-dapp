@@ -23,7 +23,8 @@ import { disconnect } from "starknetkit-next"
 import { MintWithStarknetReact } from "./_components/MintWithStarknetReact"
 
 const StarknetReactDappContent = () => {
-  const { account, isConnected } = useAccount()
+  const { address, account, isConnected } = useAccount()
+
   const [chainId, setChainId] = useState<constants.StarknetChainId | undefined>(
     undefined,
   )
@@ -54,7 +55,7 @@ const StarknetReactDappContent = () => {
         >
           <>
             <DisconnectButton disconnectFn={disconnect} />
-            <AccountSection address={account?.address} chainId={chainId} />
+            <AccountSection address={address} chainId={chainId} />
             <Section>
               <MintWithStarknetReact />
             </Section>

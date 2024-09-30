@@ -11,7 +11,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
-    "@argent/x-sessions": "^6.7.4",
+    "@argent/x-sessions": "^6.7.8",
     "@argent/x-shared": "^1.32.1",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.4",
@@ -30,9 +30,9 @@
     "react-dom": "^18.3.1",
     "starknet": "^6.11.0",
     "starknet-react-chains-next": "npm:@starknet-react/chains@3.0.0-beta.3",
-    "starknet-react-core-next": "npm:@starknet-react/core@3.0.0-beta.3",
+    "starknet-react-core-next": "npm:@starknet-react/core@3.0.1-beta.0",
     "starknetkit-latest": "npm:starknetkit@^1.1.9",
-    "starknetkit-next": "npm:starknetkit@2.3.0"
+    "starknetkit-next": "npm:starknetkit@^2.3.1"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
