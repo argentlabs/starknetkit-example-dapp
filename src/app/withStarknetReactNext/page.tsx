@@ -96,6 +96,7 @@ export default function StarknetReactNext() {
       <StarknetConfig
         chains={chains}
         provider={providers}
+        // @ts-ignore TODO
         connectors={availableConnectors}
       >
         <StarknetReactDappContent />
