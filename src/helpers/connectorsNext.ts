@@ -5,6 +5,7 @@ import {
 } from "starknetkit-next/argentMobile"
 import { InjectedConnector } from "starknetkit-next/injected"
 import { WebWalletConnector } from "starknetkit-next/webwallet"
+import { Argent } from "starknetkit-next/argent"
 
 export const availableConnectors = isInArgentMobileAppBrowser()
   ? [
@@ -17,6 +18,11 @@ export const availableConnectors = isInArgentMobileAppBrowser()
       }),
     ]
   : [
+      new Argent({
+        url: typeof window !== "undefined" ? window.location.href : "",
+        dappName: "Example dapp",
+        chainId: CHAIN_ID,
+      }),
       new InjectedConnector({ options: { id: "argentX" } }),
       new InjectedConnector({ options: { id: "braavos" } }),
       ArgentMobileConnector.init({

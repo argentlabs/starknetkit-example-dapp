@@ -9,6 +9,7 @@ import React, { useEffect, useState } from "react"
 import { useConnect } from "starknet-react-core-next"
 import {
   StarknetkitConnector,
+  StarknetkitCompoundConnector,
   useStarknetkitConnectModal,
 } from "starknetkit-next"
 
@@ -37,14 +38,23 @@ const ConnectStarknetReactNext = () => {
   return (
     <Flex direction="column" gap="3" p="5">
       <Flex direction="column" gap="3">
-        {connectors.map((connector) => {
+        {connectors.map((_connector) => {
+          const isCompoundConnector = // @ts-ignore TODO
+            (_connector as StarknetkitCompoundConnector).isCompoundConnector
+
+          const connector = isCompoundConnector
+            ? // @ts-ignore TODO
+              (_connector as StarknetkitCompoundConnector).connector
+            : _connector
+
           if (!connector.available()) {
             return <React.Fragment key={connector.id} />
           }
-          const icon =
-            typeof connector.icon === "string"
-              ? connector.icon
-              : (connector.icon.dark ?? "")
+
+          const _icon = isCompoundConnector ? _connector.icon : connector.icon
+          const name = isCompoundConnector ? _connector.name : connector.name
+
+          const icon = typeof _icon === "string" ? _icon : (_icon.dark ?? "")
           const isSvg = icon?.startsWith("<svg")
 
           return (
@@ -72,14 +82,9 @@ const ConnectStarknetReactNext = () => {
               {isSvg ? (
                 <div dangerouslySetInnerHTML={{ __html: icon }} />
               ) : (
-                <Image
-                  alt={connector.name}
-                  src={icon}
-                  height="32px"
-                  width="32px"
-                />
+                <Image alt={name} src={icon} height="32px" width="32px" />
               )}
-              {connector.name}
+              {name}
             </Button>
           )
         })}
