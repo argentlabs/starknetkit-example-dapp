@@ -72,8 +72,8 @@ importers:
         specifier: npm:starknetkit@^1.1.9
         version: starknetkit@1.1.9(starknet@6.11.0)
       starknetkit-next:
-        specifier: npm:starknetkit@^2.4.0-beta.2
-        version: starknetkit@2.4.0-beta.2(wvpexj6fpi7tchohednpn4zztm)
+        specifier: npm:starknetkit@^2.4.0-beta.3
+        version: starknetkit@2.4.0-beta.3(wvpexj6fpi7tchohednpn4zztm)
     devDependencies:
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -4836,8 +4836,8 @@ packages:
     peerDependencies:
       starknet: ^6.7.0
 
-  starknetkit@2.4.0-beta.2:
-    resolution: {integrity: sha512-tMh3wrn1rdaDH+UiCcSkPo3+FyuQ7+CTNZ8+V8LQzfqTPXOsQGdKyFOFAbxKno4Anj5pKtE8gl+wzyIFmgtTtw==}
+  starknetkit@2.4.0-beta.3:
+    resolution: {integrity: sha512-0oeS16FTEAEjpxAPg8KEZuW/EBpLMhnfZUczYJp1UV+juBgjxGrZf2/Y/e8OS2umfS8KjEp5xGiA7eiJApIhhQ==}
     peerDependencies:
       starknet: ^6.9.0
 
@@ -5589,7 +5589,7 @@ snapshots:
     dependencies:
       '@babel/compat-data': 7.26.2
       '@babel/helper-validator-option': 7.25.9
-      browserslist: 4.24.0
+      browserslist: 4.24.2
       lru-cache: 5.1.1
       semver: 6.3.1
 
@@ -6372,7 +6372,7 @@ snapshots:
     dependencies:
       '@babel/core': 7.26.0
       '@babel/helper-plugin-utils': 7.25.9
-      '@babel/types': 7.25.6
+      '@babel/types': 7.26.0
       esutils: 2.0.3
 
   '@babel/preset-typescript@7.26.0(@babel/core@7.26.0)':
@@ -7582,7 +7582,7 @@ snapshots:
       '@babel/plugin-transform-sticky-regex': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-typescript': 7.25.9(@babel/core@7.26.0)
       '@babel/plugin-transform-unicode-regex': 7.25.9(@babel/core@7.26.0)
-      '@babel/template': 7.25.0
+      '@babel/template': 7.25.9
       '@react-native/babel-plugin-codegen': 0.76.1(@babel/preset-env@7.26.0(@babel/core@7.26.0))
       babel-plugin-syntax-hermes-parser: 0.23.1
       babel-plugin-transform-flow-enums: 0.0.2(@babel/core@7.26.0)
@@ -7593,7 +7593,7 @@ snapshots:
 
   '@react-native/codegen@0.76.1(@babel/preset-env@7.26.0(@babel/core@7.26.0))':
     dependencies:
-      '@babel/parser': 7.25.6
+      '@babel/parser': 7.26.2
       '@babel/preset-env': 7.26.0(@babel/core@7.26.0)
       glob: 7.2.3
       hermes-parser: 0.23.1
@@ -7954,24 +7954,24 @@ snapshots:
 
   '@types/babel__core@7.20.5':
     dependencies:
-      '@babel/parser': 7.25.6
-      '@babel/types': 7.25.6
+      '@babel/parser': 7.26.2
+      '@babel/types': 7.26.0
       '@types/babel__generator': 7.6.8
       '@types/babel__template': 7.4.4
       '@types/babel__traverse': 7.20.6
 
   '@types/babel__generator@7.6.8':
     dependencies:
-      '@babel/types': 7.25.6
+      '@babel/types': 7.26.0
 
   '@types/babel__template@7.4.4':
     dependencies:
-      '@babel/parser': 7.25.6
-      '@babel/types': 7.25.6
+      '@babel/parser': 7.26.2
+      '@babel/types': 7.26.0
 
   '@types/babel__traverse@7.20.6':
     dependencies:
-      '@babel/types': 7.25.6
+      '@babel/types': 7.26.0
 
   '@types/debounce@1.2.4': {}
 
@@ -8537,8 +8537,8 @@ snapshots:
 
   babel-plugin-jest-hoist@29.6.3:
     dependencies:
-      '@babel/template': 7.25.0
-      '@babel/types': 7.25.6
+      '@babel/template': 7.25.9
+      '@babel/types': 7.26.0
       '@types/babel__core': 7.20.5
       '@types/babel__traverse': 7.20.6
 
@@ -9937,7 +9937,7 @@ snapshots:
   istanbul-lib-instrument@5.2.1:
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/parser': 7.25.6
+      '@babel/parser': 7.26.2
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.2
       semver: 6.3.1
@@ -9992,7 +9992,7 @@ snapshots:
 
   jest-message-util@29.7.0:
     dependencies:
-      '@babel/code-frame': 7.24.7
+      '@babel/code-frame': 7.26.2
       '@jest/types': 29.6.3
       '@types/stack-utils': 2.0.3
       chalk: 4.1.2
@@ -10060,7 +10060,7 @@ snapshots:
   jscodeshift@0.14.0(@babel/preset-env@7.26.0(@babel/core@7.26.0)):
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/parser': 7.25.6
+      '@babel/parser': 7.26.2
       '@babel/plugin-proposal-class-properties': 7.18.6(@babel/core@7.26.0)
       '@babel/plugin-proposal-nullish-coalescing-operator': 7.18.6(@babel/core@7.26.0)
       '@babel/plugin-proposal-optional-chaining': 7.21.0(@babel/core@7.26.0)
@@ -10342,9 +10342,9 @@ snapshots:
 
   metro-source-map@0.81.0:
     dependencies:
-      '@babel/traverse': 7.25.6
-      '@babel/traverse--for-generate-function-map': '@babel/traverse@7.25.6'
-      '@babel/types': 7.25.6
+      '@babel/traverse': 7.25.9
+      '@babel/traverse--for-generate-function-map': '@babel/traverse@7.25.9'
+      '@babel/types': 7.26.0
       flow-enums-runtime: 0.0.6
       invariant: 2.2.4
       metro-symbolicate: 0.81.0
@@ -10370,9 +10370,9 @@ snapshots:
   metro-transform-plugins@0.81.0:
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/generator': 7.25.6
-      '@babel/template': 7.25.0
-      '@babel/traverse': 7.25.6
+      '@babel/generator': 7.26.2
+      '@babel/template': 7.25.9
+      '@babel/traverse': 7.25.9
       flow-enums-runtime: 0.0.6
       nullthrows: 1.1.1
     transitivePeerDependencies:
@@ -10381,9 +10381,9 @@ snapshots:
   metro-transform-worker@0.81.0:
     dependencies:
       '@babel/core': 7.26.0
-      '@babel/generator': 7.25.6
-      '@babel/parser': 7.25.6
-      '@babel/types': 7.25.6
+      '@babel/generator': 7.26.2
+      '@babel/parser': 7.26.2
+      '@babel/types': 7.26.0
       flow-enums-runtime: 0.0.6
       metro: 0.81.0
       metro-babel-transformer: 0.81.0
@@ -10400,13 +10400,13 @@ snapshots:
 
   metro@0.81.0:
     dependencies:
-      '@babel/code-frame': 7.24.7
+      '@babel/code-frame': 7.26.2
       '@babel/core': 7.26.0
-      '@babel/generator': 7.25.6
-      '@babel/parser': 7.25.6
-      '@babel/template': 7.25.0
-      '@babel/traverse': 7.25.6
-      '@babel/types': 7.25.6
+      '@babel/generator': 7.26.2
+      '@babel/parser': 7.26.2
+      '@babel/template': 7.25.9
+      '@babel/traverse': 7.25.9
+      '@babel/types': 7.26.0
       accepts: 1.3.8
       chalk: 4.1.2
       ci-info: 2.0.0
@@ -11439,7 +11439,7 @@ snapshots:
       - uWebSockets.js
       - utf-8-validate
 
-  starknetkit@2.4.0-beta.2(wvpexj6fpi7tchohednpn4zztm):
+  starknetkit@2.4.0-beta.3(wvpexj6fpi7tchohednpn4zztm):
     dependencies:
       '@argent/x-ui': 1.75.1(vr7lds57luw2bljytdg6oov654)
       '@starknet-io/get-starknet': 4.0.0
