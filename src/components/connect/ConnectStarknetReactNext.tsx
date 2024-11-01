@@ -61,7 +61,7 @@ const ConnectStarknetReactNext = () => {
             <Button
               as="button"
               colorScheme="neutrals"
-              key={connector.id}
+              key={`${connector.id}-${name}`}
               onClick={async () => {
                 await connectAsync({ connector })
                 setStarknetkitVersion(
