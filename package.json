@@ -13,9 +13,7 @@
   "dependencies": {
     "@argent/x-sessions": "^6.7.10",
     "@argent/x-shared": "^1.32.1",
-    "@chakra-ui/react": "^2.8.2",
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@chakra-ui/react": "2.8.2",
     "@starknet-io/types-js": "^0.7.7",
     "@starknet-react/chains": "^0.1.7",
     "@starknet-react/core": "^2.8.2",
