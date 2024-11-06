@@ -32,7 +32,7 @@
     "starknet-react-chains-next": "npm:@starknet-react/chains@3.0.0-beta.3",
     "starknet-react-core-next": "npm:@starknet-react/core@3.4.1",
     "starknetkit-latest": "npm:starknetkit@^1.1.9",
-    "starknetkit-next": "npm:starknetkit@v2.4.0-beta-braavos-mobile.1"
+    "starknetkit-next": "npm:starknetkit@2.4.0"
   },
   "devDependencies": {
     "@types/lodash-es": "^4.17.12",
