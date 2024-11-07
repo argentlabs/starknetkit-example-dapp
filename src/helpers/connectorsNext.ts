@@ -19,9 +19,11 @@ export const availableConnectors = isInArgentMobileAppBrowser()
     ]
   : [
       new Argent({
-        url: typeof window !== "undefined" ? window.location.href : "",
-        dappName: "Example dapp",
-        chainId: CHAIN_ID,
+        mobile: {
+          url: typeof window !== "undefined" ? window.location.href : "",
+          dappName: "Example dapp",
+          chainId: CHAIN_ID,
+        },
       }),
       new InjectedConnector({ options: { id: "argentX" } }),
       new InjectedConnector({ options: { id: "braavos" } }),
