@@ -650,6 +650,9 @@ packages:
   '@starknet-react/chains@3.1.0':
     resolution: {integrity: sha512-h+fxh+Bs8h0ZSEX651vG3mn1NtMKzFDSHqrX7Q8YRRIeTKolPCx4vmoi5Gg19SXr/9iIVSwgx6qe4rVZTNfhcQ==}
 
+  '@starknet-react/chains@3.0.6':
+    resolution: {integrity: sha512-Jh4TtJxP39HPhGPF+4TdAdGIGhSahtzy4hClGoMV2FxYBBk05zwFK46LgHZyspxXByw3s1rMjnriLjVQFtZzlA==}
+
   '@starknet-react/core@2.9.0':
     resolution: {integrity: sha512-UdRo454/g2lb0YsNAUJohJ2w21LlahcEXQlkWrddoKFubRY6Q0b39hec0eZOCqfU0Z1Sh7kF1XYvI5t9xL4yTQ==}
     peerDependencies:
@@ -3608,6 +3611,8 @@ snapshots:
   '@starknet-react/chains@3.0.0': {}
 
   '@starknet-react/chains@3.1.0': {}
+
+  '@starknet-react/chains@3.0.6': {}
 
   '@starknet-react/core@2.9.0(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)':
     dependencies:
