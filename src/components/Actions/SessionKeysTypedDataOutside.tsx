@@ -1,49 +1,40 @@
 import {
+  ARGENT_DUMMY_CONTRACT_ADDRESS,
   ARGENT_SESSION_SERVICE_BASE_URL,
+  CHAIN_ID,
   ETHTokenAddress,
-  provider,
 } from "@/constants"
-import { dappKey } from "@/helpers/openSessionHelper"
+import { sessionKey } from "@/helpers/openSessionHelper"
 import { parseInputAmountToUint256 } from "@/helpers/token"
-import {
-  accountSessionSignatureAtom,
-  sessionRequestAtom,
-} from "@/state/argentSessionState"
+import { sessionAccountAtom, sessionAtom } from "@/state/argentSessionState"
 import { connectorDataAtom } from "@/state/connectedWalletStarknetkitNext"
 import { lastTxStatusAtom } from "@/state/transactionState"
-import {
-  ArgentSessionService,
-  OutsideExecutionTypedDataResponse,
-  SessionDappService,
-  buildSessionAccount,
-} from "@argent/x-sessions"
+import { createOutsideExecutionTypedData } from "@argent/x-sessions"
 import { Button, Flex, Heading, Input, useToast } from "@chakra-ui/react"
 import { useAtomValue } from "jotai"
 import { useState } from "react"
-import { Abi, Contract, stark } from "starknet"
+import { Abi, constants, Contract } from "starknet"
+import DummyAbi from "../../abi/DummyContract.json"
 import Erc20Abi from "../../abi/ERC20.json"
 
 const SessionKeysTypedDataOutside = () => {
-  const accountSessionSignature = useAtomValue(accountSessionSignatureAtom)
-  const sessionRequest = useAtomValue(sessionRequestAtom)
+  const session = useAtomValue(sessionAtom)
+  const sessionAccount = useAtomValue(sessionAccountAtom)
   const connectorData = useAtomValue(connectorDataAtom)
   const transactionStatus = useAtomValue(lastTxStatusAtom)
   const toast = useToast()
 
   const [amount, setAmount] = useState("")
-  const [outsideExecution, setOutsideExecution] = useState<
-    OutsideExecutionTypedDataResponse | undefined
-  >()
+  const [outsideExecution, setOutsideExecution] = useState<any | undefined>()
   const [error, setError] = useState<string | null>(null)
   const buttonsDisabled =
-    ["approve", "pending"].includes(transactionStatus) ||
-    !accountSessionSignature
+    ["approve", "pending"].includes(transactionStatus) || !session
 
   const handleSubmitEFOTypedData = async (e: React.FormEvent) => {
     try {
       e.preventDefault()
 
-      if (!accountSessionSignature || !sessionRequest) {
+      if (!session) {
         throw new Error("No open session")
       }
 
@@ -51,51 +42,38 @@ const SessionKeysTypedDataOutside = () => {
         throw new Error("No connector data")
       }
 
-      // this could be stored instead of creating each time
-      // in this specific example a standard account is fine, since it's passed to erc20Contract
-      const sessionAccount = await buildSessionAccount({
-        accountSessionSignature: stark.formatSignature(accountSessionSignature),
-        sessionRequest,
-        provider: provider as any, // TODO: remove after starknetjs update to 6.9.0
-        chainId: await provider.getChainId(),
-        address: connectorData.account,
-        dappKey,
-        argentSessionServiceBaseUrl: ARGENT_SESSION_SERVICE_BASE_URL,
-      })
+      let transferCallData
+      if (CHAIN_ID === constants.NetworkName.SN_MAIN) {
+        const dummyContract = new Contract(
+          DummyAbi as Abi,
+          ARGENT_DUMMY_CONTRACT_ADDRESS,
+          sessionAccount,
+        )
+        transferCallData = dummyContract.populate("set_number", {
+          number: 1,
+        })
+      } else {
+        const erc20Contract = new Contract(
+          Erc20Abi as Abi,
+          ETHTokenAddress,
+          sessionAccount,
+        )
 
-      const erc20Contract = new Contract(
-        Erc20Abi as Abi,
-        ETHTokenAddress,
-        sessionAccount as any,
-      )
-
-      // https://www.starknetjs.com/docs/guides/use_erc20/#interact-with-an-erc20
-      // check .populate
-      const transferCallData = erc20Contract.populate("transfer", {
-        recipient: connectorData.account,
-        amount: parseInputAmountToUint256(amount),
-      })
-
-      const beService = new ArgentSessionService(
-        dappKey.publicKey,
-        accountSessionSignature,
-        ARGENT_SESSION_SERVICE_BASE_URL,
-      )
-
-      const sessionDappService = new SessionDappService(
-        beService,
-        await provider.getChainId(),
-        dappKey,
-      )
+        // https://www.starknetjs.com/docs/guides/use_erc20/#interact-with-an-erc20
+        // check .populate
+        transferCallData = erc20Contract.populate("transfer", {
+          recipient: connectorData.account,
+          amount: parseInputAmountToUint256(amount),
+        })
+      }
 
       const { signature, outsideExecutionTypedData } =
-        await sessionDappService.getOutsideExecutionTypedData(
-          sessionRequest,
-          stark.formatSignature(accountSessionSignature),
-          false,
-          [transferCallData],
-          connectorData.account,
-        )
+        await createOutsideExecutionTypedData({
+          session,
+          sessionKey,
+          calls: [transferCallData],
+          argentSessionServiceUrl: ARGENT_SESSION_SERVICE_BASE_URL,
+        })
 
       setOutsideExecution({ signature, outsideExecutionTypedData })
 
@@ -140,7 +118,7 @@ const SessionKeysTypedDataOutside = () => {
         name="fname"
         placeholder="Amount"
         value={amount}
-        disabled={!accountSessionSignature}
+        disabled={!session}
         onChange={(e) => setAmount(e.target.value)}
       />
 

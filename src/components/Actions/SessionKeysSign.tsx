@@ -1,20 +1,21 @@
-import { provider } from "@/constants"
+import { ARGENT_SESSION_SERVICE_BASE_URL, provider } from "@/constants"
 import {
   allowedMethods,
-  dappKey,
   expiry,
   metaData,
+  sessionKey,
 } from "@/helpers/openSessionHelper"
+import { sessionAccountAtom, sessionAtom } from "@/state/argentSessionState"
 import {
-  accountSessionSignatureAtom,
-  sessionRequestAtom,
-} from "@/state/argentSessionState"
-import { walletStarknetkitNextAtom } from "@/state/connectedWalletStarknetkitNext"
+  connectorDataAtom,
+  walletStarknetkitNextAtom,
+} from "@/state/connectedWalletStarknetkitNext"
 import { lastTxStatusAtom } from "@/state/transactionState"
 import {
-  SessionParams,
-  createSessionRequest,
-  openSession,
+  buildSessionAccount,
+  createSession,
+  CreateSessionParams,
+  verifySession,
 } from "@argent/x-sessions"
 import { Button, Flex, Heading } from "@chakra-ui/react"
 import { useAtomValue, useSetAtom } from "jotai"
@@ -22,8 +23,9 @@ import { useState } from "react"
 
 const SessionKeysSign = () => {
   const wallet = useAtomValue(walletStarknetkitNextAtom)
-  const setAccountSessionSignature = useSetAtom(accountSessionSignatureAtom)
-  const setSessionRequest = useSetAtom(sessionRequestAtom)
+  const connectorData = useAtomValue(connectorDataAtom)
+  const setSession = useSetAtom(sessionAtom)
+  const setSessionAccount = useSetAtom(sessionAccountAtom)
   const setTransactionStatus = useSetAtom(lastTxStatusAtom)
   const [isStarkFeeToken, setIsStarkFeeToken] = useState(false)
 
@@ -32,28 +34,36 @@ const SessionKeysSign = () => {
       e.preventDefault()
       setTransactionStatus("approve")
 
-      const sessionParams: SessionParams = {
+      if (!connectorData || !connectorData.account) {
+        throw new Error("No connector data")
+      }
+
+      const sessionParams: CreateSessionParams = {
         allowedMethods,
         expiry,
         metaData: metaData(isStarkFeeToken),
-        publicDappKey: dappKey.publicKey,
+        sessionKey,
       }
 
-      const accountSessionSignature = await openSession({
+      const session = await createSession({
+        address: connectorData.account,
         chainId: await provider.getChainId(),
         wallet: wallet as any,
         sessionParams,
       })
 
-      const sessionRequest = createSessionRequest(
-        allowedMethods,
-        expiry,
-        metaData(isStarkFeeToken),
-        dappKey.publicKey,
-      )
+      // in this specific example a standard account is fine, since it's passed to erc20Contract
+      const sessionAccount = await buildSessionAccount({
+        session,
+        sessionKey,
+        provider: provider as any, // TODO: remove after starknetjs update to 6.9.0
+        argentSessionServiceBaseUrl: ARGENT_SESSION_SERVICE_BASE_URL,
+      })
 
-      setSessionRequest(sessionRequest)
-      setAccountSessionSignature(accountSessionSignature)
+      setSession(session)
+      setSessionAccount(sessionAccount)
+
+      console.log("verify:", verifySession({ session, sessionKey }))
 
       setTransactionStatus("success")
     } catch (e) {

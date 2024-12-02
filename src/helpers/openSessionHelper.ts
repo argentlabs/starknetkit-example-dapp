@@ -3,7 +3,7 @@ import {
   CHAIN_ID,
   ETHTokenAddress,
 } from "@/constants"
-import { DappKey } from "@argent/x-sessions"
+import { SessionKey } from "@argent/x-sessions"
 import { constants, ec } from "starknet"
 import { parseUnits } from "./token"
 
@@ -53,9 +53,9 @@ const metaData = (isStarkFeeToken: boolean) => ({
 
 const privateKey = ec.starkCurve.utils.randomPrivateKey()
 
-const dappKey: DappKey = {
+const sessionKey: SessionKey = {
   privateKey,
   publicKey: ec.starkCurve.getStarkKey(privateKey),
 }
 
-export { allowedMethods, dappKey, expiry, metaData }
+export { allowedMethods, sessionKey, expiry, metaData }

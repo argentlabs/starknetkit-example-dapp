@@ -1,11 +1,8 @@
-import { OffChainSession } from "@argent/x-sessions"
+import { Session } from "@argent/x-sessions"
 import { atomWithReset } from "jotai/utils"
-import { Signature } from "starknet"
+import { Account, AccountInterface } from "starknet"
 
-export const sessionAccountAtom = atomWithReset<string | undefined>(undefined)
-export const accountSessionSignatureAtom = atomWithReset<
-  string[] | Signature | undefined
+export const sessionAccountAtom = atomWithReset<
+  Account | AccountInterface | undefined
 >(undefined)
-export const sessionRequestAtom = atomWithReset<OffChainSession | undefined>(
-  undefined,
-)
+export const sessionAtom = atomWithReset<Session | undefined>(undefined)

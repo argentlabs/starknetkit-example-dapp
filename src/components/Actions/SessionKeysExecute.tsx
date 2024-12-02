@@ -1,51 +1,42 @@
 import {
   ARGENT_DUMMY_CONTRACT_ADDRESS,
-  ARGENT_SESSION_SERVICE_BASE_URL,
   CHAIN_ID,
   ETHTokenAddress,
-  provider,
 } from "@/constants"
-import { dappKey } from "@/helpers/openSessionHelper"
 import { parseInputAmountToUint256 } from "@/helpers/token"
-import {
-  accountSessionSignatureAtom,
-  sessionRequestAtom,
-} from "@/state/argentSessionState"
+import { sessionAccountAtom, sessionAtom } from "@/state/argentSessionState"
 import { connectorDataAtom } from "@/state/connectedWalletStarknetkitNext"
 import {
   lastTxErrorAtom,
   lastTxHashAtom,
   lastTxStatusAtom,
 } from "@/state/transactionState"
-import { buildSessionAccount } from "@argent/x-sessions"
+import { Button, Flex, Heading, Input } from "@chakra-ui/react"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { useState } from "react"
-import { Abi, Contract, Provider, constants, stark } from "starknet"
-import Erc20Abi from "../../abi/ERC20.json"
+import { Abi, Contract, constants } from "starknet"
 import DummyAbi from "../../abi/DummyContract.json"
-import { Button, Flex, Heading, Input } from "@chakra-ui/react"
+import Erc20Abi from "../../abi/ERC20.json"
 
 const SessionKeysExecute = () => {
   const [amount, setAmount] = useState("")
   const [error, setError] = useState<string | null>(null)
-
-  const accountSessionSignature = useAtomValue(accountSessionSignatureAtom)
-  const sessionRequest = useAtomValue(sessionRequestAtom)
+  const sessionAccount = useAtomValue(sessionAccountAtom)
+  const session = useAtomValue(sessionAtom)
   const connectorData = useAtomValue(connectorDataAtom)
   const [transactionStatus, setTransactionStatus] = useAtom(lastTxStatusAtom)
   const setLastTransactionHash = useSetAtom(lastTxHashAtom)
   const setLastTxError = useSetAtom(lastTxErrorAtom)
 
   const buttonsDisabled =
-    ["approve", "pending"].includes(transactionStatus) ||
-    !accountSessionSignature
+    ["approve", "pending"].includes(transactionStatus) || !session
 
   const submitSessionTransaction = async (e: React.FormEvent) => {
     try {
       e.preventDefault()
       setTransactionStatus("pending")
       setLastTxError("")
-      if (!accountSessionSignature || !sessionRequest) {
+      if (!session || !sessionAccount) {
         throw new Error("No open session")
       }
 
@@ -53,22 +44,11 @@ const SessionKeysExecute = () => {
         throw new Error("No connector data")
       }
 
-      // this could be stored instead of creating each time
-      const sessionAccount = await buildSessionAccount({
-        accountSessionSignature: stark.formatSignature(accountSessionSignature),
-        sessionRequest,
-        provider: provider as any, // TODO: remove after starknetjs update to 6.9.0
-        chainId: await provider.getChainId(),
-        address: connectorData.account,
-        dappKey,
-        argentSessionServiceBaseUrl: ARGENT_SESSION_SERVICE_BASE_URL,
-      })
-
       if (CHAIN_ID === constants.NetworkName.SN_MAIN) {
         const dummyContract = new Contract(
           DummyAbi as Abi,
           ARGENT_DUMMY_CONTRACT_ADDRESS,
-          sessionAccount as any,
+          sessionAccount,
         )
         const transferCallData = dummyContract.populate("set_number", {
           number: 1,
@@ -155,7 +135,7 @@ const SessionKeysExecute = () => {
             name="fname"
             placeholder="Amount"
             value={amount}
-            disabled={!accountSessionSignature}
+            disabled={!session}
             onChange={(e) => setAmount(e.target.value)}
           />
         </>

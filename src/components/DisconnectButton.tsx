@@ -1,8 +1,4 @@
-import {
-  accountSessionSignatureAtom,
-  sessionAccountAtom,
-  sessionRequestAtom,
-} from "@/state/argentSessionState"
+import { sessionAccountAtom, sessionAtom } from "@/state/argentSessionState"
 import {
   lastTxErrorAtom,
   lastTxHashAtom,
@@ -31,9 +27,8 @@ const DisconnectButton: FC<DisconnectButtonProps> = ({
   const setLastTxHash = useSetAtom(lastTxHashAtom)
   const setLastTxStatus = useSetAtom(lastTxStatusAtom)
   const setLastTxError = useSetAtom(lastTxErrorAtom)
-  const setAccountSessionSignature = useSetAtom(accountSessionSignatureAtom)
-  const setSessionRequest = useSetAtom(sessionRequestAtom)
   const setSessionAccount = useSetAtom(sessionAccountAtom)
+  const setSession = useSetAtom(sessionAtom)
   const setStarknetkitVersion = useSetAtom(starknetkitVersionAtom)
   const setStarknetReactVersion = useSetAtom(starknetReactVersionAtom)
 
@@ -50,8 +45,7 @@ const DisconnectButton: FC<DisconnectButtonProps> = ({
             setLastTxStatus(RESET)
             setLastTxError(RESET)
             setSessionAccount(RESET)
-            setSessionRequest(RESET)
-            setAccountSessionSignature(RESET)
+            setSession(RESET)
             setStarknetkitVersion(RESET)
             setStarknetReactVersion(RESET)
             navigate.push("/")
