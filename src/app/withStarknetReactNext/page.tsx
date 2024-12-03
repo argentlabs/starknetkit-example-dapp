@@ -8,7 +8,7 @@ import { DisconnectButton } from "@/components/DisconnectButton"
 import { Section } from "@/components/Section"
 import { ConnectStarknetReactNext } from "@/components/connect/ConnectStarknetReactNext"
 import { CHAIN_ID } from "@/constants"
-import { availableConnectors } from "@/helpers/connectorsNext"
+import { connectors as starknetkitConnectors } from "@/helpers/connectorsNext"
 import { useWaitForTx } from "@/hooks/useWaitForTx"
 import { Flex } from "@chakra-ui/react"
 import { useEffect, useState } from "react"
@@ -96,7 +96,7 @@ export default function StarknetReactNext() {
       <StarknetConfig
         chains={chains}
         provider={providers}
-        connectors={availableConnectors as any}
+        connectors={starknetkitConnectors as any}
       >
         <StarknetReactDappContent />
       </StarknetConfig>

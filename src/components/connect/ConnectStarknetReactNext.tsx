@@ -1,4 +1,4 @@
-import { availableConnectors } from "@/helpers/connectorsNext"
+import { connectors as starknetkitConnectors } from "@/helpers/connectorsNext"
 import {
   starknetReactVersionAtom,
   starknetkitVersionAtom,
@@ -19,7 +19,7 @@ const ConnectStarknetReactNext = () => {
   const setStarknetReactVersion = useSetAtom(starknetReactVersionAtom)
 
   const { starknetkitConnectModal } = useStarknetkitConnectModal({
-    connectors: availableConnectors as StarknetkitConnector[],
+    connectors: starknetkitConnectors as StarknetkitConnector[],
   })
 
   // https://nextjs.org/docs/messages/react-hydration-error#solution-1-using-useeffect-to-run-on-the-client-only
