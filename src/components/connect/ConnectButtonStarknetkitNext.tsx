@@ -32,6 +32,7 @@ const ConnectButtonStarknetkitNext = () => {
               new InjectedConnector({ options: { id: "argentX" } }),
               new InjectedConnector({ options: { id: "braavos" } }),
               new InjectedConnector({ options: { id: "keplr" } }),
+              new InjectedConnector({ options: { id: "metamask" } }),
               new InjectedConnector({ options: { id: "okxwallet" } }),
               new ArgentMobileBaseConnector({
                 dappName: "Starknetkit example dapp",
@@ -85,7 +86,7 @@ const ConnectButtonStarknetkitNext = () => {
           checked={withAdditionalWallets}
           onChange={() => setWithAdditionalWallets(!withAdditionalWallets)}
         />
-        Include Keplr and OKX wallets with starknetkit@next (
+        Include Metamask, Keplr and OKX wallets with starknetkit@next (
         {process.env.starknetkitNextVersion})
       </Flex>
     </>
