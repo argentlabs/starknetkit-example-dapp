@@ -24,6 +24,7 @@ export const availableConnectors = () => {
     : [
         new InjectedConnector({ options: { id: "argentX" } }),
         new InjectedConnector({ options: { id: "braavos" } }),
+        new InjectedConnector({ options: { id: "metamask" } }),
         ArgentMobileConnector.init({
           options: {
             url: typeof window !== "undefined" ? window.location.href : "",
