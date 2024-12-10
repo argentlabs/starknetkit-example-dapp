@@ -43,7 +43,7 @@ const ConnectStarknetReact = () => {
     <Flex direction="column" gap="3" p="5">
       <Flex direction="column" gap="3">
         {connectors.filter(inAppBrowserFilter).map((connector: any) => {
-          if (!connector.available()) {
+          if (!connector?.available?.()) {
             return <React.Fragment key={connector.id} />
           }
           const icon = connector.icon.dark ?? ""

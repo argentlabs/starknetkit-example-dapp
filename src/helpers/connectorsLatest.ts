@@ -6,9 +6,13 @@ import { ARGENT_WEBWALLET_URL, CHAIN_ID } from "@/constants"
 export const availableConnectors = [
   new InjectedConnector({ options: { id: "argentX" } }),
   new InjectedConnector({ options: { id: "braavos" } }),
-  new ArgentMobileConnector({
-    dappName: "Example dapp",
-    chainId: CHAIN_ID,
+  ArgentMobileConnector.init({
+    options: {
+      dappName: "Dapp name",
+      url: window.location.hostname,
+      chainId: CHAIN_ID,
+      icons: [],
+    },
   }),
   new WebWalletConnector({ url: ARGENT_WEBWALLET_URL }),
 ]

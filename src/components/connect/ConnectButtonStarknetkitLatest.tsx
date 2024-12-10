@@ -15,7 +15,6 @@ const ConnectButtonStarknetkitLatest: FC = () => {
   const connectFn = async () => {
     try {
       const { wallet } = await connect({
-        provider,
         modalMode: "alwaysAsk",
         webWalletUrl: ARGENT_WEBWALLET_URL,
         argentMobileOptions: {
