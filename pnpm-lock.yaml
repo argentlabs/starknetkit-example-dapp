@@ -63,8 +63,8 @@ importers:
         specifier: npm:@starknet-react/core@3.0.1-beta.0
         version: '@starknet-react/core@3.0.1-beta.0(get-starknet-core@4.0.0)(react@18.3.1)(starknet@6.11.0)(typescript@5.6.3)'
       starknetkit-latest:
-        specifier: npm:starknetkit@^2.6.1
-        version: starknetkit@2.6.1(starknet@6.11.0)
+        specifier: npm:starknetkit@^1.1.9
+        version: starknetkit@1.1.9(starknet@6.11.0)
       starknetkit-next:
         specifier: npm:starknetkit@2.7.0-beta.3
         version: starknetkit@2.7.0-beta.3(cbclo5jgx3mqum3na2dnz2oute)
@@ -3229,6 +3229,11 @@ packages:
   get-port-please@3.1.2:
     resolution: {integrity: sha512-Gxc29eLs1fbn6LQ4jSU4vXjlwyZhF5HsGuMAa7gqBP4Rw4yxxltyDUuF5MBclFzDTXO+ACchGQoeela4DSfzdQ==}
 
+  get-starknet-core@3.3.4:
+    resolution: {integrity: sha512-KEnzAMr4f7z7dMh4g5lWDZ+eXtOEl++VPN5Flmmj8HiPmRrPOINEIwwNL/dN+Ey1kBxQOtOMQwCxJ9qlkRIgFw==}
+    peerDependencies:
+      starknet: ^5.18.0
+
   get-starknet-core@4.0.0:
     resolution: {integrity: sha512-6pLmidQZkC3wZsrHY99grQHoGpuuXqkbSP65F8ov1/JsEI8DDLkhsAuLCKFzNOK56cJp+f1bWWfTJ57e9r5eqQ==}
 
@@ -4778,10 +4783,10 @@ packages:
   starknet@6.11.0:
     resolution: {integrity: sha512-u50KrGDi9fbu1Ogu7ynwF/tSeFlp3mzOg1/Y5x50tYFICImo3OfY4lOz9OtYDk404HK4eUujKkhov9tG7GAKlg==}
 
-  starknetkit@2.6.1:
-    resolution: {integrity: sha512-1w8F6BShtGr3IE8bTGvaXsiGn+ZUFB2jnC9fqMX89utBUEJtkft4K9r0YJWiPjTho+eap8o4dN0S0G4tisGW7A==}
+  starknetkit@1.1.9:
+    resolution: {integrity: sha512-KarnNS9sJoImTdpTKizyNzDlQSAOutbzuZ6CzHQpJHWzaf8ION9aIf+d87sY7hSlbmD7cqGRUG28Hpke24arCg==}
     peerDependencies:
-      starknet: ^6.9.0
+      starknet: ^6.7.0
 
   starknetkit@2.7.0-beta.3:
     resolution: {integrity: sha512-vxNbIw0h3eEM8O4d94Tka49Sq/+r87Rk9/ScIofZ68kbCGzUzow9SXIg2rKAF+YEbnge++WAHmpSdFgMEY4XjA==}
@@ -9486,6 +9491,11 @@ snapshots:
 
   get-port-please@3.1.2: {}
 
+  get-starknet-core@3.3.4(starknet@6.11.0):
+    dependencies:
+      '@module-federation/runtime': 0.1.21
+      starknet: 6.11.0
+
   get-starknet-core@4.0.0:
     dependencies:
       '@starknet-io/types-js': 0.7.7
@@ -11309,11 +11319,8 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  starknetkit@2.6.1(starknet@6.11.0):
+  starknetkit@1.1.9(starknet@6.11.0):
     dependencies:
-      '@starknet-io/get-starknet': 4.0.5
-      '@starknet-io/get-starknet-core': 4.0.5
-      '@starknet-io/types-js': 0.7.7
       '@trpc/client': 10.45.2(@trpc/server@10.45.2)
       '@trpc/server': 10.45.2
       '@walletconnect/sign-client': 2.17.2
@@ -11321,6 +11328,7 @@ snapshots:
       detect-browser: 5.3.0
       eventemitter3: 5.0.1
       events: 3.3.0
+      get-starknet-core: 3.3.4(starknet@6.11.0)
       lodash-es: 4.17.21
       starknet: 6.11.0
       svelte-forms: 2.3.1
