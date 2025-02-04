@@ -33,4 +33,4 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ### Session keys
 
-Require a whitelist for testnet and mainnet.
+Require a whitelist for testnet and mainnet
