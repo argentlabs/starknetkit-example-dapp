@@ -9,9 +9,9 @@ import React, { useEffect, useState } from "react"
 import { useConnect } from "starknet-react-core-next"
 import {
   StarknetkitConnector,
-  StarknetkitCompoundConnector,
   useStarknetkitConnectModal,
 } from "starknetkit-next"
+import { StarknetReactWrapper } from "starknetkit-next/starknet-react"
 
 const ConnectStarknetReactNext = () => {
   const { connectAsync, connectors } = useConnect()
@@ -39,53 +39,61 @@ const ConnectStarknetReactNext = () => {
     <Flex direction="column" gap="3" p="5">
       <Flex direction="column" gap="3">
         {connectors.map((_connector) => {
-          const isCompoundConnector = // @ts-ignore TODO
-            (_connector as StarknetkitCompoundConnector).isCompoundConnector
-
-          const connector = isCompoundConnector
-            ? // @ts-ignore TODO
-              (_connector as StarknetkitCompoundConnector).connector
-            : _connector
-
-          if (!connector.available()) {
-            return <React.Fragment key={connector.id} />
-          }
-
-          const _icon = isCompoundConnector ? _connector.icon : connector.icon
-          const name = isCompoundConnector ? _connector.name : connector.name
-
-          const icon = typeof _icon === "string" ? _icon : (_icon.dark ?? "")
-          const isSvg = icon?.startsWith("<svg")
-
           return (
-            <Button
-              as="button"
-              colorScheme="neutrals"
-              key={`${connector.id}-${name}`}
-              onClick={async () => {
-                await connectAsync({ connector })
-                setStarknetkitVersion(
-                  `starknetkit@latest (${process.env.starknetkitNextVersion})`,
-                )
-                setStarknetReactVersion(
-                  `starknet-react (${process.env.starknetReactNextVersion})`,
+            <StarknetReactWrapper
+              key={_connector.id}
+              connector={_connector}
+              connectAsyncFunction={connectAsync}
+              dappName={"Example dapp"}
+            >
+              {({ name, icon, connectAsyncWrapped }) => {
+                const _icon = typeof icon === "string" ? icon : icon.dark
+                const isSvg = _icon?.startsWith("<svg")
+
+                return (
+                  <Button
+                    as="button"
+                    colorScheme="neutrals"
+                    key={name}
+                    onClick={async () => {
+                      try {
+                        await connectAsyncWrapped()
+
+                        setStarknetkitVersion(
+                          `starknetkit@latest (${process.env.starknetkitNextVersion})`,
+                        )
+                        setStarknetReactVersion(
+                          `starknet-react (${process.env.starknetReactNextVersion})`,
+                        )
+                      } catch (err) {
+                        console.error(err)
+                      }
+                    }}
+                    alignItems="center"
+                    justifyContent="flex-start"
+                    cursor="pointer"
+                    maxW="350px"
+                    gap="2"
+                    py="2"
+                    px="4"
+                  >
+                    <>
+                      {isSvg ? (
+                        <div dangerouslySetInnerHTML={{ __html: _icon }} />
+                      ) : (
+                        <Image
+                          alt={name}
+                          src={_icon}
+                          height="32px"
+                          width="32px"
+                        />
+                      )}
+                      {name}
+                    </>
+                  </Button>
                 )
               }}
-              alignItems="center"
-              justifyContent="flex-start"
-              cursor="pointer"
-              maxW="350px"
-              gap="2"
-              py="2"
-              px="4"
-            >
-              {isSvg ? (
-                <div dangerouslySetInnerHTML={{ __html: icon }} />
-              ) : (
-                <Image alt={name} src={icon} height="32px" width="32px" />
-              )}
-              {name}
-            </Button>
+            </StarknetReactWrapper>
           )
         })}
       </Flex>
