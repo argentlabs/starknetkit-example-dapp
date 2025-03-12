@@ -6,7 +6,6 @@ import {
 } from "@/state/transactionState"
 import { useAtom, useAtomValue, useSetAtom } from "jotai"
 import { useEffect } from "react"
-import { GatewayError } from "starknet"
 
 const useWaitForTx = () => {
   const lastTxHash = useAtomValue(lastTxHashAtom)
@@ -23,9 +22,11 @@ const useWaitForTx = () => {
         } catch (error) {
           setLastTxStatus("failure")
           let message = error ? `${error}` : "No further details"
-          if (error instanceof GatewayError) {
-            message = JSON.stringify(error.message, null, 2)
-          }
+          try {
+            if (error instanceof Error) {
+              message = JSON.stringify(error.message, null, 2)
+            }
+          } catch {}
           setLastTxError(message)
         }
       }

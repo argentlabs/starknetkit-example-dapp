@@ -42,7 +42,9 @@ const ConnectStarknetReactNext = () => {
           return (
             <StarknetReactWrapper
               key={_connector.id}
+              // @ts-ignore
               connector={_connector}
+              // @ts-ignore
               connectAsyncFunction={connectAsync}
               dappName={"Example dapp"}
             >
