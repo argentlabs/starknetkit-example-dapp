@@ -66,8 +66,8 @@ importers:
         specifier: npm:starknetkit@^1.1.9
         version: starknetkit@1.1.9(starknet@6.23.1)
       starknetkit-next:
-        specifier: npm:starknetkit@2.8.0-beta.3
-        version: starknetkit@2.8.0-beta.3(yy65cqafqgescv2bdx3j6xmvly)
+        specifier: npm:starknetkit@2.9.0-beta.1
+        version: starknetkit@2.9.0-beta.1(yy65cqafqgescv2bdx3j6xmvly)
     devDependencies:
       '@types/lodash-es':
         specifier: ^4.17.12
@@ -4808,10 +4808,10 @@ packages:
     peerDependencies:
       starknet: ^6.7.0
 
-  starknetkit@2.8.0-beta.3:
-    resolution: {integrity: sha512-ftvDqjoOmQ+LvCDIGiYRbTYtIThbpmmXLFRFQaR69CPOkKUJ7cNFt9JfVQWyDx5tTYC6Pzp+SyVFa2I3daWvgw==}
+  starknetkit@2.9.0-beta.1:
+    resolution: {integrity: sha512-kJpbOENfjwKYD8dYLDP+iTAbNdJhed//tWpuxFBPBzvKJfqwCZgTLZkOFfEb285jfZP5r1K9czuwizaQki6rTA==}
     peerDependencies:
-      starknet: ^6.9.0
+      starknet: ^6.11.0
 
   statuses@1.5.0:
     resolution: {integrity: sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==}
@@ -11401,7 +11401,7 @@ snapshots:
       - ioredis
       - utf-8-validate
 
-  starknetkit@2.8.0-beta.3(yy65cqafqgescv2bdx3j6xmvly):
+  starknetkit@2.9.0-beta.1(yy65cqafqgescv2bdx3j6xmvly):
     dependencies:
       '@argent/x-ui': 1.75.3(hlqqbwf77pw4gw2rodkci74xpu)
       '@starknet-io/get-starknet': 4.0.6
