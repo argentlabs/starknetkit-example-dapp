@@ -38,10 +38,10 @@ const ConnectStarknetReactNext = () => {
   return (
     <Flex direction="column" gap="3" p="5">
       <Flex direction="column" gap="3">
-        {connectors.map((_connector) => {
+        {connectors.map((_connector, i) => {
           return (
             <StarknetReactWrapper
-              key={_connector.id}
+              key={`${_connector.id}-${i}`}
               // @ts-ignore
               connector={_connector}
               // @ts-ignore
